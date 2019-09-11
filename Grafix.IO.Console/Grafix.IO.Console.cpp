@@ -34,7 +34,7 @@ int main()
 	//------------------------------------------------------
 
 	//---file reader----------------------------------------
-	std::vector<unsigned char> bmpData = FileReader::ReadAllBytes("C:\\Users\\jbursey\\source\\repos\\Grafix\\test_bitmap.bmp");
+	std::vector<unsigned char> bmpData = FileReader::ReadAllBytes("..\\test_bitmap.bmp");
 	//------------------------------------------------------
 
 	int x = 0; 
