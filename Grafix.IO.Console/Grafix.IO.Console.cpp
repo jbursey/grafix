@@ -6,6 +6,7 @@
 #include <vector>
 #include <ByteReader.h>
 #include <FileReader.h>
+#include <BitmapFile.h>
 int main()
 {
 
@@ -35,6 +36,8 @@ int main()
 
 	//---file reader----------------------------------------
 	std::vector<unsigned char> bmpData = FileReader::ReadAllBytes("..\\test_bitmap.bmp");
+	BitmapFile bmp;
+	bmp.Parse(bmpData);
 	//------------------------------------------------------
 
 	int x = 0; 

@@ -32,6 +32,27 @@ int ByteReader::ReadInt(bool asLittleEndian)
 	return val;
 }
 
+short ByteReader::ReadShort(bool asLittleEndian)
+{
+	unsigned char v1 = _data[_index++];
+	unsigned char v2 = _data[_index++];
+
+	short val = 0;
+
+	if (!asLittleEndian)
+	{
+		val |= v1 << 8;
+		val |= v2 << 0;
+	}
+	else
+	{
+		val |= v2 << 8;
+		val |= v1 << 0;
+	}
+
+	return val;
+}
+
 void ByteReader::Reset()
 {
 	_index = 0;
