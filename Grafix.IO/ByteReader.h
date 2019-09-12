@@ -7,6 +7,8 @@ public:
 	int ReadInt(bool asLittleEndian);
 	short ReadShort(bool asLittleEndian);
 	void Reset();
+	void Seek(int index);
+	int GetIndex();
 	unsigned char ReadByte();	
 private:
 	int _index;

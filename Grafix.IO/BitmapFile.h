@@ -4,6 +4,14 @@
 //#include <wingdi.h> //bitmap v5 header
 #include "ByteReader.h"
 
+struct Color
+{
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
+	unsigned char a;
+};
+
 //https://docs.microsoft.com/en-us/windows/win32/winprog/windows-data-types?redirectedfrom=MSDN
 // https://en.wikipedia.org/wiki/BMP_file_format
 struct BitmapFileHeader
@@ -70,6 +78,7 @@ public:
 	BitmapFile();
 	~BitmapFile();
 	void Parse(std::vector<unsigned char> data);
+	std::vector<Color> Colors;
 private:
 	BitmapFileHeader _header;
 	BitmapInfoHeader _infoHeader;

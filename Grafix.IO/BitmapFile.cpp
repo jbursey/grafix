@@ -53,20 +53,36 @@ void BitmapFile::Parse(std::vector<unsigned char> data)
 	//-- color table if applicable------------------------------------
 	if (_infoV5Header.compression == 3) //BI_BITFIELDS
 	{
-
+		//-- not super clear here, but I don't know a better way. Gimp and paint3d are not putting color index
+		int bytesToData = _header.startingAddressData - _br->GetIndex();
+		for (int i = 0; i < bytesToData; i++)
+		{
+			_br->ReadByte(); //this is color palette data somehow
+		}
 	}
 
 	//-- pixel data---------------------------------------------------
 	//-- local test is a 3x3 pixel bmp...3 rows
-	for (int i = 0; i < 1; i++)
+	int colorsUntilEnd = 0;
+	int bytesPerColor = _infoV5Header.bitsPerPixel / 8;	
+	int colorBytesLeft = _header.bitmapSizeBytes - _br->GetIndex();
+	colorsUntilEnd = colorBytesLeft / bytesPerColor;
+	for (int i = 0; i < colorsUntilEnd; i++)
 	{
 		int pix = _br->ReadInt(true);
-		unsigned char a = pix >> 24;
-		unsigned char r = pix >> 16;
-		unsigned char g = pix >> 8;
-		unsigned char b = pix >> 0;
+		unsigned char r = pix >> 24;
+		unsigned char g = pix >> 16;
+		unsigned char b = pix >> 8;
+		unsigned char a = pix >> 0;
 
-		int stop = 0;
+		//--add the colors for convienience later
+		Color color;
+		color.r = r;
+		color.g = g;
+		color.b = b;
+		color.a = a;
+		
+		this->Colors.push_back(color);
 	}
 
 	int stop = 0;

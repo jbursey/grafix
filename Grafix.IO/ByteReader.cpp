@@ -58,6 +58,20 @@ void ByteReader::Reset()
 	_index = 0;
 }
 
+void ByteReader::Seek(int index)
+{
+	if (index < 0)
+	{
+		index = 0;
+	}
+	_index = index;
+}
+
+int ByteReader::GetIndex()
+{
+	return _index;
+}
+
 unsigned char ByteReader::ReadByte()
 {
 	unsigned char v = _data[_index++];
