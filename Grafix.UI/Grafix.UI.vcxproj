@@ -161,11 +161,16 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Grafix.UI.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TriangleTest.h" />
+    <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D3DRenderer.cpp" />
     <ClCompile Include="Grafix.UI.cpp" />
+    <ClCompile Include="ShaderManager.cpp" />
+    <ClCompile Include="TriangleTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Grafix.UI.rc" />

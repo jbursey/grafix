@@ -78,10 +78,7 @@ void D3DRenderer::Init(HWND handle, int width, int height)
 	viewport.TopLeftY = 0;
 	viewport.Width = width;
 
-	_context->RSSetViewports(1, &viewport);
-
-	//--create backbuffer
-	
+	_context->RSSetViewports(1, &viewport);		
 	
 	int stop = 0;
 }
