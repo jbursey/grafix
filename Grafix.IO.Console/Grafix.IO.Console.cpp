@@ -35,9 +35,37 @@ int main()
 	//------------------------------------------------------
 
 	//---file reader----------------------------------------
-	std::vector<unsigned char> bmpData = FileReader::ReadAllBytes("..\\test_bitmap.bmp");
-	BitmapFile bmp;
-	bmp.Parse(bmpData);
+	std::vector<unsigned char> bmpData1 = FileReader::ReadAllBytes("..\\test_bitmap.bmp");
+	std::vector<unsigned char> bmpData2 = FileReader::ReadAllBytes("..\\heightmap5.bmp");
+	std::vector<unsigned char> bmpData3 = FileReader::ReadAllBytes("..\\test_bitmap_needs_padding_5_by_5.bmp");
+
+	BitmapFile bmp_test_3_by_3_32bpp; //no alignment needed
+	bmp_test_3_by_3_32bpp.Parse(bmpData1);
+	int size1 = bmp_test_3_by_3_32bpp.Colors.size();
+	if (size1 != (3 * 3))
+	{
+		throw std::invalid_argument("bmp_test_3_by_3_32bpp did no have expected size");
+	}
+	if (bmp_test_3_by_3_32bpp.Colors[0].r != 255 && bmp_test_3_by_3_32bpp.Colors[0].g != 255)
+	{
+		throw std::invalid_argument("bmp_test_3_by_3_32bpp did no have expected color at pixel 0");
+	}
+
+	BitmapFile bmp_test_2048_by_2048_24bpp; //no alignment needed
+	bmp_test_2048_by_2048_24bpp.Parse(bmpData2);
+	int size2 = bmp_test_2048_by_2048_24bpp.Colors.size();
+	if (size2 != (2048 * 2048))
+	{
+		throw std::invalid_argument("bmp_test_2048_by_2048_24bpp did no have expected size");
+	}
+
+	BitmapFile bmp_test_5_by_5_24bpp;
+	bmp_test_5_by_5_24bpp.Parse(bmpData3); //needs alignment
+	int size3 = bmp_test_5_by_5_24bpp.Colors.size();
+	if (size3 != (5 * 5))
+	{
+		throw std::invalid_argument("bmp_test_5_by_5_24bpp did no have expected size");
+	}
 	//------------------------------------------------------
 
 	int x = 0; 

@@ -37,21 +37,31 @@ void BitmapFile::Parse(std::vector<unsigned char> data)
 	//-- dib headeer-------------------------------------------------
 
 	int dibMagicSize = _br->ReadInt(true);
-
+	int compressionMethod = 0;
+	short bitsPerPixel = 32;
+	int widthPixels = 1;
+	int heightPixels = 1;
 	switch (dibMagicSize)
 	{
 	case 40: //windows NT or later...parse as BITMAPINFOHEADER
 		ParseBitmapInfoHeader();
+		bitsPerPixel = _infoHeader.bitsPerPixel;
+		widthPixels = _infoHeader.bitmapWidthPixels;
+		heightPixels = _infoHeader.bitmapHeightPixels;
 		break;
 	case 124: //windows NT 5.0 or later...parse as BITMAPV5HEADER
 		ParseBitmapV5Header();
+		compressionMethod = _infoV5Header.compression;
+		bitsPerPixel = _infoV5Header.bitsPerPixel;
+		widthPixels = _infoV5Header.widthPixels;
+		heightPixels = _infoV5Header.heightPixels;
 		break;
 	default:
 		break;
 	}
 
 	//-- color table if applicable------------------------------------
-	if (_infoV5Header.compression == 3) //BI_BITFIELDS
+	if (compressionMethod == 3) //BI_BITFIELDS
 	{
 		//-- not super clear here, but I don't know a better way. Gimp and paint3d are not putting color index
 		int bytesToData = _header.startingAddressData - _br->GetIndex();
@@ -63,26 +73,63 @@ void BitmapFile::Parse(std::vector<unsigned char> data)
 
 	//-- pixel data---------------------------------------------------
 	//-- local test is a 3x3 pixel bmp...3 rows
-	int colorsUntilEnd = 0;
-	int bytesPerColor = _infoV5Header.bitsPerPixel / 8;	
-	int colorBytesLeft = _header.bitmapSizeBytes - _br->GetIndex();
-	colorsUntilEnd = colorBytesLeft / bytesPerColor;
-	for (int i = 0; i < colorsUntilEnd; i++)
+	int rowBytesRead = 0;	
+	int iterationsUntilEnd = 0;
+	int bytesPerColor = bitsPerPixel / 8;
+	int rowBytes = widthPixels * bytesPerColor;
+	//int colorBytesLeft = _header.bitmapSizeBytes - _br->GetIndex();
+	iterationsUntilEnd = (rowBytes * heightPixels) / bytesPerColor;
+	for (int i = 0; i < iterationsUntilEnd; i++)
 	{
-		int pix = _br->ReadInt(true);
-		unsigned char r = pix >> 24;
-		unsigned char g = pix >> 16;
-		unsigned char b = pix >> 8;
-		unsigned char a = pix >> 0;
-
 		//--add the colors for convienience later
 		Color color;
-		color.r = r;
-		color.g = g;
-		color.b = b;
-		color.a = a;
+
+		if (bytesPerColor == 3)
+		{			
+			unsigned char b = _br->ReadByte();
+			unsigned char g = _br->ReadByte();
+			unsigned char r = _br->ReadByte();
+
+			color.r = r;
+			color.g = g;
+			color.b = b;
+
+			rowBytesRead += 3;
+		}
+		else if (bytesPerColor == 4)
+		{
+			int pix = _br->ReadInt(true);
+			unsigned char r = pix >> 24;
+			unsigned char g = pix >> 16;
+			unsigned char b = pix >> 8;
+			unsigned char a = pix >> 0;
+
+			color.r = r;
+			color.g = g;
+			color.b = b;
+			color.a = a;
+
+			rowBytesRead += 4;
+		}
 		
+		//
 		this->Colors.push_back(color);
+
+		//--row alignment
+		if (rowBytesRead == rowBytes)
+		{
+			int padding = rowBytesRead % 4;
+			if (padding > 0)
+			{
+				padding = 4 - padding;
+				for (int j = 0; j < padding; j++)
+				{
+					_br->ReadByte();
+				}
+			}
+
+			rowBytesRead = 0;
+		}		
 	}
 
 	int stop = 0;
