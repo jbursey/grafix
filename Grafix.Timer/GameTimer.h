@@ -4,6 +4,7 @@ class GameTimer
 {
 public:
 	void Start();
+	void Tick();
 	void Pause();
 	void Stop();
 	void Reset();

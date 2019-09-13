@@ -58,7 +58,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
 
 	// Main message loop:
+	double fps = 0;
+	double totalFrames = 0;
+	double framesThisSecond = 0;
+	double dt = 0;
 	g_renderer->Init(g_handle, g_width, g_height);    
+	g_timer->Start();
     while (true)
     {
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
@@ -69,7 +74,29 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		g_renderer->Update();
 		g_renderer->Render();
+
+		dt += g_timer->ElapsedTimeMS();		
+
+		//--update metrics
+		++framesThisSecond;
+		++totalFrames;
+		if (dt >= 1000)
+		{
+			fps = framesThisSecond / (dt / 1000.0);
+
+			dt = 0;
+			framesThisSecond = 0;
+		}
+
+		//--update window text
+		std::wstring metrics = L"";
+		metrics += L"FPS: " + std::to_wstring(fps);
+		SetWindowText(g_handle, metrics.c_str());
     }
+	g_timer->Stop();
+	
+	delete g_timer;
+	delete g_renderer;
 
     return (int) msg.wParam;
 }
