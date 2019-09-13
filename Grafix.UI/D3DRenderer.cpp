@@ -79,7 +79,17 @@ void D3DRenderer::Init(HWND handle, int width, int height)
 	viewport.Width = width;
 
 	_context->RSSetViewports(1, &viewport);		
+	D3D11_RASTERIZER_DESC rastDesc;
+	ZeroMemory(&rastDesc, sizeof(D3D11_RASTERIZER_DESC));
+	rastDesc.CullMode = D3D11_CULL_BACK;
+	rastDesc.FillMode = D3D11_FILL_SOLID;
+	ID3D11RasterizerState* rastState;
+	_device->CreateRasterizerState(&rastDesc, &rastState);
+	_context->RSSetState(rastState);	
 	
+	_sm.Init(_device);
+	_tt.Init(_device);
+
 	int stop = 0;
 }
 
@@ -92,9 +102,9 @@ void D3DRenderer::Render()
 	static float red = 0;
 	static float green = 0;
 	static float blue = 0;
-	red = (rand() % 255) / 255.0;
-	green = (rand() % 255) / 255.0;
-	blue = (rand() % 255) / 255.0;
+	//red = (rand() % 255) / 255.0;
+	//green = (rand() % 255) / 255.0;
+	//blue = (rand() % 255) / 255.0;
 
 	float color[4];
 	color[0] = red;
@@ -103,7 +113,8 @@ void D3DRenderer::Render()
 	color[3] = 255;
 	_context->ClearDepthStencilView(_dsv, D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH, 1.0, 0);	
 	_context->ClearRenderTargetView(_rtv, &color[0]);
-
+	_sm.Render(_context);
+	_tt.Render(_context);	
 	_dxgiSwapChain->Present(0, 0);
 }
 
