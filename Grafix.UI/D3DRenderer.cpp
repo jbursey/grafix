@@ -13,7 +13,9 @@ void D3DRenderer::Init(HWND handle, int width, int height)
 
 	unsigned int deviceflags = 0;
 	deviceflags |= D3D11_CREATE_DEVICE_BGRA_SUPPORT;
+#ifdef _DEBUG
 	deviceflags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
 
 	D3D_FEATURE_LEVEL levels[1];
 	levels[0] = D3D_FEATURE_LEVEL_11_0;

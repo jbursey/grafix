@@ -86,12 +86,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			dt = 0;
 			framesThisSecond = 0;
-		}
 
-		//--update window text
-		std::wstring metrics = L"";
-		metrics += L"FPS: " + std::to_wstring(fps);
-		SetWindowText(g_handle, metrics.c_str());
+			//--update window text
+			std::wstring metrics = L"";
+			metrics += L"FPS: " + std::to_wstring(fps);
+			SetWindowText(g_handle, metrics.c_str());
+		}
     }
 	g_timer->Stop();
 	
