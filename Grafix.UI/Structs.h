@@ -1,5 +1,6 @@
 #pragma once
 #include <DirectXMath.h>
+#include <vector>
 
 struct Vertex
 {
@@ -12,4 +13,10 @@ struct MWP
 	DirectX::XMMATRIX ModelToWorld;
 	DirectX::XMMATRIX WorldToCamera;
 	DirectX::XMMATRIX CameraToProjection;
+};
+
+struct Mesh
+{
+	std::vector<Vertex> Vertx;
+	std::vector<unsigned int> Indx;
 };

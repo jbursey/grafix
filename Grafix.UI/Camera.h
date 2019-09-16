@@ -5,15 +5,26 @@ class Camera
 public:
 	Camera();
 	~Camera();
-	void Init(float x, float y, float z, float lookX, float lookY, float lookZ, int width, int height, float nearZ, float farZ);
-	DirectX::XMFLOAT4X4 GetCameraMatrix();
-	DirectX::XMFLOAT4X4 GetProjectionMatrix();
+	void Init(int width, int height, float nearZ, float farZ);
+	void SetPosition(float x, float y, float z);
+	void SetOrientation(float roll, float pitch, float yaw);
+	DirectX::XMMATRIX GetCameraMatrix();
+	DirectX::XMMATRIX GetProjectionMatrix();
+	void MoveForward();
+	void MoveBackward();
 
-private:
-	DirectX::XMFLOAT4X4 _worldToCamera;
-	DirectX::XMFLOAT4X4 _cameraToProjection;
+private:	
+	float _x;
+	float _y;
+	float _z;
 
-	DirectX::XMFLOAT4 _position;
+	float _roll;
+	float _pitch;
+	float _yaw;
+
+	DirectX::XMMATRIX _projectionMatrix;
+
+	//DirectX::XMFLOAT4 _position;
 	DirectX::XMFLOAT4 _up;
 	DirectX::XMFLOAT4 _lookAt;
 };

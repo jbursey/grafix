@@ -165,11 +165,14 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="D3DRenderer.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Grafix.UI.h" />
     <ClInclude Include="GrafixConstants.h" />
     <ClInclude Include="InputControls.h" />
+    <ClInclude Include="MeshUtil.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TriangleTest.h" />
@@ -178,8 +181,11 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="D3DRenderer.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Grafix.UI.cpp" />
     <ClCompile Include="InputControls.cpp" />
+    <ClCompile Include="MeshUtil.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="TriangleTest.cpp" />
   </ItemGroup>
