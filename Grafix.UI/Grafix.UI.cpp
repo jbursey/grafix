@@ -96,7 +96,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		*/		
 		while (updateTime > GrafixConstants::MillisecondsPerUpdate)
 		{
-			g_renderer->Update();
+			g_renderer->Update(g_controls);
 			updateTime -= GrafixConstants::MillisecondsPerUpdate;
 			++totalUpdates;
 			++updatesThisSecond;

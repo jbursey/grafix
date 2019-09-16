@@ -6,12 +6,13 @@
 #include "TriangleTest.h"
 #include "Camera.h"
 #include "Scene.h"
+#include "InputControls.h"
 
 class D3DRenderer
 {
 public:
 	void Init(HWND handle, int width, int height);
-	void Update();
+	void Update(InputControls* controls);
 	void Render();
 	void Resize(int width, int height);
 

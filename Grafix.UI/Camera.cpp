@@ -51,8 +51,10 @@ DirectX::XMMATRIX Camera::GetProjectionMatrix()
 
 void Camera::MoveForward()
 {
+	_z -= 0.01;
 }
 
 void Camera::MoveBackward()
 {
+	_z += 0.01;
 }

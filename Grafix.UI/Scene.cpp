@@ -18,9 +18,9 @@ void Scene::AddEntity(Entity entity)
 
 void Scene::Init(int width, int height, ID3D11Device* device)
 {
-	_camera.Init(width, height, 1, 1000);
-	_camera.SetPosition(0, 0, 0);
-	_camera.SetOrientation(0, 0, 0);
+	Camera.Init(width, height, 1, 1000);
+	Camera.SetPosition(0, 0, 0);
+	Camera.SetOrientation(0, 0, 0);
 
 	auto m1 = MeshUtil::GetTriangle();
 	Entity e1;
@@ -36,8 +36,8 @@ void Scene::Render(ID3D11DeviceContext* context)
 	{
 		Entity& entity = Entities[i];
 
-		DirectX::XMMATRIX worldToCamera = _camera.GetCameraMatrix();
-		DirectX::XMMATRIX cameraToProjection = _camera.GetProjectionMatrix();
+		DirectX::XMMATRIX worldToCamera = Camera.GetCameraMatrix();
+		DirectX::XMMATRIX cameraToProjection = Camera.GetProjectionMatrix();
 
 		entity.Render(context, worldToCamera, cameraToProjection);
 	}

@@ -97,8 +97,16 @@ void D3DRenderer::Init(HWND handle, int width, int height)
 	int stop = 0;
 }
 
-void D3DRenderer::Update()
+void D3DRenderer::Update(InputControls* controls)
 {
+	if (controls->IsKeyDown('W'))
+	{
+		_scene.Camera.MoveForward();
+	}
+	if (controls->IsKeyDown('S'))
+	{
+		_scene.Camera.MoveBackward();
+	}
 }
 
 void D3DRenderer::Render()

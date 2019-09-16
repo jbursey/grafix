@@ -14,8 +14,8 @@ public:
 	void AddEntity(Entity entity);
 	void Init(int width, int height, ID3D11Device* device);
 	void Render(ID3D11DeviceContext* context);
-
+	Camera Camera;
 private:
-	Camera _camera;
+	//Camera _camera;
 };
 
