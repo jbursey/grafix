@@ -7,6 +7,8 @@
 #include "framework.h"
 #include "Grafix.UI.h"
 #include "D3DRenderer.h"
+#include "InputControls.h"
+#include "GrafixConstants.h"
 #include <GameTimer.h>
 
 #define MAX_LOADSTRING 100
@@ -19,6 +21,7 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 HWND g_handle;
 GameTimer* g_timer = nullptr;
 D3DRenderer* g_renderer = nullptr;
+InputControls* g_controls = nullptr;
 int g_width;
 int g_height;
 
@@ -39,6 +42,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // TODO: Place code here.
 	g_timer = new GameTimer();
 	g_renderer = new D3DRenderer();
+	g_controls = new InputControls();
 	g_width = 1000;
 	g_height = 800;
 
@@ -60,8 +64,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Main message loop:
 	double fps = 0;
 	double totalFrames = 0;
+	double totalUpdates = 0;
+	double frameDeltaTime = 0;
 	double framesThisSecond = 0;
+	double updatesThisSecond = 0;
 	double dt = 0;
+	double updateTime = 0;
+
 	g_renderer->Init(g_handle, g_width, g_height);    
 	g_timer->Start();
     while (true)
@@ -72,24 +81,52 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			DispatchMessage(&msg);
 		}
 
-		g_renderer->Update();
+		if (msg.message == WM_QUIT)
+		{
+			break;
+		}
+
+		if (g_controls->IsKeyDown(VK_ESCAPE))
+		{
+			break;
+		}
+
+		/*
+		it dt = 1000ms and the updates per second is 10, then we need to update every 100ms so in this case we are 10 updates behind
+		*/		
+		while (updateTime > GrafixConstants::MillisecondsPerUpdate)
+		{
+			g_renderer->Update();
+			updateTime -= GrafixConstants::MillisecondsPerUpdate;
+			++totalUpdates;
+			++updatesThisSecond;
+		}
 		g_renderer->Render();
 
-		dt += g_timer->ElapsedTimeMS();		
+		frameDeltaTime = g_timer->ElapsedTimeMS();		
+		dt += frameDeltaTime;
+		updateTime += frameDeltaTime;
 
 		//--update metrics
 		++framesThisSecond;
-		++totalFrames;
+		++totalFrames;		
+		
 		if (dt >= 1000)
 		{
 			fps = framesThisSecond / (dt / 1000.0);
+			updatesThisSecond = updatesThisSecond / (dt / 1000.0);
 
 			dt = 0;
 			framesThisSecond = 0;
 
 			//--update window text
 			std::wstring metrics = L"";
-			metrics += L"FPS: " + std::to_wstring(fps);
+			metrics += L"DT: " + std::to_wstring(frameDeltaTime);
+			metrics += L" FPS: " + std::to_wstring(fps);
+			metrics += L" UPS: " + std::to_wstring(updatesThisSecond);
+			metrics += L" Total Updates: " + std::to_wstring(totalUpdates);
+
+			updatesThisSecond = 0;
 			SetWindowText(g_handle, metrics.c_str());
 		}
     }
@@ -169,6 +206,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	int stop = 0;
     switch (message)
     {
     case WM_COMMAND:
@@ -196,6 +234,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             EndPaint(hWnd, &ps);
         }
         break;
+	case WM_KEYDOWN:
+		g_controls->SetKey((char)wParam, true);
+		break;
+	case WM_KEYUP:
+		g_controls->SetKey((char)wParam, false);
+		break;
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
