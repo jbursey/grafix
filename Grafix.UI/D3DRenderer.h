@@ -4,6 +4,7 @@
 #include <dxgi.h>
 #include "ShaderManager.h"
 #include "TriangleTest.h"
+#include "Camera.h"
 
 class D3DRenderer
 {
@@ -25,6 +26,7 @@ private:
 
 	ShaderManager _sm;
 	TriangleTest _tt;
+	Camera _camera;
 
 	int _width;
 	int _height;

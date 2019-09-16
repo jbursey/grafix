@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="D3DRenderer.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Grafix.UI.h" />
@@ -172,9 +173,10 @@
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TriangleTest.h" />
-    <ClInclude Include="Vertex.h" />
+    <ClInclude Include="Structs.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="D3DRenderer.cpp" />
     <ClCompile Include="Grafix.UI.cpp" />
     <ClCompile Include="InputControls.cpp" />
