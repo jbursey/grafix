@@ -3,7 +3,7 @@
 
 void GameTimer::Start()
 {
-	QueryPerformanceCounter(&_start);	
+	QueryPerformanceCounter(&_start);
 	QueryPerformanceCounter(&_then);
 	QueryPerformanceFrequency(&_freq);
 }

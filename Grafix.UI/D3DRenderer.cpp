@@ -107,6 +107,14 @@ void D3DRenderer::Update(InputControls* controls)
 	{
 		_scene.Camera.MoveBackward();
 	}
+	if (controls->IsKeyDown('D'))
+	{
+		_scene.Camera.TurnRight();
+	}
+	if (controls->IsKeyDown('A'))
+	{
+		_scene.Camera.TurnLeft();
+	}
 }
 
 void D3DRenderer::Render()

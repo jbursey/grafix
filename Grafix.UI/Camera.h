@@ -1,5 +1,6 @@
 #pragma once
 #include <DirectXMath.h>
+#include "GrafixConstants.h"
 class Camera
 {
 public:
@@ -12,6 +13,8 @@ public:
 	DirectX::XMMATRIX GetProjectionMatrix();
 	void MoveForward();
 	void MoveBackward();
+	void TurnRight();
+	void TurnLeft();
 
 private:	
 	float _x;
