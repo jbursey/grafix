@@ -177,6 +177,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TriangleTest.h" />
     <ClInclude Include="Structs.h" />
+    <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
@@ -188,6 +189,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="TriangleTest.cpp" />
+    <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Grafix.UI.rc" />

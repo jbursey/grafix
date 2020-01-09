@@ -1,5 +1,6 @@
 #pragma once
 #include "Structs.h"
+#include "Util.h"
 #include <vector>
 #include <DirectXMath.h>
 
