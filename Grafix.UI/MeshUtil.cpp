@@ -54,21 +54,48 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 
 	m.Vertx.push_back(north);
 
-	for (double theta = 0; theta < 360.0; theta += sliceStep)
-	{
-		for (double phi = 0; phi < 180.0; phi += stackStep)
+
+	double theta = 0;
+	double phi = 0;
+
+	for (int stack = 0; stack < numStacks; stack++)
+	{		
+		for (int slice = 0; slice < numSlices; slice++)
 		{
-			double x = radius * sin(theta) * cos(phi);
-			double y = radius * cos(theta);
-			double z = radius * sin(theta) * sin(phi);
+			double thetaDeg = theta * (DirectX::XM_PI / 180.0);
+			double phiDeg = phi * (DirectX::XM_PI / 180.0);
+
+			double x = radius * sin(thetaDeg) * cos(phiDeg);
+			double y = radius * cos(thetaDeg);
+			double z = radius * sin(thetaDeg) * sin(phiDeg);
 
 			Vertex v;
 			v.Point = DirectX::XMFLOAT4(x, y, z, 1);
 			v.Color = DirectX::XMFLOAT4(0, 1, 0, 1);
 
 			m.Vertx.push_back(v);
+
+			phi += stackStep;
 		}
+
+		theta += sliceStep;
 	}
+
+	//for (double theta = 0; theta < 360.0; theta += sliceStep)
+	//{
+	//	for (double phi = 0; phi < 180.0; phi += stackStep)
+	//	{
+	//		double x = radius * sin(theta) * cos(phi);
+	//		double y = radius * cos(theta);
+	//		double z = radius * sin(theta) * sin(phi);
+
+	//		Vertex v;
+	//		v.Point = DirectX::XMFLOAT4(x, y, z, 1);
+	//		v.Color = DirectX::XMFLOAT4(0, 1, 0, 1);
+
+	//		m.Vertx.push_back(v);
+	//	}
+	//}
 
 	Vertex south;
 	south.Point = DirectX::XMFLOAT4(0, -radius, 0, 1);
