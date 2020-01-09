@@ -14,6 +14,7 @@ Entity::~Entity()
 void Entity::Init(Mesh mesh, ID3D11Device* device)
 {
 	_mesh = mesh;
+	_topology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 	// create vertex buffer
 	D3D11_BUFFER_DESC vertxBufferDesc;
@@ -85,14 +86,22 @@ void Entity::Render(ID3D11DeviceContext* context, DirectX::XMMATRIX worldToCamer
 	mwp->CameraToProjection = DirectX::XMMatrixTranspose(cameraToProjection);
 	context->Unmap(_cbuffer, 0);
 
-	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	context->IASetPrimitiveTopology(_topology);
 	context->RSSetState(_rasterizerState);
 	unsigned int strides = sizeof(Vertex);
 	unsigned int offset = 0;
 	context->IASetVertexBuffers(0, 1, &_vbuffer, &strides, &offset);
 	context->IASetIndexBuffer(_ibuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
 	context->VSSetConstantBuffers(0, 1, &_cbuffer);
-	context->DrawIndexed(_mesh.Indx.size(), 0, 0);
+
+	if (_topology == D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+	{
+		context->DrawIndexed(_mesh.Indx.size(), 0, 0);
+	}
+	else if (_topology == D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST)
+	{
+		context->Draw(_mesh.Vertx.size(), 0);
+	}
 	
 }
 
@@ -108,6 +117,11 @@ void Entity::SetOrientation(float roll, float pitch, float yaw)
 	_roll = roll;
 	_pitch = pitch;
 	_yaw = yaw;
+}
+
+void Entity::SetTopology(D3D11_PRIMITIVE_TOPOLOGY topology)
+{
+	_topology = topology;
 }
 
 DirectX::XMMATRIX Entity::GetModelToWorldMatrix()

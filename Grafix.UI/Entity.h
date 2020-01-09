@@ -14,6 +14,7 @@ public:
 	void Render(ID3D11DeviceContext* context, DirectX::XMMATRIX worldToCamera, DirectX::XMMATRIX cameraToProjection);
 	void SetPosition(float x, float y, float z);
 	void SetOrientation(float roll, float pitch, float yaw);
+	void SetTopology(D3D11_PRIMITIVE_TOPOLOGY topology);
 	D3D11_CULL_MODE Cull;
 	D3D11_FILL_MODE Fill;
 	DirectX::XMMATRIX GetModelToWorldMatrix();
@@ -34,5 +35,7 @@ private:
 	ID3D11Buffer* _vbuffer;
 	ID3D11Buffer* _ibuffer;
 	ID3D11Buffer* _cbuffer;
+
+	D3D11_PRIMITIVE_TOPOLOGY _topology;
 };
 

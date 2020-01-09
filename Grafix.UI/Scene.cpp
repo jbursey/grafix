@@ -31,6 +31,7 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 	e1.Init(m1, device);
 	e1.SetPosition(0, 0, 10);
 	e1.SetOrientation(0 * (DirectX::XM_PI / 180.0), 0, 0);
+	e1.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 	AddEntity(e1);
 
 	//--behind

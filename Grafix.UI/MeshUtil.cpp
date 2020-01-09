@@ -33,3 +33,36 @@ Mesh MeshUtil::GetTriangle()
 
 	return m;
 }
+
+Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
+{
+	Mesh m;
+
+	// x = r sin(theta)cos(phi)
+	// y = r cos(theta)
+	// z = r sin(theta)sin(phi)
+
+	// 360 degrees for the slices
+	// 180 degrees for the stacks
+
+	double sliceStep = 360.0 / numSlices;
+	double stackStep = 180.0 / numStacks;
+
+	Vertex north;
+	north.Point = DirectX::XMFLOAT4(0, radius, 0, 1);
+	north.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
+
+	for (double theta = 0; theta < 360.0; theta += sliceStep)
+	{
+		for (double phi = 0; phi < 180.0; phi += stackStep)
+		{
+			
+		}
+	}
+
+	Vertex south;
+	south.Point = DirectX::XMFLOAT4(0, -radius, 0, 1);
+	south.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
+
+	return m;
+}
