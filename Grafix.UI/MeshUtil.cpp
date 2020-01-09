@@ -81,28 +81,26 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 		theta += sliceStep;
 	}
 
-	//for (double theta = 0; theta < 360.0; theta += sliceStep)
-	//{
-	//	for (double phi = 0; phi < 180.0; phi += stackStep)
-	//	{
-	//		double x = radius * sin(theta) * cos(phi);
-	//		double y = radius * cos(theta);
-	//		double z = radius * sin(theta) * sin(phi);
-
-	//		Vertex v;
-	//		v.Point = DirectX::XMFLOAT4(x, y, z, 1);
-	//		v.Color = DirectX::XMFLOAT4(0, 1, 0, 1);
-
-	//		m.Vertx.push_back(v);
-	//	}
-	//}
-
 	Vertex south;
 	south.Point = DirectX::XMFLOAT4(0, -radius, 0, 1);
 	south.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
 	m.Vertx.push_back(south);
 
-	m.Indx.push_back(0);
+
+	//--indexs
+	int top = 0;
+	int bottom = m.Vertx.size();
+
+	//--top pie
+	for (int i = 1; i < numSlices; i++)
+	{
+		m.Indx.push_back(top);
+		m.Indx.push_back(i);
+		m.Indx.push_back(i + 1);
+	}
+
+	//--middle
+	//--bottom pie	
 
 	return m;
 }

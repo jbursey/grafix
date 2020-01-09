@@ -59,12 +59,13 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 	AddEntity(e4);
 
 	//--at origin
-	auto sphere = MeshUtil::GetSphere(3, 100, 100);
+	auto sphere = MeshUtil::GetSphere(30, 100, 100);
 	Entity e5;
 	e5.Init(sphere, device);
 	e5.SetPosition(0, 0, 0);
 	e5.SetOrientation(0, 0, 0);
-	e5.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+	//e5.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+	e5.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	AddEntity(e5);
 }
 

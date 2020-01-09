@@ -134,3 +134,19 @@ void Camera::TurnLeft()
 
 	_yaw += radiansToTurn;
 }
+
+void Camera::MoveUp()
+{
+	//lets move up 2 units per second
+	//GrafixConstants::MillisecondsPerUpdate
+	//  2     X
+	// --- = ---
+	// 1000   mpu
+
+	_y -= (2 * GrafixConstants::MillisecondsPerUpdate) / 1000.0;
+}
+
+void Camera::MoveDown()
+{
+	_y += (2 * GrafixConstants::MillisecondsPerUpdate) / 1000.0;
+}

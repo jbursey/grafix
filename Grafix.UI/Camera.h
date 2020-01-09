@@ -15,6 +15,8 @@ public:
 	void MoveBackward();
 	void TurnRight();
 	void TurnLeft();
+	void MoveUp();
+	void MoveDown();
 
 private:	
 	float _x;
