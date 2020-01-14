@@ -45,8 +45,8 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 	// 360 degrees for the slices
 	// 180 degrees for the stacks
 
-	double sliceStep = 360.0 / numSlices;
-	double stackStep = 180.0 / numStacks;
+	double sliceStep = 360.0 / (numSlices * 1.0);
+	double stackStep = 180.0 / (numStacks * 1.0);
 
 	Vertex north;
 	north.Point = DirectX::XMFLOAT4(0, radius, 0, 1);
@@ -54,35 +54,32 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 
 	m.Vertx.push_back(north);
 
-
 	double theta = 0;
-	double phi = 0;
-
 	for (int stack = 1; stack < numStacks; stack++)
 	{
 		auto color = Util::CreateRandomColor();
+
 		theta = stack * stackStep;
-		for (int slice = 0; slice <= numSlices; slice++)
+		theta = theta * (DirectX::XM_PI / 180.0);
+
+		double phi = 0;
+		for(int slice = 0; slice < numSlices; slice++)
 		{
 			phi = slice * sliceStep;
-			double thetaDeg = theta * (DirectX::XM_PI / 180.0);
-			double phiDeg = phi * (DirectX::XM_PI / 180.0);
+			phi = phi * (DirectX::XM_PI / 180.0);
 
-			double x = radius * sin(thetaDeg) * cos(phiDeg);
-			double y = radius * cos(thetaDeg);
-			double z = radius * sin(thetaDeg) * sin(phiDeg);
+			double x = radius * sin(theta) * cos(phi);
+			double y = radius * cos(theta);
+			double z = radius * sin(theta) * sin(phi);
 
 			Vertex v;
 			v.Point = DirectX::XMFLOAT4(x, y, z, 1);
 			v.Color = color;
 
 			m.Vertx.push_back(v);
-
-			//phi += stackStep;
-		}
-
-		//theta += sliceStep;
+		}	
 	}
+
 
 	Vertex south;
 	south.Point = DirectX::XMFLOAT4(0, -radius, 0, 1);
@@ -109,7 +106,7 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 
 	   C      D
 	*/
-	for (int stack = 1; stack < numStacks; stack++)
+	for (int stack = 0; stack < numStacks - 2; stack++)
 	{
 		int a = 0;
 		int b = 0;
@@ -118,9 +115,10 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 
 		for (int slice = 0; slice < numSlices; slice++)
 		{
-			a = 1 + (slice * stack);
+			//a = 1 + (slice * stack);
+			a = (1 + slice) + (numSlices * stack);
 			b = a + 1;
-			c = a + numSlices;
+			c = (1 + slice) + (numSlices * (stack + 1));
 			d = c + 1;
 
 			m.Indx.push_back(a);
@@ -129,19 +127,24 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 
 			m.Indx.push_back(b);
 			m.Indx.push_back(d);
-			m.Indx.push_back(c);
+			m.Indx.push_back(c);		
 
-			break;
-		}
+			int zzzz = 0;
+		}		
+		
+		//if (stack == 2)
+		//{
+		//	break;
+		//}
 	}
-
-	//--bottom pie	
-	for (int i = bottom - numSlices; i < numSlices; i++)
-	{
-		m.Indx.push_back(0);
-		m.Indx.push_back(0);
-		m.Indx.push_back(0);
-	}
+//
+//	//--bottom pie	
+//	for (int i = bottom - numSlices; i < numSlices; i++)
+//	{
+//		m.Indx.push_back(i);
+//		m.Indx.push_back(i+1);
+//		m.Indx.push_back(bottom);
+//	}
 
 	return m;
 }

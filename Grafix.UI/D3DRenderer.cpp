@@ -81,13 +81,13 @@ void D3DRenderer::Init(HWND handle, int width, int height)
 	viewport.Width = width;
 
 	_context->RSSetViewports(1, &viewport);		
-	D3D11_RASTERIZER_DESC rastDesc;
-	ZeroMemory(&rastDesc, sizeof(D3D11_RASTERIZER_DESC));
-	rastDesc.CullMode = D3D11_CULL_BACK;
-	rastDesc.FillMode = D3D11_FILL_SOLID;
-	ID3D11RasterizerState* rastState;
-	_device->CreateRasterizerState(&rastDesc, &rastState);
-	_context->RSSetState(rastState);	
+	//D3D11_RASTERIZER_DESC rastDesc;
+	//ZeroMemory(&rastDesc, sizeof(D3D11_RASTERIZER_DESC));
+	//rastDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
+	//rastDesc.FillMode = D3D11_FILL_SOLID;
+	//ID3D11RasterizerState* rastState;
+	//_device->CreateRasterizerState(&rastDesc, &rastState);
+	//_context->RSSetState(rastState);	
 	
 	_sm.Init(_device);
 	_tt.Init(_device);
