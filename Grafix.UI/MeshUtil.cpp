@@ -114,7 +114,7 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 	*/
 	for (int i = 0; i < numStacks - 2; i++)
 	{
-		for (int j = 0; j <= numSlices; j++)
+		for (int j = 0; j <= numSlices + 3; j++)
 		{
 			int a = 1 + j + (i * numSlices);
 			int b = a + 1;
@@ -137,10 +137,10 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 			//}
 		}
 		
-		//if (i == 1)
-		//{
-		//	break;
-		//}
+		if (i == 300000)
+		{
+			break;
+		}
 	}
 
 	//--bottom pie
