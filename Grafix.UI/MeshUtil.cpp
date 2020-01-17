@@ -112,36 +112,42 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 
 		C      D
 	*/
-	//for (int i = 0; i < numStacks - 2; i++)
-	//{
-	//	for (int j = 0; j < numSlices - 1; j++)
-	//	{
-	//		int a = 1 + j + (i * numSlices);
-	//		int b = a + 1;
-	//		int c = a + numSlices + 1;
-	//		int d = c + 1;
+	for (int i = 0; i < numStacks - 2; i++)
+	{
+		if (i == 2)
+		{
+			int zsadjfklasfj = 0;
+		}
 
-	//		m.Indx.push_back(a);
-	//		m.Indx.push_back(b);
-	//		m.Indx.push_back(c);
+		for (int j = 0; j < numSlices - 0; j++)
+		{
+			int a = 1 + j + (i * (numSlices + 1));
+			int b = a + 1;
+			int c = a + numSlices + 1; 
+			int d = c + 1;
 
-	//		m.Indx.push_back(b);
-	//		m.Indx.push_back(d);
-	//		m.Indx.push_back(c);
+			m.Indx.push_back(a);
+			m.Indx.push_back(b);
+			m.Indx.push_back(c);
 
-	//		int z = 0;
-	//		
-	//		//if (j == 5)
-	//		//{
-	//		//	break;
-	//		//}
-	//	}
-	//	
-	//	//if (i == 1)
-	//	//{
-	//	//	break;
-	//	//}
-	//}
+			m.Indx.push_back(b);
+			m.Indx.push_back(d);
+			m.Indx.push_back(c);
+
+			int z = 0;
+			
+			//if (j == 5)
+			//{
+			//	break;
+			//}
+		}
+
+		//if (i == 3)
+		//{
+		//	break;
+		//}
+
+	}
 
 	//--bottom pie
 	for (int i = southPole - (numSlices + 1); i < m.Vertx.size(); i++)
