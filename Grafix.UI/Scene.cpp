@@ -19,6 +19,7 @@ void Scene::AddEntity(Entity entity)
 
 void Scene::Init(int width, int height, ID3D11Device* device)
 {
+	
 	Camera.Init(width, height, 1, 1000);
 	Camera.SetPosition(0, 0, 0);
 	Camera.SetOrientation(0, 0, 0);
@@ -58,7 +59,7 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 	//e4.SetOrientation(0 * (DirectX::XM_PI / 180.0), 0, 90 * (DirectX::XM_PI / 180.0));
 	//AddEntity(e4);
 
-	int size = 50;
+	int size = 5000;
 
 	//--at origin
 	auto sphere = MeshUtil::GetSphere(10, size, size);
@@ -67,7 +68,7 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 	e5.SetPosition(0, 0, 0);
 	e5.SetOrientation(0, 0, 0);	
 	e5.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	AddEntity(e5);
+	//AddEntity(e5);
 
 	//auto sphere2 = MeshUtil::GetSphere(10, size, size);
 	Entity e6;

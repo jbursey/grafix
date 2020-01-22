@@ -61,10 +61,10 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 
 	m.Vertx.push_back(north);
 
+	
 	for (int i = 1; i < numStacks; i++)
-	{
+	{		
 		auto color = Util::CreateRandomColor();
-
 		for (int j = 0; j <= numSlices; j++)
 		{
 			theta = i * stackStep;
