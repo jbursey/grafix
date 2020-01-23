@@ -11,6 +11,7 @@
 class D3DRenderer
 {
 public:
+	D3DRenderer();
 	void Init(HWND handle, int width, int height);
 	void Update(InputControls* controls);
 	void Render();
@@ -26,10 +27,14 @@ private:
 	ID3D11RenderTargetView* _rtv;
 	ID3D11DepthStencilView* _dsv;
 
+	ID3D11Texture2D* _depthBuffer;
+
 	ShaderManager _sm;
 	TriangleTest _tt;
 	Camera _camera;
 	Scene _scene;
+
+	bool _swapChainCreated;
 
 	int _width;
 	int _height;

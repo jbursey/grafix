@@ -43,8 +43,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	g_timer = new GameTimer();
 	g_renderer = new D3DRenderer();
 	g_controls = new InputControls();
-	g_width = 1000;
-	g_height = 800;
+	g_width = 300;
+	g_height = 200;
 
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -206,6 +206,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	RECT rect;
 	int stop = 0;
     switch (message)
     {
@@ -239,6 +240,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_KEYUP:
 		g_controls->SetKey((char)wParam, false);
+		break;
+	case WM_SIZE:
+		GetWindowRect(hWnd, &rect);
+		g_renderer->Resize(rect.right - rect.left, rect.bottom - rect.top);
 		break;
     case WM_DESTROY:
         PostQuitMessage(0);

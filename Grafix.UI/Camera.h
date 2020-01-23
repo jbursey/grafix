@@ -9,6 +9,7 @@ public:
 	void Init(int width, int height, float nearZ, float farZ);
 	void SetPosition(float x, float y, float z);
 	void SetOrientation(float roll, float pitch, float yaw);
+	void Resize(int width, int height, float nearZ, float farZ);
 	DirectX::XMMATRIX GetCameraMatrix();
 	DirectX::XMMATRIX GetProjectionMatrix();
 	void MoveForward();

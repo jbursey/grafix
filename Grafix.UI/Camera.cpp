@@ -17,7 +17,7 @@ void Camera::Init(int width, int height, float nearZ, float farZ)
 	_up = DirectX::XMFLOAT4(0, 1, 0, 0); //w = 0 = vector
 	_lookAt = DirectX::XMFLOAT4(0, 0, 1, 0);	
 
-	_projectionMatrix = DirectX::XMMatrixPerspectiveFovLH(75.0 * (DirectX::XM_PI / 180.0), width / height, nearZ, farZ);
+	Resize(width, height, nearZ, farZ);	
 }
 
 void Camera::SetPosition(float x, float y, float z)
@@ -32,6 +32,11 @@ void Camera::SetOrientation(float roll, float pitch, float yaw)
 	_roll = roll;
 	_pitch = pitch;
 	_yaw = yaw;
+}
+
+void Camera::Resize(int width, int height, float nearZ, float farZ)
+{
+	_projectionMatrix = DirectX::XMMatrixPerspectiveFovLH(75.0 * (DirectX::XM_PI / 180.0), width / height, nearZ, farZ);
 }
 
 DirectX::XMMATRIX Camera::GetCameraMatrix()
