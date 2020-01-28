@@ -160,3 +160,49 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 
 	return m;
 }
+
+Mesh MeshUtil::GetGrid(int width, int depth)
+{
+	Mesh m;
+
+	//--vertx
+	for (int x = 0; x < width; x++)
+	{
+		for (int z = 0; z < depth; z++)
+		{
+			Vertex v;
+			v.Point = DirectX::XMFLOAT4(x, 0, z, 1);
+			v.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
+			m.Vertx.push_back(v);
+		}
+	}
+
+	//--indx
+	/*
+	
+	B     C
+
+	A     D
+	
+	*/
+	for (int x = 0; x < width - 1 ; x++)
+	{
+		for (int z = 0; z < depth - 1; z++)
+		{
+			unsigned int a = z + (x * width);
+			unsigned int b = a + width;
+			unsigned int c = b + 1;
+			unsigned int d = a + 1;
+
+			m.Indx.push_back(a);
+			m.Indx.push_back(b);
+			m.Indx.push_back(c);
+
+			m.Indx.push_back(a);
+			m.Indx.push_back(c);
+			m.Indx.push_back(d);
+		}
+	}
+
+	return m;
+}

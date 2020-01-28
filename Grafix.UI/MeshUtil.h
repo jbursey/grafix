@@ -10,5 +10,6 @@ public:
 	~MeshUtil();
 	static Mesh GetTriangle();
 	static Mesh GetSphere(int radius, int numStacks, int numSlices);
+	static Mesh GetGrid(int width, int depth);
 };
 

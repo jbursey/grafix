@@ -77,6 +77,16 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 	e6.SetOrientation(0, 0, 0);
 	e6.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);	
 	AddEntity(e6);
+
+	int w = 10;
+	int d = 10;
+	auto grid = MeshUtil::GetGrid(w, d);
+	Entity e7;
+	e7.Init(grid, device);
+	e7.SetPosition(0, 0, 0);
+	e7.SetOrientation(0, 0, 0);
+	e7.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	AddEntity(e7);
 }
 
 void Scene::Render(ID3D11DeviceContext* context)
