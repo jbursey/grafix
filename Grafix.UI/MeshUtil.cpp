@@ -273,3 +273,7 @@ Mesh MeshUtil::GetGrid(std::string bitmapFile, double scaling)
 
 	return m;
 }
+
+void MeshUtil::CalculateNormals(Mesh m)
+{
+}
