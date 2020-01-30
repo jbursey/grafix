@@ -36,7 +36,8 @@ void Camera::SetOrientation(float roll, float pitch, float yaw)
 
 void Camera::Resize(int width, int height, float nearZ, float farZ)
 {
-	_projectionMatrix = DirectX::XMMatrixPerspectiveFovLH(75.0 * (DirectX::XM_PI / 180.0), width / height, nearZ, farZ);
+	float aspect = width / (height * 1.0);
+	_projectionMatrix = DirectX::XMMatrixPerspectiveFovLH(75.0 * (DirectX::XM_PI / 180.0), aspect, nearZ, farZ);
 }
 
 DirectX::XMMATRIX Camera::GetCameraMatrix()
