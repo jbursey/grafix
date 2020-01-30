@@ -195,12 +195,12 @@ Mesh MeshUtil::GetGrid(int width, int depth)
 			unsigned int d = a + 1;
 
 			m.Indx.push_back(a);
-			m.Indx.push_back(b);
 			m.Indx.push_back(c);
+			m.Indx.push_back(b);
 
 			m.Indx.push_back(a);
-			m.Indx.push_back(c);
 			m.Indx.push_back(d);
+			m.Indx.push_back(c);
 		}
 	}
 
@@ -217,9 +217,10 @@ Mesh MeshUtil::GetGrid(std::string bitmapFile, double scaling)
 	BitmapFile bitmap;
 	bitmap.Parse(fileBytes);
 
+	auto color = Util::CreateRandomColor();
 	//--vertx	
 	for (int x = 0; x < bitmap.Width; x++)
-	{
+	{		
 		for (int z = 0; z < bitmap.Height; z++)
 		{
 			int i = z + (x * bitmap.Width);
@@ -231,6 +232,7 @@ Mesh MeshUtil::GetGrid(std::string bitmapFile, double scaling)
 			Vertex v;
 			v.Point = DirectX::XMFLOAT4(x, height, z, 1);
 			v.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
+			v.Color = color;
 
 			m.Vertx.push_back(v);
 		}
@@ -260,12 +262,12 @@ Mesh MeshUtil::GetGrid(std::string bitmapFile, double scaling)
 			d = a + 1;
 
 			m.Indx.push_back(a);
-			m.Indx.push_back(b);
 			m.Indx.push_back(c);
+			m.Indx.push_back(b);
 
 			m.Indx.push_back(a);
-			m.Indx.push_back(c);
 			m.Indx.push_back(d);
+			m.Indx.push_back(c);
 		}
 	}
 

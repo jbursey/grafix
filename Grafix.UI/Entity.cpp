@@ -62,11 +62,11 @@ void Entity::Init(Mesh mesh, ID3D11Device* device)
 	//--rast result
 	D3D11_RASTERIZER_DESC rastDesc;
 	rastDesc.AntialiasedLineEnable = true;
-	rastDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
+	rastDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
 	rastDesc.DepthBias = 0;
 	rastDesc.DepthBiasClamp = 1.0;
 	rastDesc.DepthClipEnable = false;
-	rastDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_WIREFRAME;
+	rastDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 	rastDesc.FrontCounterClockwise = false;
 	rastDesc.MultisampleEnable = false;
 	rastDesc.ScissorEnable = false;
