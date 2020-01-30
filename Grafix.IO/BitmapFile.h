@@ -79,6 +79,8 @@ public:
 	~BitmapFile();
 	void Parse(std::vector<unsigned char> data);
 	std::vector<Color> Colors;
+	int Width;
+	int Height;
 private:
 	BitmapFileHeader _header;
 	BitmapInfoHeader _infoHeader;

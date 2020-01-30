@@ -15,6 +15,8 @@ BitmapFile::~BitmapFile()
 void BitmapFile::Parse(std::vector<unsigned char> data)
 {
 	_br = new ByteReader(data);
+	Width = 0;
+	Height = 0;
 
 	//-- bitmap header----------------------------------------------
 	unsigned char header1 = _br->ReadByte();
@@ -59,6 +61,9 @@ void BitmapFile::Parse(std::vector<unsigned char> data)
 	default:
 		break;
 	}
+
+	Width = widthPixels;
+	Height = heightPixels;
 
 	//-- color table if applicable------------------------------------
 	if (compressionMethod == 3) //BI_BITFIELDS

@@ -206,3 +206,68 @@ Mesh MeshUtil::GetGrid(int width, int depth)
 
 	return m;
 }
+
+Mesh MeshUtil::GetGrid(std::string bitmapFile, double scaling)
+{
+	Mesh m;
+	
+	FileReader fr;
+	std::vector<unsigned char> fileBytes = fr.ReadAllBytes(bitmapFile);
+
+	BitmapFile bitmap;
+	bitmap.Parse(fileBytes);
+
+	//--vertx	
+	for (int x = 0; x < bitmap.Width; x++)
+	{
+		for (int z = 0; z < bitmap.Height; z++)
+		{
+			int i = z + (x * bitmap.Width);
+
+			Color c = bitmap.Colors[i];
+
+			double height = ((c.r + c.b + c.g) * scaling) / 3.0;
+
+			Vertex v;
+			v.Point = DirectX::XMFLOAT4(x, height, z, 1);
+			v.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
+
+			m.Vertx.push_back(v);
+		}
+	}
+
+	//--indx
+	/*
+	
+	B      C
+
+
+	A      D
+	
+	*/
+	for (int x = 0; x < bitmap.Width - 1; x++)
+	{
+		for (int z = 0; z < bitmap.Height - 1; z++)
+		{
+			int a = 0;
+			int b = 0;
+			int c = 0;
+			int d = 0;
+
+			a = z + (x * bitmap.Width);
+			b = a + bitmap.Width;
+			c = b + 1;
+			d = a + 1;
+
+			m.Indx.push_back(a);
+			m.Indx.push_back(b);
+			m.Indx.push_back(c);
+
+			m.Indx.push_back(a);
+			m.Indx.push_back(c);
+			m.Indx.push_back(d);
+		}
+	}
+
+	return m;
+}
