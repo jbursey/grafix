@@ -40,6 +40,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: Place code here.
+	//--lets refactor to try to be "ECS"
+	/*	
+
+	Entities - have IDs
+		eg....crate, box, sphere, triangle
+	Components - have data
+		eg position, velocity, sprites, health value, name, player tags, 
+	Systems - have logic
+		render system, input system, movement system, gravity system, ai system, physics system
+	
+	*/
+
 	g_timer = new GameTimer();
 	g_renderer = new D3DRenderer();
 	g_controls = new InputControls();

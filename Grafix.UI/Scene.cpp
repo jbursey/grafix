@@ -89,8 +89,8 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 	AddEntity(e7);
 
 	//auto grid2 = MeshUtil::GetGrid("..\\test_bitmap.bmp", 1/128.0);
-	auto grid2 = MeshUtil::GetGrid("..\\heightmap5.bmp", 1 / 10.0);
-	//auto grid2 = MeshUtil::GetGrid("..\\heightmap_test.bmp", 1 / 10.0);
+	//auto grid2 = MeshUtil::GetGrid("..\\heightmap5.bmp", 1 / 10.0);
+	auto grid2 = MeshUtil::GetGrid("..\\heightmap_test.bmp", 1 / 10.0);
 	Entity e8;
 	e8.Init(grid2, device);
 	e8.SetPosition(0, 0, 0);

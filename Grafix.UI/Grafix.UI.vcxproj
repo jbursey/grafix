@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="D3DRenderer.h" />
+    <ClInclude Include="ECSDelMe.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Grafix.UI.h" />
