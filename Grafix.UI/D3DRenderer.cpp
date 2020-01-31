@@ -16,6 +16,9 @@ void D3DRenderer::Init(HWND handle, int width, int height)
 	//--get a handle for the main device....usually the graphics card
 	auto dxgiadapterhr = _dxgiFactory->EnumAdapters(0, &_dxgiAdapter);
 
+	DXGI_ADAPTER_DESC adapterDesc;
+	_dxgiAdapter->GetDesc(&adapterDesc);
+
 	unsigned int deviceflags = 0;
 	deviceflags |= D3D11_CREATE_DEVICE_BGRA_SUPPORT;
 #ifdef _DEBUG

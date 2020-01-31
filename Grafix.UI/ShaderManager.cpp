@@ -9,7 +9,7 @@ void ShaderManager::Init(ID3D11Device* device)
 	auto psoResult = device->CreatePixelShader(&pso[0], pso.size(), 0, &_ps);
 	auto vsoResult = device->CreateVertexShader(&vso[0], vso.size(), 0, &_vs);
 
-	D3D11_INPUT_ELEMENT_DESC inputDesc[2];
+	D3D11_INPUT_ELEMENT_DESC inputDesc[3];
 	inputDesc[0].AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
 	inputDesc[0].Format = DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT;
 	inputDesc[0].InputSlot = 0;
@@ -25,6 +25,14 @@ void ShaderManager::Init(ID3D11Device* device)
 	inputDesc[1].InstanceDataStepRate = 0;
 	inputDesc[1].SemanticIndex = 0;
 	inputDesc[1].SemanticName = "COLOR";
+
+	inputDesc[2].AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+	inputDesc[2].Format = DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT;
+	inputDesc[2].InputSlot = 0;
+	inputDesc[2].InputSlotClass = D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA;
+	inputDesc[2].InstanceDataStepRate = 0;
+	inputDesc[2].SemanticIndex = 0;
+	inputDesc[2].SemanticName = "NORMAL";
 
 	auto inputLayoutResult = device->CreateInputLayout(inputDesc, 2, &vso[0], vso.size(), &_inputLayout);
 

@@ -28,8 +28,10 @@ Mesh MeshUtil::GetTriangle()
 	m.Vertx.push_back(v3);
 
 	m.Indx.push_back(0);
-	m.Indx.push_back(1);
 	m.Indx.push_back(2);
+	m.Indx.push_back(1);
+
+	CalculateNormals(m);
 
 	return m;
 }
@@ -83,7 +85,8 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 			Vertex v;
 			v.Point = DirectX::XMFLOAT4(x, y, z, 1);
 			v.Color = color;
-				
+			v.Normal = DirectX::XMFLOAT4(x, y, z, 0);
+
 			m.Vertx.push_back(v);
 		}
 	}
@@ -204,6 +207,8 @@ Mesh MeshUtil::GetGrid(int width, int depth)
 		}
 	}
 
+	CalculateNormals(m);
+
 	return m;
 }
 
@@ -271,9 +276,43 @@ Mesh MeshUtil::GetGrid(std::string bitmapFile, double scaling)
 		}
 	}
 
+	CalculateNormals(m);
 	return m;
 }
 
-void MeshUtil::CalculateNormals(Mesh m)
+void MeshUtil::CalculateNormals(Mesh& m)
 {
+	//--lets assume triangle strips for now
+	for (int i = 0; i < m.Indx.size() - 3; i += 3)
+	{
+		unsigned int indx1 = m.Indx[i+0];
+		unsigned int indx2 = m.Indx[i+1];
+		unsigned int indx3 = m.Indx[i+2];
+
+		Vertex& v1 = m.Vertx[indx1];
+		Vertex& v2 = m.Vertx[indx2];
+		Vertex& v3 = m.Vertx[indx3];
+
+		//v1 in the direction of v2
+		//v1 in the direction of v3
+		DirectX::XMFLOAT3 v1v2 = DirectX::XMFLOAT3(v2.Point.x - v1.Point.x, v2.Point.y - v1.Point.y, v2.Point.z - v1.Point.z);
+		DirectX::XMFLOAT3 v1v3 = DirectX::XMFLOAT3(v3.Point.x - v1.Point.x, v3.Point.y - v1.Point.y, v3.Point.z - v1.Point.z);
+		DirectX::XMVECTOR xmv1v2 = DirectX::XMLoadFloat3(&v1v2);
+		DirectX::XMVECTOR xmv1v3 = DirectX::XMLoadFloat3(&v1v3);
+		DirectX::XMVECTOR xmnorm = DirectX::XMVector3Cross(xmv1v2, xmv1v3);
+
+		//store the cross product for the normal
+		DirectX::XMFLOAT3 normal;
+		DirectX::XMStoreFloat3(&normal, xmnorm);
+
+		double magnitudeNormal = sqrt(pow(normal.x, 2) + pow(normal.y, 2) + pow(normal.z, 2));
+		auto test = DirectX::XMVector3Length(xmnorm);
+
+		DirectX::XMFLOAT4 unitnormal = DirectX::XMFLOAT4(normal.x / magnitudeNormal, normal.y / magnitudeNormal, normal.z / magnitudeNormal, 0); //0 = vector
+
+		v1.Normal = unitnormal;
+		v2.Normal = unitnormal;
+		v3.Normal = unitnormal;
+	}
+
 }

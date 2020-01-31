@@ -9,5 +9,6 @@ VertexOutput main(VertexInput input)
 	output.Position = mul(output.Position, CameraToProjection);
 	//output.Position = input.Position;
 	output.Color = input.Color;
+	output.Normal = mul(input.Normal, ModelToWorld);
 	return output;
 }

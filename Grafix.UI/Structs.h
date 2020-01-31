@@ -4,8 +4,14 @@
 
 struct Vertex
 {
+public:
+	Vertex() : Point(0, 0, 0, 1), Color(1, 1, 1, 1), Normal(0, 0, 0, 0)
+	{
+
+	}
 	DirectX::XMFLOAT4 Point;
 	DirectX::XMFLOAT4 Color;
+	DirectX::XMFLOAT4 Normal;
 };
 
 struct MWP

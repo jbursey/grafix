@@ -59,44 +59,44 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 	//e4.SetOrientation(0 * (DirectX::XM_PI / 180.0), 0, 90 * (DirectX::XM_PI / 180.0));
 	//AddEntity(e4);
 
-	int size = 20;
+	////////////int size = 20;
 
-	//--at origin
-	auto sphere = MeshUtil::GetSphere(10, size, size);
-	Entity e5;
-	e5.Init(sphere, device);
-	e5.SetPosition(0, 0, 0);
-	e5.SetOrientation(0, 0, 0);	
-	e5.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	AddEntity(e5);
+	//////////////--at origin
+	////////////auto sphere = MeshUtil::GetSphere(10, size, size);
+	////////////Entity e5;
+	////////////e5.Init(sphere, device);
+	////////////e5.SetPosition(0, 0, 0);
+	////////////e5.SetOrientation(0, 0, 0);	
+	////////////e5.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	////////////AddEntity(e5);
 
-	//auto sphere2 = MeshUtil::GetSphere(10, size, size);
-	Entity e6;
-	e6.Init(sphere, device);
-	e6.SetPosition(0, 0, 15);
-	e6.SetOrientation(0, 0, 0);
-	e6.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);	
-	AddEntity(e6);
+	//////////////auto sphere2 = MeshUtil::GetSphere(10, size, size);
+	////////////Entity e6;
+	////////////e6.Init(sphere, device);
+	////////////e6.SetPosition(0, 0, 15);
+	////////////e6.SetOrientation(0, 0, 0);
+	////////////e6.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);	
+	////////////AddEntity(e6);
 
 	int w = 10;
 	int d = 10;
 	auto grid = MeshUtil::GetGrid(w, d);
 	Entity e7;
 	e7.Init(grid, device);
-	e7.SetPosition(0, -50, 0);
+	e7.SetPosition(0, 0, 0);
 	e7.SetOrientation(0, 0, 0);
 	e7.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	AddEntity(e7);
 
-	//auto grid2 = MeshUtil::GetGrid("..\\test_bitmap.bmp", 1/128.0);
-	//auto grid2 = MeshUtil::GetGrid("..\\heightmap5.bmp", 1 / 10.0);
-	auto grid2 = MeshUtil::GetGrid("..\\heightmap_test.bmp", 1 / 10.0);
-	Entity e8;
-	e8.Init(grid2, device);
-	e8.SetPosition(0, 0, 0);
-	e8.SetOrientation(0, 0, 0);
-	e8.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	AddEntity(e8);
+	//////////////auto grid2 = MeshUtil::GetGrid("..\\test_bitmap.bmp", 1/128.0);
+	////////////auto grid2 = MeshUtil::GetGrid("..\\heightmap5.bmp", 1 / 10.0);
+	//////////////auto grid2 = MeshUtil::GetGrid("..\\heightmap_test.bmp", 1 / 10.0);
+	////////////Entity e8;
+	////////////e8.Init(grid2, device);
+	////////////e8.SetPosition(0, 0, 0);
+	////////////e8.SetOrientation(0, 0, 0);
+	////////////e8.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	////////////AddEntity(e8);
 }
 
 void Scene::Render(ID3D11DeviceContext* context)

@@ -66,7 +66,7 @@ void Entity::Init(Mesh mesh, ID3D11Device* device)
 	rastDesc.DepthBias = 0;
 	rastDesc.DepthBiasClamp = 1.0;
 	rastDesc.DepthClipEnable = false;
-	rastDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_WIREFRAME;
+	rastDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 	rastDesc.FrontCounterClockwise = false;
 	rastDesc.MultisampleEnable = false;
 	rastDesc.ScissorEnable = false;
