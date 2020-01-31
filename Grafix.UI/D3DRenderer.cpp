@@ -56,6 +56,51 @@ void D3DRenderer::Init(HWND handle, int width, int height)
 	//_camera.Init(width, height, 1, 1000);
 	_scene.Init(width, height, _device);
 
+	if (true)
+	{
+		std::vector<Entity> normalEntities;
+		for (int i = 0; i < _scene.Entities.size(); i++)
+		{
+			Entity& e = _scene.Entities[i];
+			Mesh m = e.GetMesh();
+
+			for (int j = 0; j < m.Vertx.size(); j++)
+			{
+				Vertex v = m.Vertx[j];
+				Mesh normalLine;
+
+				Vertex start;
+				Vertex end;
+
+				start.Point = DirectX::XMFLOAT4(v.Point.x, v.Point.y, v.Point.z, 1);
+				start.Color = DirectX::XMFLOAT4(1, 0, 0, 1);
+
+				end.Point = DirectX::XMFLOAT4(v.Point.x + v.Normal.x, v.Point.y + v.Normal.y, v.Point.z + v.Normal.z, 1);
+				end.Color = DirectX::XMFLOAT4(1, 0, 0, 1);
+
+				normalLine.Vertx.push_back(start);
+				normalLine.Vertx.push_back(end);
+
+				normalLine.Indx.push_back(0);
+				normalLine.Indx.push_back(1);
+
+				Entity normalEntity;
+				normalEntity.Init(normalLine, _device);
+				//normalEntity.SetPosition(start.Point.x, start.Point.y, start.Point.z);
+				normalEntity.SetPosition(0, 0, 0);
+				normalEntity.SetOrientation(0, 0, 0);
+				normalEntity.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
+
+				normalEntities.push_back(normalEntity);				
+			}
+		}
+
+		for (int i = 0; i < normalEntities.size(); i++)
+		{
+			_scene.AddEntity(normalEntities[i]);
+		}
+	}
+
 	int stop = 0;
 }
 

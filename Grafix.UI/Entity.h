@@ -18,6 +18,8 @@ public:
 	D3D11_CULL_MODE Cull;
 	D3D11_FILL_MODE Fill;
 	DirectX::XMMATRIX GetModelToWorldMatrix();
+
+	Mesh GetMesh();
 private:
 	float _x;
 	float _y;

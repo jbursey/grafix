@@ -26,14 +26,14 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 
 	//four triangles for reference
 
-	////--into screen
-	//auto m1 = MeshUtil::GetTriangle();
-	//Entity e1;
-	//e1.Init(m1, device);
-	//e1.SetPosition(0, 0, 10);
-	//e1.SetOrientation(0 * (DirectX::XM_PI / 180.0), 0, 0);
-	//e1.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
-	//AddEntity(e1);
+	//--into screen
+	auto m1 = MeshUtil::GetTriangle();
+	Entity e1;
+	e1.Init(m1, device);
+	e1.SetPosition(0, 10, 10);
+	e1.SetOrientation(0 * (DirectX::XM_PI / 180.0), 0, 0);
+	e1.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+	AddEntity(e1);
 
 	////--behind
 	//auto m2 = MeshUtil::GetTriangle();
@@ -59,27 +59,27 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 	//e4.SetOrientation(0 * (DirectX::XM_PI / 180.0), 0, 90 * (DirectX::XM_PI / 180.0));
 	//AddEntity(e4);
 
-	////////////int size = 20;
+	int size = 20;
 
-	//////////////--at origin
-	////////////auto sphere = MeshUtil::GetSphere(10, size, size);
-	////////////Entity e5;
-	////////////e5.Init(sphere, device);
-	////////////e5.SetPosition(0, 0, 0);
-	////////////e5.SetOrientation(0, 0, 0);	
-	////////////e5.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	////////////AddEntity(e5);
+	//--at origin
+	auto sphere = MeshUtil::GetSphere(10, size, size);
+	Entity e5;
+	e5.Init(sphere, device);
+	e5.SetPosition(0, -20, 0);
+	e5.SetOrientation(0, 0, 0);	
+	e5.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	AddEntity(e5);
 
-	//////////////auto sphere2 = MeshUtil::GetSphere(10, size, size);
-	////////////Entity e6;
-	////////////e6.Init(sphere, device);
-	////////////e6.SetPosition(0, 0, 15);
-	////////////e6.SetOrientation(0, 0, 0);
-	////////////e6.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);	
-	////////////AddEntity(e6);
+	//auto sphere2 = MeshUtil::GetSphere(10, size, size);
+	Entity e6;
+	e6.Init(sphere, device);
+	e6.SetPosition(0, 0, 15);
+	e6.SetOrientation(0, 0, 0);
+	e6.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);	
+	//AddEntity(e6);
 
-	int w = 10;
-	int d = 10;
+	int w = 5;
+	int d = 5;
 	auto grid = MeshUtil::GetGrid(w, d);
 	Entity e7;
 	e7.Init(grid, device);

@@ -66,7 +66,7 @@ void Entity::Init(Mesh mesh, ID3D11Device* device)
 	rastDesc.DepthBias = 0;
 	rastDesc.DepthBiasClamp = 1.0;
 	rastDesc.DepthClipEnable = false;
-	rastDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
+	rastDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_WIREFRAME;
 	rastDesc.FrontCounterClockwise = false;
 	rastDesc.MultisampleEnable = false;
 	rastDesc.ScissorEnable = false;
@@ -94,7 +94,7 @@ void Entity::Render(ID3D11DeviceContext* context, DirectX::XMMATRIX worldToCamer
 	context->IASetIndexBuffer(_ibuffer, DXGI_FORMAT::DXGI_FORMAT_R32_UINT, 0);
 	context->VSSetConstantBuffers(0, 1, &_cbuffer);
 
-	if (_topology == D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+	if (_topology != D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST)
 	{
 		context->DrawIndexed(_mesh.Indx.size(), 0, 0);
 	}
@@ -133,4 +133,9 @@ DirectX::XMMATRIX Entity::GetModelToWorldMatrix()
 
 	return S*R*T;
 	//return T*R*S;
+}
+
+Mesh Entity::GetMesh()
+{
+	return _mesh;
 }

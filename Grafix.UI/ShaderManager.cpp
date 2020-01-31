@@ -34,7 +34,7 @@ void ShaderManager::Init(ID3D11Device* device)
 	inputDesc[2].SemanticIndex = 0;
 	inputDesc[2].SemanticName = "NORMAL";
 
-	auto inputLayoutResult = device->CreateInputLayout(inputDesc, 2, &vso[0], vso.size(), &_inputLayout);
+	auto inputLayoutResult = device->CreateInputLayout(inputDesc, 3, &vso[0], vso.size(), &_inputLayout);
 
 	int stop = 0;
 }
