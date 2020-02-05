@@ -59,24 +59,24 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 	//e4.SetOrientation(0 * (DirectX::XM_PI / 180.0), 0, 90 * (DirectX::XM_PI / 180.0));
 	//AddEntity(e4);
 
-	//int size = 20;
+	int size = 20;
 
-	////--at origin
-	//auto sphere = MeshUtil::GetSphere(10, size, size);
-	//Entity e5;
-	//e5.Init(sphere, device);
-	//e5.SetPosition(0, -20, 0);
-	//e5.SetOrientation(0, 0, 0);	
-	//e5.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	//AddEntity(e5);
+	//--at origin
+	auto sphere = MeshUtil::GetSphere(10, size, size);
+	Entity e5;
+	e5.Init(sphere, device);
+	e5.SetPosition(0, -20, 0);
+	e5.SetOrientation(0, 0, 0);	
+	e5.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	AddEntity(e5);
 
-	//auto sphere2 = MeshUtil::GetSphere(10, size, size);
-	//Entity e6;
-	//e6.Init(sphere, device);
-	//e6.SetPosition(0, 0, 15);
-	//e6.SetOrientation(0, 0, 0);
-	//e6.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);	
-	//AddEntity(e6);
+	auto sphere2 = MeshUtil::GetSphere(10, size, size);
+	Entity e6;
+	e6.Init(sphere, device);
+	e6.SetPosition(0, -20, 0);
+	e6.SetOrientation(0, 0, 0);
+	e6.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);	
+	AddEntity(e6);
 
 	//int w = 20;
 	//int d = 20;
@@ -90,9 +90,9 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 
 	//auto grid2 = MeshUtil::GetGrid("..\\test_bitmap.bmp", 1/128.0);
 	//auto grid2 = MeshUtil::GetGrid("..\\heightmap5.bmp", 1 / 1.0);
-	auto grid2 = MeshUtil::GetGrid("..\\heightmap_test.bmp", 1 / 6.0);
+	//auto grid2 = MeshUtil::GetGrid("..\\heightmap_test.bmp", 1 / 6.0);
 	//auto grid2 = MeshUtil::GetGrid("..\\usgs_ft_worth.bmp", 1 / 1.0);
-	//auto grid2 = MeshUtil::GetGrid("..\\usgs_colo_springs.bmp", 1 / 1.0);
+	auto grid2 = MeshUtil::GetGrid("..\\usgs_colo_springs.bmp", 1 / 1.0);
 	Entity e8;
 	e8.Init(grid2, device);
 	e8.SetPosition(0, 0, 0);
