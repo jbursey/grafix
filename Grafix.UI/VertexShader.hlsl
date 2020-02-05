@@ -10,5 +10,6 @@ VertexOutput main(VertexInput input)
 	//output.Position = input.Position;
 	output.Color = input.Color;
 	output.Normal = mul(input.Normal, ModelToWorld);
+	output.PositionWorld = mul(input.Position, ModelToWorld);
 	return output;
 }

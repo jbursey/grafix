@@ -9,6 +9,6 @@ VertexOutput main(VertexInput input)
 	output.Color = input.Color;
 	//output.Normal = mul(input.Normal, ModelToWorld); //move the normal to where the object is in world space
 	output.Normal = input.Normal;
-
+	output.PositionWorld = mul(input.Position, ModelToWorld);
 	return output;
 }
