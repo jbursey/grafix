@@ -34,6 +34,9 @@ float4 CalculateSpotDiffuseLight(float4 lightColor, float4 lightPosition, float4
 	return saturate(color);
 }
 
+//-------------------------------------------------------
+// main
+//-------------------------------------------------------
 float4 main(VertexOutput input) : SV_TARGET
 {
 	float4 color = input.Color;
@@ -42,5 +45,9 @@ float4 main(VertexOutput input) : SV_TARGET
 
 	float4 diffuseColor = CalculateDirectionalDiffuseLight(float4(1, 1, 1, 1), float4(1, 0, 0, 0), input.Normal);
 
-	return color * (diffuseColor + ambientColor);
+	float4 spotDiffuseColor1 = CalculateSpotDiffuseLight(float4(0, 0, 1, 1), float4(200, 10, 10, 1), input.Normal, input.PositionWorld, 0.075);
+	float4 spotDiffuseColor2 = CalculateSpotDiffuseLight(float4(0, 1, 0, 1), float4(10, 10, 200, 1), input.Normal, input.PositionWorld, 0.075);
+	float4 spotDiffuseColor3 = CalculateSpotDiffuseLight(float4(1, 0, 0, 1), float4(200, 10, 200, 1), input.Normal, input.PositionWorld, 0.075);
+
+	return color * (diffuseColor + ambientColor + spotDiffuseColor1 + spotDiffuseColor2 + spotDiffuseColor3);
 }
