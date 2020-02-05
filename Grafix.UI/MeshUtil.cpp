@@ -84,7 +84,8 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 
 			Vertex v;
 			v.Point = DirectX::XMFLOAT4(x, y, z, 1);
-			v.Color = color;
+			//v.Color = color;
+			v.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
 			v.Normal = DirectX::XMFLOAT4(x, y, z, 0);
 
 			m.Vertx.push_back(v);
@@ -237,7 +238,7 @@ Mesh MeshUtil::GetGrid(std::string bitmapFile, double scaling)
 			Vertex v;
 			v.Point = DirectX::XMFLOAT4(x, height, z, 1);
 			v.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
-			v.Color = color;
+			//v.Color = color;
 
 			m.Vertx.push_back(v);
 		}

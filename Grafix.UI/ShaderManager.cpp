@@ -3,8 +3,8 @@
 void ShaderManager::Init(ID3D11Device* device)
 {		
 	_didRender = false;
-	std::vector<unsigned char> pso = FileReader::ReadAllBytes("..\\x64\\Debug\\PixelShader.cso");
-	std::vector<unsigned char> vso = FileReader::ReadAllBytes("..\\x64\\Debug\\VertexShader.cso");
+	std::vector<unsigned char> pso = FileReader::ReadAllBytes("..\\x64\\Debug\\PixelShaderLights.cso");
+	std::vector<unsigned char> vso = FileReader::ReadAllBytes("..\\x64\\Debug\\VertexShaderLights.cso");
 
 	auto psoResult = device->CreatePixelShader(&pso[0], pso.size(), 0, &_ps);
 	auto vsoResult = device->CreateVertexShader(&vso[0], vso.size(), 0, &_vs);

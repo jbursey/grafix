@@ -56,7 +56,7 @@ void D3DRenderer::Init(HWND handle, int width, int height)
 	//_camera.Init(width, height, 1, 1000);
 	_scene.Init(width, height, _device);
 
-	if (true)
+	if (false)
 	{
 		std::vector<Entity> normalEntities;
 		for (int i = 0; i < _scene.Entities.size(); i++)
@@ -189,8 +189,7 @@ void D3DRenderer::Resize(int width, int height)
 
 		//--create render target view			
 		getBufferResult = _dxgiSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)& backBuffer);
-		auto rtvResult = _device->CreateRenderTargetView(backBuffer, nullptr, &_rtv);
-		_context->OMSetRenderTargets(1, &_rtv, 0);		
+		auto rtvResult = _device->CreateRenderTargetView(backBuffer, nullptr, &_rtv);		
 		backBuffer->Release();
 
 		//--create depth stencil view
@@ -217,6 +216,8 @@ void D3DRenderer::Resize(int width, int height)
 		auto depthBufferResult = _device->CreateTexture2D(&texDesc, 0, &_depthBuffer);
 
 		auto dsvResult = _device->CreateDepthStencilView(_depthBuffer, &dsvDesc, &_dsv);		
+
+		_context->OMSetRenderTargets(1, &_rtv, _dsv);
 
 		//--create viewport
 		D3D11_VIEWPORT viewport;
