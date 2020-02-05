@@ -23,4 +23,4 @@ cbuffer cbMWP : register(b0)
 //{
 //	float4 Position : POSITION;
 //	float4 Color : COLOR;
-//};
+//};t
