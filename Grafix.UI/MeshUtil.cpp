@@ -175,7 +175,9 @@ Mesh MeshUtil::GetGrid(int width, int depth)
 		for (int z = 0; z < depth; z++)
 		{
 			Vertex v;
-			v.Point = DirectX::XMFLOAT4(x, 0, z, 1);
+			double y = sin(z);
+			y = 0;
+			v.Point = DirectX::XMFLOAT4(x, y, z, 1);
 			v.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
 			m.Vertx.push_back(v);
 		}
