@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bitmaps", "Bitmaps", "{65D0
 		heightmap_test.bmp = heightmap_test.bmp
 		test_bitmap.bmp = test_bitmap.bmp
 		test_bitmap_needs_padding_5_by_5.bmp = test_bitmap_needs_padding_5_by_5.bmp
+		usgs_colo_springs.bmp = usgs_colo_springs.bmp
+		usgs_ft_worth.bmp = usgs_ft_worth.bmp
 	EndProjectSection
 EndProject
 Global

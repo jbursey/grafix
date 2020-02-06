@@ -37,7 +37,7 @@ void Camera::SetOrientation(float roll, float pitch, float yaw)
 void Camera::Resize(int width, int height, float nearZ, float farZ)
 {
 	float aspect = width / (height * 1.0);
-	_projectionMatrix = DirectX::XMMatrixPerspectiveFovLH(75.0 * (DirectX::XM_PI / 180.0), aspect, nearZ, farZ);
+	_projectionMatrix = DirectX::XMMatrixPerspectiveFovLH(70.0 * (DirectX::XM_PI / 180.0), aspect, nearZ, farZ);
 }
 
 DirectX::XMMATRIX Camera::GetCameraMatrix()
@@ -149,10 +149,10 @@ void Camera::MoveUp()
 	// --- = ---
 	// 1000   mpu
 
-	_y -= (2 * GrafixConstants::MillisecondsPerUpdate) / 1000.0;
+	_y -= (GrafixConstants::CameraMoveUnitsPerSecond * GrafixConstants::MillisecondsPerUpdate) / 1000.0;
 }
 
 void Camera::MoveDown()
 {
-	_y += (2 * GrafixConstants::MillisecondsPerUpdate) / 1000.0;
+	_y += (GrafixConstants::CameraMoveUnitsPerSecond * GrafixConstants::MillisecondsPerUpdate) / 1000.0;
 }

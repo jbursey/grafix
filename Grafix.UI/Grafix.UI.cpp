@@ -55,8 +55,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	g_timer = new GameTimer();
 	g_renderer = new D3DRenderer();
 	g_controls = new InputControls();
-	g_width = 300;
-	g_height = 200;
+	g_width = 1200;
+	g_height = 800;
 
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
