@@ -58,7 +58,10 @@ void D3DRenderer::Init(HWND handle, int width, int height)
 
 	if (false)
 	{
-		std::vector<Entity> normalEntities;
+		Entity normalEntity;
+		Mesh normalLine;
+		//std::vector<Entity> normalEntities;
+		int normalEntityIndex = 0;
 		for (int i = 0; i < _scene.Entities.size(); i++)
 		{
 			Entity& e = _scene.Entities[i];
@@ -66,8 +69,7 @@ void D3DRenderer::Init(HWND handle, int width, int height)
 
 			for (int j = 0; j < m.Vertx.size(); j++)
 			{
-				Vertex v = m.Vertx[j];
-				Mesh normalLine;
+				Vertex v = m.Vertx[j];				
 
 				Vertex start;
 				Vertex end;
@@ -81,24 +83,24 @@ void D3DRenderer::Init(HWND handle, int width, int height)
 				normalLine.Vertx.push_back(start);
 				normalLine.Vertx.push_back(end);
 
-				normalLine.Indx.push_back(0);
-				normalLine.Indx.push_back(1);
-
-				Entity normalEntity;
-				normalEntity.Init(normalLine, _device);
-				//normalEntity.SetPosition(start.Point.x, start.Point.y, start.Point.z);
-				normalEntity.SetPosition(0, 0, 0);
-				normalEntity.SetOrientation(0, 0, 0);
-				normalEntity.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
-
-				normalEntities.push_back(normalEntity);				
+				normalLine.Indx.push_back(normalEntityIndex++);
+				normalLine.Indx.push_back(normalEntityIndex++);
+			
 			}
+
+			//if (i == 3)
+			//{
+			//	break;
+			//}
 		}
 
-		for (int i = 0; i < normalEntities.size(); i++)
-		{
-			_scene.AddEntity(normalEntities[i]);
-		}
+		normalEntity.Init(normalLine, _device);
+		//normalEntity.SetPosition(start.Point.x, start.Point.y, start.Point.z);
+		normalEntity.SetPosition(0, 0, 0);
+		normalEntity.SetOrientation(0, 0, 0);
+		normalEntity.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
+
+		_scene.AddEntity(normalEntity);
 	}
 
 	int stop = 0;
@@ -232,7 +234,7 @@ void D3DRenderer::Resize(int width, int height)
 
 		//-----
 
-		_scene.Camera.Resize(width, height, 1, 1000);
+		_scene.Camera.Resize(width, height, 1, 2000);
 
 		int sto = 0;
 	}
