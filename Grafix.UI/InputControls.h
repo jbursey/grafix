@@ -9,7 +9,8 @@ public:
 	void SetKey(char key, bool isDown);
 	void SetMousePosition(int x, int y);
 	void SetMouseClick(bool left, bool right);
-
+	int GetMouseX();
+	int GetMouseY();
 	bool IsKeyDown(char key);
 private:
 	std::vector<bool> _keys;

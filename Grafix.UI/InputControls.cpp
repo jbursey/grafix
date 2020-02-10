@@ -41,6 +41,16 @@ void InputControls::SetMouseClick(bool left, bool right)
 	_mouseRightClick = right;
 }
 
+int InputControls::GetMouseX()
+{
+	return _mouseX;
+}
+
+int InputControls::GetMouseY()
+{
+	return _mouseY;
+}
+
 bool InputControls::IsKeyDown(char key)
 {
 	return _keys[(int)key];

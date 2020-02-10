@@ -69,6 +69,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
+	//ShowCursor(false);
+	RECT windowRect;
+	//GetClientRect(g_handle, &windowRect);
+	GetWindowRect(g_handle, &windowRect);	
+	ClipCursor(&windowRect);
+
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_GRAFIXUI));
 
     MSG msg;
@@ -87,6 +93,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	g_timer->Start();
     while (true)
     {
+		POINT mouse;
+		mouse.x = g_width / 2.0;
+		mouse.y = g_height / 2.0;
+		ClientToScreen(g_handle, &mouse);
+		SetCursorPos(mouse.x, mouse.y);
+		
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
@@ -123,7 +135,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		++framesThisSecond;
 		++totalFrames;		
 		
-		if (dt >= 1000)
+		if (dt >= 100)
 		{
 			fps = framesThisSecond / (dt / 1000.0);
 			updatesThisSecond = updatesThisSecond / (dt / 1000.0);
@@ -137,6 +149,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			metrics += L" FPS: " + std::to_wstring(fps);
 			metrics += L" UPS: " + std::to_wstring(updatesThisSecond);
 			metrics += L" Total Updates: " + std::to_wstring(totalUpdates);
+			metrics += L" Mouse: " + std::to_wstring(g_controls->GetMouseX()) + L"," + std::to_wstring(g_controls->GetMouseY());
 
 			updatesThisSecond = 0;
 			SetWindowText(g_handle, metrics.c_str());
@@ -144,6 +157,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 	g_timer->Stop();
 	
+	ShowCursor(true);
 	delete g_timer;
 	delete g_renderer;
 
@@ -257,6 +271,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		GetWindowRect(hWnd, &rect);
 		g_renderer->Resize(rect.right - rect.left, rect.bottom - rect.top);
 		break;
+	case WM_MOUSEMOVE:
+	{
+		POINT point;
+		GetCursorPos(&point);
+		g_controls->SetMousePosition(point.x, point.y);		
+	}
+		break;		
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
