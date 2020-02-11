@@ -26,3 +26,9 @@ struct Mesh
 	std::vector<Vertex> Vertx;
 	std::vector<unsigned int> Indx;
 };
+
+struct CBPerFrame
+{
+	DirectX::XMFLOAT4 pointLightPositions[20];
+	DirectX::XMFLOAT4 pointLightColors[20];
+};
