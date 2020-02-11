@@ -8,10 +8,10 @@ void LightSystem::Init(ID3D11Device* device)
 {
 	for (int i = 0; i < GrafixConstants::NumLights; i++)
 	{
-		_cbPerFrame.pointLightPositions[i] = DirectX::XMFLOAT4(i * 20, 0, i * 20, 1);
+		Lights.pointLightPositions[i] = DirectX::XMFLOAT4(i * 20, i * 20, i * 20, 1);
 		//_cbPerFrame.pointLightColors[i] = DirectX::XMFLOAT4(255, 0, 0, 1);
-		_cbPerFrame.pointLightColors[i] = Util::CreateRandomColor();
-	}
+		Lights.pointLightColors[i] = Util::CreateRandomColor();
+	}	
 
 	D3D11_BUFFER_DESC cbDesc;
 	cbDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_CONSTANT_BUFFER;
@@ -26,6 +26,12 @@ void LightSystem::Init(ID3D11Device* device)
 
 void LightSystem::Update()
 {
+	for (int i = 0; i < GrafixConstants::NumLights; i++)
+	{
+		Lights.pointLightPositions[i] = DirectX::XMFLOAT4(i * 20, 0, i * 20, 1);
+		//_cbPerFrame.pointLightColors[i] = DirectX::XMFLOAT4(255, 0, 0, 1);
+		Lights.pointLightColors[i] = Util::CreateRandomColor();
+	}
 }
 
 void LightSystem::Render(ID3D11DeviceContext* context)
@@ -37,8 +43,8 @@ void LightSystem::Render(ID3D11DeviceContext* context)
 	CBPerFrame* cbPerFrame = (CBPerFrame*)mappedResource.pData;
 	for (int i = 0; i < GrafixConstants::NumLights; i++)
 	{
-		cbPerFrame->pointLightColors[i] = _cbPerFrame.pointLightColors[i];
-		cbPerFrame->pointLightPositions[i] = _cbPerFrame.pointLightPositions[i];
+		cbPerFrame->pointLightColors[i] = Lights.pointLightColors[i];
+		cbPerFrame->pointLightPositions[i] = Lights.pointLightPositions[i];
 	}	
 	context->Unmap(_buffer, 0);
 

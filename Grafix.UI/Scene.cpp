@@ -91,15 +91,27 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 
 	//auto grid2 = MeshUtil::GetGrid("..\\test_bitmap.bmp", 1/128.0);
 	//auto grid2 = MeshUtil::GetGrid("..\\heightmap5.bmp", 1 / 1.0);
-	auto grid2 = MeshUtil::GetGrid("..\\heightmap_test.bmp", 1 / 6.0);
+	//auto grid2 = MeshUtil::GetGrid("..\\heightmap_test.bmp", 1 / 6.0);
 	//auto grid2 = MeshUtil::GetGrid("..\\usgs_ft_worth.bmp", 1 / 1.0);
-	//auto grid2 = MeshUtil::GetGrid("..\\usgs_colo_springs.bmp", 1 / 1.0);
+	auto grid2 = MeshUtil::GetGrid("..\\usgs_colo_springs.bmp", 1 / 1.0);
 	Entity e8;
 	e8.Init(grid2, device);
 	e8.SetPosition(0, 0, 0);
 	e8.SetOrientation(0, 0, 0);
 	e8.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	AddEntity(e8);
+
+	auto lights = _ls.Lights;	
+	for (int i = 0; i < 20; i++)
+	{
+		DirectX::XMFLOAT4 lightPos = lights.pointLightPositions[i];
+		auto lightMesh = MeshUtil::GetSphere(1, 4, 4);
+		Entity lightEntity;
+		lightEntity.Init(lightMesh, device);
+		lightEntity.SetPosition(lightPos.x, lightPos.y, lightPos.z);
+		lightEntity.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		AddEntity(lightEntity);		
+	}
 }
 
 void Scene::Render(ID3D11DeviceContext* context)
