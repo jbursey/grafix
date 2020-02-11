@@ -44,16 +44,25 @@ float4 main(VertexOutput input) : SV_TARGET
 
 	float4 ambientColor = CalculateAmbientLight();
 
-	float4 diffuseColor = CalculateDirectionalDiffuseLight(float4(1, 1, 1, 1), float4(0, -1, 0, 0), input.Normal);	
+	float4 diffuseColor = CalculateDirectionalDiffuseLight(float4(1, 1, 1, 1), float4(1, 0, 0, 0), input.Normal);	
 
-	float4 spotDiffuseColor1 = CalculateSpotDiffuseLight(float4(0, 0, 1, 1), float4(200, 125, 10, 1), input.Normal, input.PositionWorld, 0.075);
+	float4 spotDiffuseColor = float4(0, 0, 0, 1);
+	for (int i = 0; i < 20; i++)
+	{
+		//spotDiffuseColor += CalculateSpotDiffuseLight(pointLightPositions[i], pointLightColors[i], input.Normal, input.PositionWorld, 0.075);
+		spotDiffuseColor += CalculateSpotDiffuseLight(pointLightColors[i], pointLightPositions[i], input.Normal, input.PositionWorld, 0.075);
+	}
+
+	/*float4 spotDiffuseColor1 = CalculateSpotDiffuseLight(float4(0, 0, 1, 1), float4(200, 125, 10, 1), input.Normal, input.PositionWorld, 0.075);
 	float4 spotDiffuseColor2 = CalculateSpotDiffuseLight(float4(0, 1, 0, 1), float4(10, 100, 200, 1), input.Normal, input.PositionWorld, 0.075);
 	float4 spotDiffuseColor3 = CalculateSpotDiffuseLight(float4(1, 0, 0, 1), float4(200, 150, 200, 1), input.Normal, input.PositionWorld, 0.075);
-	float4 spotDiffuseColor4 = CalculateSpotDiffuseLight(float4(1, 0, 1, 1), float4(0, 200, 0, 1), input.Normal, input.PositionWorld, 0.075);
+	float4 spotDiffuseColor4 = CalculateSpotDiffuseLight(float4(1, 0, 1, 1), float4(0, 200, 0, 1), input.Normal, input.PositionWorld, 0.075);*/
 
 	//return color * (ambientColor);	
 	//return color * (diffuseColor + ambientColor);
 	//return color * (diffuseColor + ambientColor + spotDiffuseColor1);
 	//return color * (diffuseColor + ambientColor + spotDiffuseColor1 + spotDiffuseColor2);
-	return color * (diffuseColor + ambientColor + spotDiffuseColor1 + spotDiffuseColor2 + spotDiffuseColor3);
+	//return color * (diffuseColor + ambientColor + spotDiffuseColor1 + spotDiffuseColor2 + spotDiffuseColor3);
+	//spotDiffuseColor = CalculateSpotDiffuseLight(float4(1, 0, 0, 1), float4(0, 0, 0, 1), input.Normal, input.PositionWorld, 0.075);
+	return color * (diffuseColor + ambientColor + spotDiffuseColor);
 }

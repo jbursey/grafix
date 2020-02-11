@@ -4,6 +4,7 @@
 #include <d3d11.h>
 #include <vector>
 #include "MeshUtil.h"
+#include "LightSystem.h"
 
 class Scene
 {
@@ -17,5 +18,6 @@ public:
 	Camera Camera;
 private:
 	//Camera _camera;
+	LightSystem _ls;
 };
 
