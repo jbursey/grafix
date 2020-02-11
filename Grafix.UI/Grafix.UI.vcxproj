@@ -171,6 +171,7 @@
     <ClInclude Include="Grafix.UI.h" />
     <ClInclude Include="GrafixConstants.h" />
     <ClInclude Include="InputControls.h" />
+    <ClInclude Include="LightSystem.h" />
     <ClInclude Include="MeshUtil.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Grafix.UI.cpp" />
     <ClCompile Include="InputControls.cpp" />
+    <ClCompile Include="LightSystem.cpp" />
     <ClCompile Include="MeshUtil.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ShaderManager.cpp" />

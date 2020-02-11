@@ -19,7 +19,9 @@ void Scene::AddEntity(Entity entity)
 
 void Scene::Init(int width, int height, ID3D11Device* device)
 {
-	
+
+	_ls.Init(device);
+
 	Camera.Init(width, height, 1, 1000);
 	Camera.SetPosition(0, 0, 0);
 	Camera.SetOrientation(0, 0, 0);
@@ -102,6 +104,8 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 
 void Scene::Render(ID3D11DeviceContext* context)
 {		
+	_ls.Render(context);
+
 	for (int i = 0; i < Entities.size(); i++)
 	{
 		Entity& entity = Entities[i];

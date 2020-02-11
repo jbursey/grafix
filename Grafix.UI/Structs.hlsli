@@ -20,6 +20,12 @@ cbuffer cbMWP : register(b0)
 	matrix CameraToProjection;
 };
 
+cbuffer cbPerFrame : register(b1)
+{	
+	float4 pointLightPositions[20];
+	float4 pointLightColors[20];
+}
+
 //struct PixelInput
 //{
 //	float4 Position : POSITION;
