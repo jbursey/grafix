@@ -135,7 +135,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		++framesThisSecond;
 		++totalFrames;		
 		
-		if (dt >= 100)
+		if (dt >= 1000)
 		{
 			fps = framesThisSecond / (dt / 1000.0);
 			updatesThisSecond = updatesThisSecond / (dt / 1000.0);
