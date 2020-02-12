@@ -8,7 +8,7 @@ void LightSystem::Init(ID3D11Device* device)
 {
 	for (int i = 0; i < GrafixConstants::NumLights; i++)
 	{
-		Lights.pointLightPositions[i] = DirectX::XMFLOAT4(i * 20, i * 20, i * 20, 1);
+		Lights.pointLightPositions[i] = DirectX::XMFLOAT4(i * 20, 200, i * 20, 1);
 		//_cbPerFrame.pointLightColors[i] = DirectX::XMFLOAT4(255, 0, 0, 1);
 		Lights.pointLightColors[i] = Util::CreateRandomColor();
 	}	
