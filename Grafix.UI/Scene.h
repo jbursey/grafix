@@ -16,8 +16,9 @@ public:
 	void Init(int width, int height, ID3D11Device* device);
 	void Render(ID3D11DeviceContext* context);
 	Camera Camera;
+	LightSystem Lights;
 private:
 	//Camera _camera;
-	LightSystem _ls;
+	//LightSystem _ls;
 };
 

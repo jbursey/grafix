@@ -132,6 +132,8 @@ void D3DRenderer::Update(InputControls* controls)
 	{
 		_scene.Camera.MoveDown();
 	}
+
+	_scene.Lights.Update();
 }
 
 void D3DRenderer::Render()

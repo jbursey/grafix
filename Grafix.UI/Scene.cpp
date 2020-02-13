@@ -20,9 +20,9 @@ void Scene::AddEntity(Entity entity)
 void Scene::Init(int width, int height, ID3D11Device* device)
 {
 
-	_ls.Init(device);
+	Lights.Init(device);
 
-	Camera.Init(width, height, 1, 1000);
+	Camera.Init(width, height, 1, 3000);
 	Camera.SetPosition(0, 0, 0);
 	Camera.SetOrientation(0, 0, 0);
 
@@ -101,7 +101,7 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 	e8.SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	AddEntity(e8);
 
-	auto lights = _ls.Lights;	
+	auto lights = Lights.Lights;
 	for (int i = 0; i < 20; i++)
 	{
 		DirectX::XMFLOAT4 lightPos = lights.pointLightPositions[i];
@@ -116,7 +116,7 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 
 void Scene::Render(ID3D11DeviceContext* context)
 {		
-	_ls.Render(context);
+	Lights.Render(context);
 
 	for (int i = 0; i < Entities.size(); i++)
 	{

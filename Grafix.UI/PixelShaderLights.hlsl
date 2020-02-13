@@ -2,8 +2,8 @@
 
 float4 CalculateAmbientLight()
 {
-	return float4(0.1, 0.1, 0.1, 1); // no ambient light
-	//return float4(0, 0, 0, 1);
+	//return float4(0.1, 0.1, 0.1, 1); // no ambient light
+	return float4(0, 0, 0, 1);
 }
 
 float4 CalculateDirectionalDiffuseLight(float4 lightColor, float4 lightDirection, float4 inputNormal)

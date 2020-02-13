@@ -6,11 +6,14 @@ LightSystem::LightSystem()
 
 void LightSystem::Init(ID3D11Device* device)
 {
+	double y = 200;
 	for (int i = 0; i < GrafixConstants::NumLights; i++)
-	{
-		Lights.pointLightPositions[i] = DirectX::XMFLOAT4(i * 20, 200, i * 20, 1);
+	{		
+		Lights.pointLightPositions[i] = DirectX::XMFLOAT4(i * 40, y, i * 40, 1);
 		//_cbPerFrame.pointLightColors[i] = DirectX::XMFLOAT4(255, 0, 0, 1);
 		Lights.pointLightColors[i] = Util::CreateRandomColor();
+
+		y = y - 3;
 	}	
 
 	D3D11_BUFFER_DESC cbDesc;
@@ -28,9 +31,10 @@ void LightSystem::Update()
 {
 	for (int i = 0; i < GrafixConstants::NumLights; i++)
 	{
-		Lights.pointLightPositions[i] = DirectX::XMFLOAT4(i * 20, 0, i * 20, 1);
+		//Lights.pointLightPositions[i] = DirectX::XMFLOAT4(i * 20, 0, i * 20, 1);
+		Lights.pointLightPositions[i].x += 0.1;
 		//_cbPerFrame.pointLightColors[i] = DirectX::XMFLOAT4(255, 0, 0, 1);
-		Lights.pointLightColors[i] = Util::CreateRandomColor();
+		//Lights.pointLightColors[i] = Util::CreateRandomColor();
 	}
 }
 

@@ -37,6 +37,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Grafix.Algorithms", "Grafix
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Grafix.Algorithms.Console", "Grafix.Algorithms.Console\Grafix.Algorithms.Console.vcxproj", "{4442D3E2-E155-4965-9FBE-1C9B60A2E996}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Grafix.UI2", "Grafix.UI2\Grafix.UI2.vcxproj", "{2DD7B057-089D-45FE-908C-F4D6E55C5F18}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3B94AB20-2201-4593-BEC4-E218F958CDC7} = {3B94AB20-2201-4593-BEC4-E218F958CDC7}
+		{C251523F-A66F-4722-8226-559C8AC881EE} = {C251523F-A66F-4722-8226-559C8AC881EE}
+		{2001A689-A9AA-4219-9CBD-48A2B3B44E10} = {2001A689-A9AA-4219-9CBD-48A2B3B44E10}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -101,6 +108,14 @@ Global
 		{4442D3E2-E155-4965-9FBE-1C9B60A2E996}.Release|x64.Build.0 = Release|x64
 		{4442D3E2-E155-4965-9FBE-1C9B60A2E996}.Release|x86.ActiveCfg = Release|Win32
 		{4442D3E2-E155-4965-9FBE-1C9B60A2E996}.Release|x86.Build.0 = Release|Win32
+		{2DD7B057-089D-45FE-908C-F4D6E55C5F18}.Debug|x64.ActiveCfg = Debug|x64
+		{2DD7B057-089D-45FE-908C-F4D6E55C5F18}.Debug|x64.Build.0 = Debug|x64
+		{2DD7B057-089D-45FE-908C-F4D6E55C5F18}.Debug|x86.ActiveCfg = Debug|Win32
+		{2DD7B057-089D-45FE-908C-F4D6E55C5F18}.Debug|x86.Build.0 = Debug|Win32
+		{2DD7B057-089D-45FE-908C-F4D6E55C5F18}.Release|x64.ActiveCfg = Release|x64
+		{2DD7B057-089D-45FE-908C-F4D6E55C5F18}.Release|x64.Build.0 = Release|x64
+		{2DD7B057-089D-45FE-908C-F4D6E55C5F18}.Release|x86.ActiveCfg = Release|Win32
+		{2DD7B057-089D-45FE-908C-F4D6E55C5F18}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
