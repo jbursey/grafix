@@ -23,7 +23,7 @@ void Scene::Init(int width, int height, ID3D11Device* device)
 	Lights.Init(device);
 
 	Camera.Init(width, height, 1, 3000);
-	Camera.SetPosition(0, 0, 0);
+	Camera.SetPosition(-100, -300, -100);
 	Camera.SetOrientation(0, 0, 0);
 
 	//four triangles for reference

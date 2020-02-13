@@ -159,11 +159,19 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="Grafix.UI2.h" />
+    <ClInclude Include="GrafixConstantsh.h" />
+    <ClInclude Include="MeshUtil.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="Structs.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Grafix.UI2.cpp" />
+    <ClCompile Include="MeshUtil.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Grafix.UI2.rc" />
