@@ -7,7 +7,8 @@ namespace GrafixConstants
 	const double CameraMoveUnitsPerSecond = 25;
 	const int NumLights = 20;
 
-	//reserved entities
+	//ecs
+	const int MaxEntities = 500;
 	const int EntityPlayerID = 0;
 	const int EntityTerrainID = 1;	
 }

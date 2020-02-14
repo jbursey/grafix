@@ -157,20 +157,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AssetSystem.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Grafix.UI2.h" />
     <ClInclude Include="GrafixConstantsh.h" />
+    <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="LightSystem.h" />
     <ClInclude Include="MeshUtil.h" />
+    <ClInclude Include="PhysicsSystem.h" />
+    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Structs.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TerrainSystem.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AssetSystem.cpp" />
     <ClCompile Include="Grafix.UI2.cpp" />
+    <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="LightSystem.cpp" />
     <ClCompile Include="MeshUtil.cpp" />
+    <ClCompile Include="PhysicsSystem.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="TerrainSystem.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>

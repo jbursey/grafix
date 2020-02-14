@@ -1,5 +1,6 @@
 #pragma once
 #include <DirectXMath.h>
+#include <d3d11.h>
 #include <vector>
 
 struct Vertex
@@ -14,11 +15,24 @@ public:
 	DirectX::XMFLOAT4 Normal;
 };
 
-struct MWP
+struct CBPerEntity
 {
 	DirectX::XMMATRIX ModelToWorld;
 	DirectX::XMMATRIX WorldToCamera;
 	DirectX::XMMATRIX CameraToProjection;
+};
+
+struct CBPerFrame
+{
+	DirectX::XMFLOAT4 pointLightPositions[20];
+	DirectX::XMFLOAT4 pointLightColors[20];
+};
+
+enum LightType
+{
+	POINT,
+	SPOT,
+	DIRECTION
 };
 
 struct Mesh
@@ -27,8 +41,52 @@ struct Mesh
 	std::vector<unsigned int> Indx;
 };
 
-struct CBPerFrame
+//-------------ECS
+struct PositionComponent
 {
-	DirectX::XMFLOAT4 pointLightPositions[20];
-	DirectX::XMFLOAT4 pointLightColors[20];
+	float X;
+	float Y;
+	float Z;
+
+	float Pitch;
+	float Yaw;
+	float Roll;
+};
+
+struct PhysicsComponent
+{
+	float VelX;
+	float VelY;
+	float VelZ;
+
+	float AccX;
+	float AccY;
+	float AccZ;
+};
+
+
+
+struct LightComponent
+{
+	DirectX::XMFLOAT4 Direction;
+	DirectX::XMFLOAT4 Color;
+	float AttenA;
+	float AttenB;
+	float AttenC;	
+	LightType LightType;
+};
+
+struct RenderComponent
+{
+	Mesh Mesh;
+	D3D11_CULL_MODE CullMode;
+	D3D11_FILL_MODE FillMode;	
+};
+
+struct EntityData
+{
+	std::vector<PositionComponent> PositionComponents;
+	std::vector<LightComponent> LightComponents;
+	std::vector<PhysicsComponent> PhysicsComponents;
+	std::vector<RenderComponent> RenderComponents;
 };

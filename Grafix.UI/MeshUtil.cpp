@@ -238,7 +238,8 @@ Mesh MeshUtil::GetGrid(std::string bitmapFile, double scaling)
 
 			Color c = bitmap.Colors[i];
 
-			double height = ((c.r + c.b + c.g) * scaling) / 3.0;
+			//double height = ((c.r + c.b + c.g) * scaling) / 3.0;
+			double height = c.r * scaling;
 
 			Vertex v;
 			v.Point = DirectX::XMFLOAT4(x, height, z, 1);
