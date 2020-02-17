@@ -2,6 +2,7 @@
 #include <DirectXMath.h>
 #include <d3d11.h>
 #include <vector>
+#include <string>
 
 struct Vertex
 {
@@ -51,6 +52,18 @@ struct PositionComponent
 	float Pitch;
 	float Yaw;
 	float Roll;
+
+	bool Enabled;
+
+	DirectX::XMMATRIX GetModelToWorldMatrix()
+	{
+		//-- mat = S*R*T
+		DirectX::XMMATRIX S = DirectX::XMMatrixScaling(1.0, 1.0, 1.0);
+		DirectX::XMMATRIX T = DirectX::XMMatrixTranslation(X, Y, Z);
+		DirectX::XMMATRIX R = DirectX::XMMatrixRotationRollPitchYaw(Pitch, Yaw, Roll);
+
+		return S * R * T;		
+	}
 };
 
 struct PhysicsComponent
@@ -62,9 +75,9 @@ struct PhysicsComponent
 	float AccX;
 	float AccY;
 	float AccZ;
+
+	bool Enabled;
 };
-
-
 
 struct LightComponent
 {
@@ -74,13 +87,20 @@ struct LightComponent
 	float AttenB;
 	float AttenC;	
 	LightType LightType;
+
+	bool Enabled;
 };
 
 struct RenderComponent
 {
 	Mesh Mesh;
+	std::string PixelShader;
+	std::string VertexShader;
 	D3D11_CULL_MODE CullMode;
-	D3D11_FILL_MODE FillMode;	
+	D3D11_FILL_MODE FillMode;
+	D3D11_PRIMITIVE_TOPOLOGY Topology;
+
+	bool Enabled;
 };
 
 struct EntityData
@@ -89,4 +109,13 @@ struct EntityData
 	std::vector<LightComponent> LightComponents;
 	std::vector<PhysicsComponent> PhysicsComponents;
 	std::vector<RenderComponent> RenderComponents;
+};
+
+struct Entity
+{
+	int ID;
+	PositionComponent* Position;
+	LightComponent* Light;
+	PhysicsComponent* Physics;
+	RenderComponent* Render;
 };

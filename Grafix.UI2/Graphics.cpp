@@ -193,7 +193,7 @@ void Graphics::Resize(int width, int height)
 	}
 }
 
-void Graphics::Tick()
+void Graphics::BeginDraw()
 {
 	static float red = 0;
 	static float green = 0;
@@ -212,5 +212,10 @@ void Graphics::Tick()
 	//_sm.Render(_context);
 	//_tt.Render(_context);	
 	//_scene.Render(_context);	
+}
+
+void Graphics::EndDraw()
+{
+
 	DxgiSwapChain->Present(0, 0);
 }

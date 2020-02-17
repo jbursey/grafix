@@ -160,9 +160,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AssetSystem.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Grafix.UI2.h" />
-    <ClInclude Include="GrafixConstantsh.h" />
+    <ClInclude Include="GrafixConstants.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="LightSystem.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="ShaderSystem.h" />
     <ClInclude Include="Structs.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TerrainSystem.h" />
@@ -178,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetSystem.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Grafix.UI2.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="InputSystem.cpp" />
@@ -186,6 +189,7 @@
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="ShaderSystem.cpp" />
     <ClCompile Include="TerrainSystem.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>

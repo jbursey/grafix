@@ -8,7 +8,8 @@ public:
 	~Graphics();
 	void Init(HWND hwnd, int width, int height);
 	void Resize(int width, int height);
-	void Tick();
+	void BeginDraw();
+	void EndDraw();
 
 	ID3D11Device* Device;
 	ID3D11DeviceContext* Context;	
