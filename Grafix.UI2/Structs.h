@@ -30,9 +30,9 @@ struct CBPerFrame
 
 enum LightType
 {
-	POINT,
-	SPOT,
-	DIRECTION
+	LIGHT_TYPE_POINT,
+	LIGHT_TYPE_SPOT,
+	LIGHT_TYPE_DIRECTION
 };
 
 struct Mesh

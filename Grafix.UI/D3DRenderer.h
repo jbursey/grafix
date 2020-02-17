@@ -26,7 +26,6 @@ private:
 	ID3D11DeviceContext* _context;
 	ID3D11RenderTargetView* _rtv;
 	ID3D11DepthStencilView* _dsv;
-
 	ID3D11Texture2D* _depthBuffer;
 
 	ShaderManager _sm;
