@@ -3,6 +3,7 @@
 
 #include "framework.h"
 #include "Grafix.UI2.h"
+#include "InputControls.h"
 #include "Scene.h"
 #include <GameTimer.h>
 
@@ -13,6 +14,7 @@ HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 Scene* g_scene;
+InputControls* g_controls;
 GameTimer* g_timer;
 HWND g_handle;
 int g_width;
@@ -48,7 +50,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	g_timer = new GameTimer();
 	g_scene = new Scene();
 	//g_renderer = new D3DRenderer();
-	//g_controls = new InputControls();
+	g_controls = new InputControls();
 	g_width = 1200;
 	g_height = 800;
 
@@ -99,10 +101,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			break;
 		}
 
-		//if (g_controls->IsKeyDown(VK_ESCAPE))
-		//{
-		//	break;
-		//}
+		if (g_controls->IsKeyDown(VK_ESCAPE))
+		{
+			break;
+		}
 
 		/*
 		it dt = 1000ms and the updates per second is 10, then we need to update every 100ms so in this case we are 10 updates behind
@@ -110,7 +112,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		while (updateTime > GrafixConstants::MillisecondsPerUpdate)
 		{
 			//g_renderer->Update(g_controls);
-			g_scene->Update();
+			g_scene->Update(g_controls);
 			updateTime -= GrafixConstants::MillisecondsPerUpdate;
 			++totalUpdates;
 			++updatesThisSecond;
@@ -254,10 +256,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	}
 	break;
 	case WM_KEYDOWN:
-		//g_controls->SetKey((char)wParam, true);
+		g_controls->SetKey((char)wParam, true);
 		break;
 	case WM_KEYUP:
-		//g_controls->SetKey((char)wParam, false);
+		g_controls->SetKey((char)wParam, false);
 		break;
 	case WM_SIZE:
 		GetWindowRect(hWnd, &rect);

@@ -10,6 +10,7 @@
 #include "ShaderSystem.h"
 #include "Camera.h"
 #include "MeshUtil.h"
+#include "InputControls.h"
 
 class Scene
 {
@@ -18,13 +19,13 @@ public:
 	~Scene();
 	void Init(HWND handle, int width, int height);
 	void Resize(int width, int height);
-	void Update();
+	void Update(InputControls* controls);
 	void Tick();
 
 private:
 	EntityData _entities;
 	std::vector<Entity> _entities2;
-	Graphics _graphics;	
+	Graphics* _graphics;	
 	RenderSystem _systemRender;
 	LightSystem _systemLight;
 	PhysicsSystem _systemPhysics;

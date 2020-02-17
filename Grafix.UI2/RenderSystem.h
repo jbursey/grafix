@@ -14,7 +14,7 @@ public:
 	RenderSystem();
 	~RenderSystem();	
 	//void Init(AssetSystem* assetSystem);
-	void Tick(int entityId, RenderComponent rc, PositionComponent pc, Graphics graphics, Camera camera);
+	void Tick(int entityId, RenderComponent* rc, PositionComponent* pc, Graphics* graphics, Camera camera);
 
 private:
 	std::map<int, ID3D11Buffer*> _entityVBuffers;

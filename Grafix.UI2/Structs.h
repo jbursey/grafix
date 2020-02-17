@@ -53,7 +53,7 @@ struct PositionComponent
 	float Yaw;
 	float Roll;
 
-	bool Enabled;
+	//bool Enabled;
 
 	DirectX::XMMATRIX GetModelToWorldMatrix()
 	{
@@ -76,7 +76,7 @@ struct PhysicsComponent
 	float AccY;
 	float AccZ;
 
-	bool Enabled;
+	//bool Enabled;
 };
 
 struct LightComponent
@@ -88,7 +88,7 @@ struct LightComponent
 	float AttenC;	
 	LightType LightType;
 
-	bool Enabled;
+	//bool Enabled;
 };
 
 struct RenderComponent
@@ -100,15 +100,15 @@ struct RenderComponent
 	D3D11_FILL_MODE FillMode;
 	D3D11_PRIMITIVE_TOPOLOGY Topology;
 
-	bool Enabled;
+	//bool Enabled;
 };
 
 struct EntityData
 {
-	std::vector<PositionComponent> PositionComponents;
-	std::vector<LightComponent> LightComponents;
-	std::vector<PhysicsComponent> PhysicsComponents;
-	std::vector<RenderComponent> RenderComponents;
+	std::vector<PositionComponent*> PositionComponents;
+	std::vector<LightComponent*> LightComponents;
+	std::vector<PhysicsComponent*> PhysicsComponents;
+	std::vector<RenderComponent*> RenderComponents;
 };
 
 struct Entity

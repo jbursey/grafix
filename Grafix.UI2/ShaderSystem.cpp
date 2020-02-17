@@ -13,9 +13,9 @@ void ShaderSystem::Init(AssetSystem* assets)
 	_assets = assets;
 }
 
-void ShaderSystem::Tick(RenderComponent rc, Graphics graphics)
+void ShaderSystem::Tick(RenderComponent* rc, Graphics* graphics)
 {
-	if (!rc.Enabled)
+	if (!rc)
 	{
 		return;
 	}
@@ -24,20 +24,20 @@ void ShaderSystem::Tick(RenderComponent rc, Graphics graphics)
 	ID3D11VertexShader* vs = 0;
 	ID3D11InputLayout* il = 0;
 
-	GetShaderResources(rc.PixelShader, rc.VertexShader, &ps, &vs, &il);
+	GetShaderResources(rc->PixelShader, rc->VertexShader, &ps, &vs, &il);
 
 	if (!ps)
 	{
-		std::vector<unsigned char> psBytes = _assets->GetAsset(rc.PixelShader);
-		auto psoResult = graphics.Device->CreatePixelShader(&psBytes[0], psBytes.size(), 0, &ps);
-		_pixelShaders.insert_or_assign(rc.PixelShader, ps);
+		std::vector<unsigned char> psBytes = _assets->GetAsset(rc->PixelShader);
+		auto psoResult = graphics->Device->CreatePixelShader(&psBytes[0], psBytes.size(), 0, &ps);
+		_pixelShaders.insert_or_assign(0, ps);
 	}
 
 	if (!vs)
 	{
-		std::vector<unsigned char> vsBytes = _assets->GetAsset(rc.VertexShader);
-		auto psoResult = graphics.Device->CreateVertexShader(&vsBytes[0], vsBytes.size(), 0, &vs);
-		_vertexShaders.insert_or_assign(rc.VertexShader, vs);
+		std::vector<unsigned char> vsBytes = _assets->GetAsset(rc->VertexShader);
+		auto psoResult = graphics->Device->CreateVertexShader(&vsBytes[0], vsBytes.size(), 0, &vs);
+		_vertexShaders.insert_or_assign(0, vs);
 
 		//--make better ugh
 		D3D11_INPUT_ELEMENT_DESC inputDesc[3];
@@ -65,8 +65,8 @@ void ShaderSystem::Tick(RenderComponent rc, Graphics graphics)
 		inputDesc[2].SemanticIndex = 0;
 		inputDesc[2].SemanticName = "NORMAL";
 
-		auto inputLayoutResult = graphics.Device->CreateInputLayout(inputDesc, 3, &vsBytes[0], vsBytes.size(), &il);
-		_inputLayouts.insert_or_assign(rc.VertexShader, il);
+		auto inputLayoutResult = graphics->Device->CreateInputLayout(inputDesc, 3, &vsBytes[0], vsBytes.size(), &il);
+		_inputLayouts.insert_or_assign(0, il);
 	}
 
 	if (!il)
@@ -74,29 +74,42 @@ void ShaderSystem::Tick(RenderComponent rc, Graphics graphics)
 		//see above. Make this better.
 	}
 
-	graphics.Context->IASetInputLayout(il);	
-	graphics.Context->PSSetShader(ps, 0, 0);
-	graphics.Context->VSSetShader(vs, 0, 0);
+	if (_lastInputLayout != rc->VertexShader)
+	{
+		graphics->Context->IASetInputLayout(il);
+		_lastInputLayout = rc->VertexShader;
+	}
+	if (_lastPixelShader != rc->PixelShader)
+	{
+		graphics->Context->PSSetShader(ps, 0, 0);
+		_lastPixelShader = rc->PixelShader;
+	}
+	if (_lastVertexShader != rc->VertexShader)
+	{
+		graphics->Context->VSSetShader(vs, 0, 0);
+		_lastVertexShader = rc->VertexShader;
+	}
 
 }
 
 void ShaderSystem::GetShaderResources(std::string pixelKey, std::string vertexKey, ID3D11PixelShader** ps, ID3D11VertexShader** vs, ID3D11InputLayout** il)
 {
-	if (_pixelShaders.count(pixelKey) > 0)
+	
+	if (_pixelShaders.count(0) > 0)
 	{
-		ID3D11PixelShader* temp = _pixelShaders[pixelKey];
-		ps = &temp;
+		ID3D11PixelShader* temp = _pixelShaders[0];
+		*ps = temp;
 	}
 
-	if (_vertexShaders.count(pixelKey) > 0)
+	if (_vertexShaders.count(0) > 0)
 	{
-		ID3D11VertexShader* temp = _vertexShaders[pixelKey];
-		vs = &temp;
+		ID3D11VertexShader* temp = _vertexShaders[0];
+		*vs = temp;
 	}
 
-	if (_inputLayouts.count(pixelKey) > 0)
+	if (_inputLayouts.count(0) > 0)
 	{
-		ID3D11InputLayout* temp = _inputLayouts[pixelKey];
-		il = &temp;
+		ID3D11InputLayout* temp = _inputLayouts[0];
+		*il = temp;
 	}
 }

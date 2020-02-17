@@ -56,7 +56,7 @@ void D3DRenderer::Init(HWND handle, int width, int height)
 	//_camera.Init(width, height, 1, 1000);
 	_scene.Init(width, height, _device);
 
-	if (true)
+	if (false)
 	{
 		Entity normalEntity;
 		Mesh normalLine;

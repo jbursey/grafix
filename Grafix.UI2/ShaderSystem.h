@@ -10,13 +10,17 @@ public:
 	ShaderSystem();
 	~ShaderSystem();
 	void Init(AssetSystem* assets);
-	void Tick(RenderComponent rc, Graphics graphics);
+	void Tick(RenderComponent* rc, Graphics* graphics);
 
 private: 
 	AssetSystem* _assets;
-	std::map<std::string, ID3D11PixelShader*> _pixelShaders;
-	std::map<std::string, ID3D11VertexShader*> _vertexShaders;
-	std::map<std::string, ID3D11InputLayout*> _inputLayouts;
+	std::map<int, ID3D11PixelShader*> _pixelShaders;
+	std::map<int, ID3D11VertexShader*> _vertexShaders;
+	std::map<int, ID3D11InputLayout*> _inputLayouts;
+
+	std::string _lastPixelShader;
+	std::string _lastVertexShader;
+	std::string _lastInputLayout;
 
 	void GetShaderResources(std::string pixelKey, std::string vertexKey, ID3D11PixelShader** ps, ID3D11VertexShader** vs, ID3D11InputLayout** il);
 };
