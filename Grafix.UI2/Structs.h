@@ -40,6 +40,14 @@ struct Mesh
 {
 	std::vector<Vertex> Vertx;
 	std::vector<unsigned int> Indx;
+
+	void SetColor(float r, float g, float b, float a)
+	{
+		for (Vertex& v : Vertx)
+		{
+			v.Color = DirectX::XMFLOAT4(r, g, b, a);
+		}
+	}
 };
 
 //-------------ECS

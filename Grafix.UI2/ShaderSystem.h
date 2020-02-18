@@ -14,9 +14,9 @@ public:
 
 private: 
 	AssetSystem* _assets;
-	std::map<int, ID3D11PixelShader*> _pixelShaders;
-	std::map<int, ID3D11VertexShader*> _vertexShaders;
-	std::map<int, ID3D11InputLayout*> _inputLayouts;
+	std::map<std::string, ID3D11PixelShader*> _pixelShaders;
+	std::map<std::string, ID3D11VertexShader*> _vertexShaders;
+	std::map<std::string, ID3D11InputLayout*> _inputLayouts;
 
 	std::string _lastPixelShader;
 	std::string _lastVertexShader;

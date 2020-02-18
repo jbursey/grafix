@@ -108,10 +108,7 @@ void RenderSystem::Tick(int entityId, RenderComponent* rc, PositionComponent* pc
 		auto rastResult = graphics->Device->CreateRasterizerState(&rastDesc, &rstate);
 		_entityRastStates.insert_or_assign(entityId, rstate);
 	}
-
-	//--draw indexed	
-	graphics->Context->DrawIndexed(rc->Mesh.Indx.size(), 0, 0);
-
+	
 	auto modelMat = pc->GetModelToWorldMatrix();
 	auto worldToCamera = camera.GetCameraMatrix();
 	auto cameraToProjection = camera.GetProjectionMatrix();
@@ -142,7 +139,7 @@ void RenderSystem::Tick(int entityId, RenderComponent* rc, PositionComponent* pc
 }
 
 void RenderSystem::GetEntityRenderObjects(int id, ID3D11Buffer** vbuffer, ID3D11Buffer** ibuffer, ID3D11Buffer** cbuffer, ID3D11RasterizerState** rastState)
-{
+{	
 	if (_entityVBuffers.count(id) > 0)
 	{
 		ID3D11Buffer* vbufferTemp = _entityVBuffers[id];

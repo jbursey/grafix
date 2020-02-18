@@ -30,14 +30,14 @@ void ShaderSystem::Tick(RenderComponent* rc, Graphics* graphics)
 	{
 		std::vector<unsigned char> psBytes = _assets->GetAsset(rc->PixelShader);
 		auto psoResult = graphics->Device->CreatePixelShader(&psBytes[0], psBytes.size(), 0, &ps);
-		_pixelShaders.insert_or_assign(0, ps);
+		_pixelShaders.insert_or_assign(rc->PixelShader, ps);
 	}
 
 	if (!vs)
 	{
 		std::vector<unsigned char> vsBytes = _assets->GetAsset(rc->VertexShader);
 		auto psoResult = graphics->Device->CreateVertexShader(&vsBytes[0], vsBytes.size(), 0, &vs);
-		_vertexShaders.insert_or_assign(0, vs);
+		_vertexShaders.insert_or_assign(rc->VertexShader, vs);
 
 		//--make better ugh
 		D3D11_INPUT_ELEMENT_DESC inputDesc[3];
@@ -66,7 +66,7 @@ void ShaderSystem::Tick(RenderComponent* rc, Graphics* graphics)
 		inputDesc[2].SemanticName = "NORMAL";
 
 		auto inputLayoutResult = graphics->Device->CreateInputLayout(inputDesc, 3, &vsBytes[0], vsBytes.size(), &il);
-		_inputLayouts.insert_or_assign(0, il);
+		_inputLayouts.insert_or_assign(rc->VertexShader, il);
 	}
 
 	if (!il)
@@ -95,21 +95,21 @@ void ShaderSystem::Tick(RenderComponent* rc, Graphics* graphics)
 void ShaderSystem::GetShaderResources(std::string pixelKey, std::string vertexKey, ID3D11PixelShader** ps, ID3D11VertexShader** vs, ID3D11InputLayout** il)
 {
 	
-	if (_pixelShaders.count(0) > 0)
+	if (_pixelShaders.count(pixelKey) > 0)
 	{
-		ID3D11PixelShader* temp = _pixelShaders[0];
+		ID3D11PixelShader* temp = _pixelShaders[pixelKey];
 		*ps = temp;
 	}
 
-	if (_vertexShaders.count(0) > 0)
+	if (_vertexShaders.count(vertexKey) > 0)
 	{
-		ID3D11VertexShader* temp = _vertexShaders[0];
+		ID3D11VertexShader* temp = _vertexShaders[vertexKey];
 		*vs = temp;
 	}
 
-	if (_inputLayouts.count(0) > 0)
+	if (_inputLayouts.count(vertexKey) > 0)
 	{
-		ID3D11InputLayout* temp = _inputLayouts[0];
+		ID3D11InputLayout* temp = _inputLayouts[vertexKey];
 		*il = temp;
 	}
 }

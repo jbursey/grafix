@@ -8,7 +8,7 @@ namespace GrafixConstants
 	const int NumLights = 20;
 
 	//ecs
-	const int MaxEntities = 1;
+	const int MaxEntities = 2;
 	const int EntityPlayerID = 0;
 	const int EntityTerrainID = 1;	
 }
