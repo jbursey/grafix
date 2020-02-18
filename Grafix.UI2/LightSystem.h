@@ -11,7 +11,7 @@ public:
 	~LightSystem();
 	void Init(Graphics* graphics);
 	void Update(PositionComponent* pc, LightComponent* lc, Graphics* graphics);
-	void Tick(PositionComponent* pc, LightComponent* lc, Graphics* graphics);
+	void Tick(Graphics* graphics);
 
 private:
 	ID3D11Buffer* _buffer;

@@ -66,7 +66,7 @@ void BitmapFile::Parse(std::vector<unsigned char> data)
 	Height = heightPixels;
 
 	//-- color table if applicable------------------------------------
-	if (compressionMethod == 3) //BI_BITFIELDS
+	if (compressionMethod == 3 || true) //BI_BITFIELDS
 	{
 		//-- not super clear here, but I don't know a better way. Gimp and paint3d are not putting color index
 		int bytesToData = _header.startingAddressData - _br->GetIndex();
@@ -100,6 +100,15 @@ void BitmapFile::Parse(std::vector<unsigned char> data)
 			color.b = b;
 
 			rowBytesRead += 3;
+		}
+		else if (bytesPerColor == 1)
+		{
+			unsigned char r = _br->ReadByte();
+			color.r = r;
+			color.g = r;
+			color.b = r;
+
+			rowBytes += 1;
 		}
 		else if (bytesPerColor == 4)
 		{

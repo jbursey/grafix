@@ -152,21 +152,13 @@ void Scene::Update(InputControls* controls)
 
 void Scene::Tick()
 {
-	_graphics->BeginDraw();
+	_graphics->BeginDraw();	
 
-	////-- system ticks?
-	//for (Entity e : _entities2)
-	//{
-	//	if (e.Render && e.Position)
-	//	{
-	//		_systemRender.Tick(e.ID, *e.Render, *e.Position, _graphics, _camera);
-	//	}
-	//}
+	_systemLight.Tick(_graphics);
 
 	for (int i = 0; i < GrafixConstants::MaxEntities; i++)
 	{
-		_systemShader.Tick(_entities.RenderComponents[i], _graphics);
-		_systemLight.Tick(_entities.PositionComponents[i], _entities.LightComponents[i], _graphics);		
+		_systemShader.Tick(_entities.RenderComponents[i], _graphics);		
 		_systemRender.Tick(i, _entities.RenderComponents[i], _entities.PositionComponents[i], _graphics, _camera);
 
 		int a = 0;

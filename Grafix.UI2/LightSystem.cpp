@@ -54,24 +54,14 @@ void LightSystem::Update(PositionComponent* pc, LightComponent* lc, Graphics* gr
 	}
 }
 
-void LightSystem::Tick(PositionComponent* pc, LightComponent* lc, Graphics* graphics)
-{
-	if (!pc)
-	{
-		return;
-	}
-
-	if (!lc)
-	{
-		return;
-	}
-
+void LightSystem::Tick(Graphics* graphics)
+{	
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	graphics->Context->Map(_buffer, 0, D3D11_MAP::D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	mappedResource.DepthPitch = 0;
 	mappedResource.RowPitch = 0;
 	CBPerFrame* cbPerFrame = (CBPerFrame*)mappedResource.pData;
-	for (int i = 0; i < GrafixConstants::NumLights; i++)
+	for (int i = 1; i < GrafixConstants::NumLights; i++)
 	{
 		cbPerFrame->pointLightColors[i] = _cbPerFrame.pointLightColors[i];
 		cbPerFrame->pointLightPositions[i] = _cbPerFrame.pointLightPositions[i];
