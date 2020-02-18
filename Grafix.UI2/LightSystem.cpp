@@ -13,15 +13,13 @@ LightSystem::~LightSystem()
 
 void LightSystem::Init(Graphics* graphics)
 {
-	//double y = 200;
-	//for (int i = 0; i < GrafixConstants::NumLights; i++)
-	//{
-	//	Lights.pointLightPositions[i] = DirectX::XMFLOAT4(i * 40, y, i * 40, 1);
-	//	//_cbPerFrame.pointLightColors[i] = DirectX::XMFLOAT4(255, 0, 0, 1);
-	//	Lights.pointLightColors[i] = Util::CreateRandomColor();
+	_currentLightIndex = 0;
 
-	//	y = y - 3;
-	//}
+	for (int i = 0; i < GrafixConstants::NumLights; i++)
+	{
+		_cbPerFrame.pointLightColors[i] = DirectX::XMFLOAT4(0, 0, 0, 1);
+		_cbPerFrame.pointLightPositions[i] = DirectX::XMFLOAT4(0, 0, 0, 1);
+	}
 
 	D3D11_BUFFER_DESC cbDesc;
 	cbDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_CONSTANT_BUFFER;
@@ -32,6 +30,28 @@ void LightSystem::Init(Graphics* graphics)
 	cbDesc.Usage = D3D11_USAGE::D3D11_USAGE_DYNAMIC;
 
 	auto createBufferResult = graphics->Device->CreateBuffer(&cbDesc, 0, &_buffer);
+}
+
+void LightSystem::Update(PositionComponent* pc, LightComponent* lc, Graphics* graphics)
+{
+	if (!pc)
+	{
+		return;
+	}
+
+	if (!lc)
+	{
+		return;
+	}
+	
+	_cbPerFrame.pointLightColors[_currentLightIndex] = lc->Color;
+	_cbPerFrame.pointLightPositions[_currentLightIndex] = DirectX::XMFLOAT4(pc->X, pc->Y, pc->Z, 1);
+
+	++_currentLightIndex;
+	if (_currentLightIndex >= GrafixConstants::NumLights)
+	{
+		_currentLightIndex = GrafixConstants::NumLights;
+	}
 }
 
 void LightSystem::Tick(PositionComponent* pc, LightComponent* lc, Graphics* graphics)
@@ -53,13 +73,12 @@ void LightSystem::Tick(PositionComponent* pc, LightComponent* lc, Graphics* grap
 	CBPerFrame* cbPerFrame = (CBPerFrame*)mappedResource.pData;
 	for (int i = 0; i < GrafixConstants::NumLights; i++)
 	{
-		//cbPerFrame->pointLightColors[i] = Lights.pointLightColors[i];
-		//cbPerFrame->pointLightPositions[i] = Lights.pointLightPositions[i];
-
-		cbPerFrame->pointLightColors[i] = lc->Color;
-		cbPerFrame->pointLightPositions[i] = DirectX::XMFLOAT4(pc->X, pc->Y, pc->Z, 1);
+		cbPerFrame->pointLightColors[i] = _cbPerFrame.pointLightColors[i];
+		cbPerFrame->pointLightPositions[i] = _cbPerFrame.pointLightPositions[i];
 	}
 	graphics->Context->Unmap(_buffer, 0);
 
-	graphics->Context->PSSetConstantBuffers(1, 1, &_buffer);
+	graphics->Context->PSSetConstantBuffers(1, 1, &_buffer);	
+
+	_currentLightIndex = 0;
 }

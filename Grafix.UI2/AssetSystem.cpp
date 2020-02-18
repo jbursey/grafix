@@ -3,12 +3,13 @@
 
 
 AssetSystem::AssetSystem()
-{
+{	
 }
 
 
 AssetSystem::~AssetSystem()
 {
+	_assets.clear();	
 }
 
 void AssetSystem::Init()

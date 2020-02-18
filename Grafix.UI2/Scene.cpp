@@ -9,7 +9,7 @@ Scene::Scene()
 
 
 Scene::~Scene()
-{
+{	
 }
 
 void Scene::Init(HWND handle, int width, int height)
@@ -25,8 +25,9 @@ void Scene::Init(HWND handle, int width, int height)
 	_entities.RenderComponents.resize(GrafixConstants::MaxEntities);
 
 	//--systems init
-	_systemAsset.Init();
-	_systemShader.Init(&_systemAsset);
+	_systemAsset = new AssetSystem();
+	_systemAsset->Init();
+	_systemShader.Init(_systemAsset);
 	_systemLight.Init(_graphics);
 
 	//--turn all components off
@@ -42,7 +43,7 @@ void Scene::Init(HWND handle, int width, int height)
 	_entities.RenderComponents[0] = new RenderComponent();
 	_entities.RenderComponents[0]->CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
 	_entities.RenderComponents[0]->FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
-	_entities.RenderComponents[0]->Mesh = MeshUtil::GetGrid(_systemAsset.GetAsset("heightmap_test.bmp"), 1.0 / 6.0);
+	_entities.RenderComponents[0]->Mesh = MeshUtil::GetGrid(_systemAsset->GetAsset("usgs_colo_springs.bmp"), 1.0 / 1.0);
 	_entities.RenderComponents[0]->PixelShader = "PixelShaderLights.cso";
 	_entities.RenderComponents[0]->Topology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 	_entities.RenderComponents[0]->VertexShader = "VertexShaderLights.cso";
@@ -69,11 +70,40 @@ void Scene::Init(HWND handle, int width, int height)
 	_entities.PositionComponents[1]->Roll = 0;
 	_entities.PositionComponents[1]->Yaw = 0;
 	_entities.PositionComponents[1]->X = 85;
-	_entities.PositionComponents[1]->Y = 20;
+	_entities.PositionComponents[1]->Y = 220;
 	_entities.PositionComponents[1]->Z = 85;
 
-	_entities.LightComponents[1] = new LightComponent();
-	_entities.LightComponents[1]->Color = DirectX::XMFLOAT4(1, 0, 0, 1);	
+	//_entities.LightComponents[1] = new LightComponent();
+	//_entities.LightComponents[1]->Color = DirectX::XMFLOAT4(1, 0, 0, 1);	
+
+	for (int i = 2; i < GrafixConstants::NumLights; i++)
+	{
+		int x = (int)(rand() % 1081);
+		int z = (int)(rand() % 1081);
+		int y = (int)(rand() % 150 + 50);
+		auto color = Util::CreateRandomColor();
+
+		_entities.RenderComponents[i] = new RenderComponent();
+		_entities.RenderComponents[i]->CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
+		_entities.RenderComponents[i]->FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
+		_entities.RenderComponents[i]->Mesh = MeshUtil::GetSphere(3.0, 10, 10);		
+		_entities.RenderComponents[i]->Mesh.SetColor(color);
+		_entities.RenderComponents[i]->PixelShader = "PixelShader.cso";
+		_entities.RenderComponents[i]->Topology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+		_entities.RenderComponents[i]->VertexShader = "VertexShader.cso";
+
+		_entities.PositionComponents[i] = new PositionComponent();
+		_entities.PositionComponents[i]->Pitch = 0;
+		_entities.PositionComponents[i]->Roll = 0;
+		_entities.PositionComponents[i]->Yaw = 0;
+		_entities.PositionComponents[i]->X = x;
+		_entities.PositionComponents[i]->Y = y;
+		_entities.PositionComponents[i]->Z = z;
+
+		_entities.LightComponents[i] = new LightComponent();		
+		_entities.LightComponents[i]->Color = color;
+	}
+
 }
 
 void Scene::Resize(int width, int height)
@@ -112,10 +142,12 @@ void Scene::Update(InputControls* controls)
 
 	//_scene.Lights.Update();
 
-	/*for (int i = 0; i < GrafixConstants::MaxEntities; i++)
-	{
-		_systemTerrain
-	}*/
+	for (int i = 0; i < GrafixConstants::MaxEntities; i++)
+	{		
+		_systemLight.Update(_entities.PositionComponents[i], _entities.LightComponents[i], _graphics);		
+
+		int a = 0;
+	}
 }
 
 void Scene::Tick()

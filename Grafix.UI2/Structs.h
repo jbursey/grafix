@@ -48,6 +48,14 @@ struct Mesh
 			v.Color = DirectX::XMFLOAT4(r, g, b, a);
 		}
 	}
+
+	void SetColor(DirectX::XMFLOAT4 color)
+	{
+		for (Vertex& v : Vertx)
+		{
+			v.Color = color;
+		}
+	}
 };
 
 //-------------ECS

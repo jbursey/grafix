@@ -30,7 +30,7 @@ private:
 	LightSystem _systemLight;
 	PhysicsSystem _systemPhysics;
 	TerrainSystem _systemTerrain;
-	AssetSystem _systemAsset;
+	AssetSystem* _systemAsset;
 	ShaderSystem _systemShader;
 	Camera _camera;
 };
