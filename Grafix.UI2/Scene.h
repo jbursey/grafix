@@ -11,6 +11,7 @@
 #include "Camera.h"
 #include "MeshUtil.h"
 #include "InputControls.h"
+#include <time.h>
 
 class Scene
 {

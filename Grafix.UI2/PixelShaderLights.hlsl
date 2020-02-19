@@ -53,7 +53,7 @@ float4 main(VertexOutput input) : SV_TARGET
 	for (int i = 0; i < 20; i++)
 	{
 		//spotDiffuseColor += CalculateSpotDiffuseLight(pointLightPositions[i], pointLightColors[i], input.Normal, input.PositionWorld, 0.075);
-		spotDiffuseColor += CalculateSpotDiffuseLight(pointLightColors[i], pointLightPositions[i], input.Normal, input.PositionWorld, 1.0, 0.025, 0.025);
+		spotDiffuseColor += CalculateSpotDiffuseLight(pointLightColors[i], pointLightPositions[i], input.Normal, input.PositionWorld, 1.0, 0.025, 0.05);
 	}
 
 	/*float4 spotDiffuseColor1 = CalculateSpotDiffuseLight(float4(0, 0, 1, 1), float4(200, 125, 10, 1), input.Normal, input.PositionWorld, 0.075);
