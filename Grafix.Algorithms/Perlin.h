@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <random>
+#include <time.h>
 
 struct Vec2d
 {
@@ -18,10 +19,12 @@ class Perlin
 {
 public:
 	Perlin();
-	~Perlin();
-	void Implement();
+	~Perlin();	
+	void Implement(int x, int y);
 
 private:
 	std::vector<std::vector<Vec2d>> _grid;
+	std::vector<double> GetDotProductsWithCorners(double perlinX, double perlinY);
+	double Lerp(double perlinX, double perlinY, std::vector<double> dots);
 };
 

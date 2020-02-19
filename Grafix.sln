@@ -36,6 +36,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Grafix.Algorithms", "Grafix.Algorithms\Grafix.Algorithms.vcxproj", "{3B94AB20-2201-4593-BEC4-E218F958CDC7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Grafix.Algorithms.Console", "Grafix.Algorithms.Console\Grafix.Algorithms.Console.vcxproj", "{4442D3E2-E155-4965-9FBE-1C9B60A2E996}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3B94AB20-2201-4593-BEC4-E218F958CDC7} = {3B94AB20-2201-4593-BEC4-E218F958CDC7}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Grafix.UI2", "Grafix.UI2\Grafix.UI2.vcxproj", "{2DD7B057-089D-45FE-908C-F4D6E55C5F18}"
 	ProjectSection(ProjectDependencies) = postProject

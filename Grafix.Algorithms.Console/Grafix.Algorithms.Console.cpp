@@ -7,6 +7,12 @@
 int main()
 {
 	Perlin perlin;
+	perlin.Implement(44, 98);
+	perlin.Implement(23, 2);
+	perlin.Implement(85, 43);
+	perlin.Implement(1, 4);
+	perlin.Implement(77, 33);
+	perlin.Implement(25, 39);
 
     std::cout << "Hello World!\n";
 }
