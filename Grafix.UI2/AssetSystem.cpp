@@ -25,6 +25,7 @@ void AssetSystem::Init()
 	heightmaps.push_back("usgs_ft_worth.bmp");
 	heightmaps.push_back("mt_shasta.bmp");
 	heightmaps.push_back("hawaii.bmp");
+	heightmaps.push_back("perlin.bmp");
 
 	std::string shaderDir = "./";
 	std::vector<std::string> shaders;

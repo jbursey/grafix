@@ -14,58 +14,131 @@ namespace Grafix.TerrainCreator
     {
         private List<List<Vec2d>> _grid = new List<List<Vec2d>>();
 
-        
+        private int _maxX = 10;
+        private int _maxY = 10;
+        private int _rows = 10;
+        private int _cols = 10;
 
-        void Implement(int inx, int iny)
+        public Perlin(int maxX, int maxY, int rows, int cols)
         {
-            Random random = new Random((int)DateTime.Now.Ticks);
+            _maxX = maxX;
+            _maxY = maxY;
 
             //grid definition with random gradient vectors unit length
-            int rows = 10;
-            int cols = 10;
-            for (int x = 0; x < rows; x++)
+            Random random = new Random();            
+            _rows = rows;
+            _cols = cols;
+            for (int x = 0; x < _rows; x++)
             {
                 List<Vec2d> row = new List<Vec2d>(); ;
-                for (int z = 0; z < cols; z++)
+                for (int z = 0; z < _cols; z++)
                 {
                     Vec2d v;
-                    v.x = random.NextDouble();
-                    v.y = random.NextDouble();
-                    row.Add(v);
+                    v.x = (random.NextDouble() * 2.0) - 1;
+                    v.y = (random.NextDouble() * 2.0) - 1;
+                    Vec2d norm = Normalize(v);
+                    row.Add(norm);
                 }
 
                 _grid.Add(row);
             }
 
+            int asdfjlasf = 0;
+        }
+
+        public double Noise(int inx, int iny)
+        {            
+
+
+
             //dot product given a cordinate x,y
             //int X = 35;
-            //int Y = 12;
-            int MAX_X = 100;
-            int MAX_Y = 100;
+            //int Y = 12;            
 
             /*
 
-            x =>  35     X
-                 ---- = ----
-                 100     10
-
-            x => X = (x * rows) / maxX
+                
 
             */
 
-            double perlinX = (inx * (rows - 1)) / (MAX_X * 1.0);
-            double perlinY = (iny * (cols - 1)) / (MAX_Y * 1.0);
+            //double perlinX = (inx * (rows - 1)) / (MAX_X * 1.0);
+            //double perlinY = (iny * (cols - 1)) / (MAX_Y * 1.0);
+            double perlinX = (inx / (_maxX * 1.0)) * (_rows - 1);
+            double perlinY = (iny / (_maxY * 1.0)) * (_cols - 1);
 
             List<double> dotProducts = GetDotProductsWithCorners(perlinX, perlinY);
 
             //interpolation
-            double val = Lerp(perlinX, perlinY, dotProducts);
+            double val = Interpolate(perlinX, perlinY, dotProducts);
+
+            //Console.WriteLine($"X: {inx}, Y: {iny}, PerlinX: {perlinX}, PerlinY: {perlinY}, Noise: {val}");
+
+            return val;
+        }
+
+        private Vec2d Normalize(Vec2d vec)
+        {
+            double magnitude = Math.Sqrt((vec.x * vec.x) + (vec.y * vec.y));
+
+            Vec2d norm = new Vec2d();
+            if (magnitude > 0)
+            {
+                norm.x = vec.x / magnitude;
+                norm.y = vec.y / magnitude;
+            }
+            else
+            {
+                norm.x = 0;
+                norm.y = 0;
+            }
+
+            return norm;
+        }
+
+        private double Interpolate(double perlinX, double perlinY, List<double> dots)
+        {
+            int x = (int)Math.Floor(perlinX);
+            int y = (int)Math.Floor(perlinY);
+
+            double d0 = dots[0];
+            double d1 = dots[1];
+            double d2 = dots[2];
+            double d3 = dots[3];
+
+            double dx = perlinX - x;
+            double dy = perlinY - y;
+
+            double a = Lerp(d0, d1, dx);
+            double b = Lerp(d2, d3, dx);
+            double c = Lerp(a, b, dy);
+            return c;
+        }
+
+        private double Lerp(double a, double b, double factor)
+        {
+            double lerp = 0;
+
+            /*
+             
+             Lets assume a = 5 and b = 13 and factor = 0.25
+             then b - a = 8
+             
+             lerp = ((b-a) * factor) + a
+
+             */
+
+            lerp = ((b - a) * factor) + a;
+
+            return lerp;
         }
 
         private List<double> GetDotProductsWithCorners(double perlinX, double perlinY)
         {
             int x = (int)Math.Floor(perlinX);
-            int y = (int)Math.Floor(perlinX);
+            int y = (int)Math.Floor(perlinY);
+
+            double gridX = perlinX - x;
+            double gridY = perlinY - y;
 
             Vec2d v1 = _grid[x][y];
             Vec2d v2 = _grid[x + 1][y];
@@ -78,21 +151,43 @@ namespace Grafix.TerrainCreator
             vecs.Add(v3);
             vecs.Add(v4);
 
+            ////Vec2d dirV1;
+            ////dirV1.x = gridX - v1.x;
+            ////dirV1.y = gridY - v1.y;
+
+            ////Vec2d dirV2;
+            ////dirV2.x = gridX - v2.x;
+            ////dirV2.y = gridY - v2.y;
+
+            ////Vec2d dirV3;
+            ////dirV3.x = gridX - v3.x;
+            ////dirV3.y = gridY - v3.y;
+
+            ////Vec2d dirV4;
+            ////dirV4.x = gridX - v4.x;
+            ////dirV4.y = gridY - v4.y;
+
             Vec2d dirV1;
-            dirV1.x = v1.x - perlinX;
-            dirV1.y = v1.y - perlinY;
+            dirV1.x = gridX - x;
+            dirV1.y = gridY - y;
 
             Vec2d dirV2;
-            dirV2.x = v2.x - perlinX;
-            dirV2.y = v2.y - perlinY;
+            dirV2.x = gridX - (x + 1);
+            dirV2.y = gridY - y;
 
             Vec2d dirV3;
-            dirV3.x = v3.x - perlinX;
-            dirV3.y = v3.y - perlinY;
+            dirV3.x = gridX - x;
+            dirV3.y = gridY - (y + 1);
 
             Vec2d dirV4;
-            dirV4.x = v4.x - perlinX;
-            dirV4.y = v4.y - perlinY;
+            dirV4.x = gridX - (x + 1);
+            dirV4.y = gridY - (y + 1);
+
+
+            dirV1 = Normalize(dirV1);
+            dirV2 = Normalize(dirV2);
+            dirV3 = Normalize(dirV3);
+            dirV4 = Normalize(dirV4);
 
             double dotV1 = (dirV1.x * v1.x) + (dirV1.y * v1.y);
             double dotV2 = (dirV2.x * v2.x) + (dirV2.y * v2.y);
@@ -106,27 +201,6 @@ namespace Grafix.TerrainCreator
             dotProducts.Add(dotV4);
 
             return dotProducts;
-        }
-
-
-
-        double Lerp(double perlinX, double perlinY, List<double> dots)
-        {
-            int x = (int)Math.Floor(perlinX);
-            int y = (int)Math.Floor(perlinX);
-
-            double d0 = dots[0];
-            double d1 = dots[1];
-            double d2 = dots[2];
-            double d3 = dots[3];
-
-            // a = lerp(dots[0], dots[1], perlinX - x)
-            // b = lerp(dots[2], dots[3], perlinX - x)
-            // c = lerp(a, b, perlinY - y)
-            // return c;
-
-
-            return 0;
         }
 
     }
