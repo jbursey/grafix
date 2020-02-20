@@ -14,8 +14,8 @@ namespace Grafix.TerrainCreator
 
         static void CreateBitmap()
         {
-            int width = 1024;
-            int height = 1024;
+            int width = 1000;
+            int height = 1000;
 
             Perlin perlin = new Perlin(width, height, 6, 6);            
             Bitmap bitmap = new Bitmap(width, height);
@@ -28,17 +28,13 @@ namespace Grafix.TerrainCreator
                 for (int i = 0; i < width; i++)
                 {
                     for (int j = 0; j < height; j++)
-                    {
-                        if(i == 68 && j == 67)
-                        {
-                            int stjsadflkjsadklf = 0;
-                        }
-                        if (i == 69 && j == 67)
-                        {
-                            int alksdfjklsadf = 0;
-                        }
+                    {                        
                         double noise = perlin.Noise(i, j);
                         byte val = (byte)ScaleNoiseToBitmap(noise);
+                        if(val == 255)
+                        {
+                            //Console.WriteLine($"X: {i}, Y: {j}");
+                        }
                         //Console.WriteLine($"Noise: {noise} --> Color: {val}");
 
                         //int color = *ptr;
@@ -91,8 +87,8 @@ namespace Grafix.TerrainCreator
             //    }
             //}
 
-            bitmap.Save(@"E:\perlin\perlin.png", System.Drawing.Imaging.ImageFormat.Png);
-            bitmap.Save(@"E:\perlin\perlin.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            bitmap.Save(@"F:\Jeff\perlin\perlin.png", System.Drawing.Imaging.ImageFormat.Png);
+            bitmap.Save(@"F:\Jeff\perlin\perlin.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
 
             int asdfsadf = 0;
         }
