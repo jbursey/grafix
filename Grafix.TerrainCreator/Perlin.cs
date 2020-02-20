@@ -112,11 +112,18 @@ namespace Grafix.TerrainCreator
 
         double Lerp(double perlinX, double perlinY, List<double> dots)
         {
+            int x = (int)Math.Floor(perlinX);
+            int y = (int)Math.Floor(perlinX);
+
             double d0 = dots[0];
             double d1 = dots[1];
             double d2 = dots[2];
             double d3 = dots[3];
 
+            // a = lerp(dots[0], dots[1], perlinX - x)
+            // b = lerp(dots[2], dots[3], perlinX - x)
+            // c = lerp(a, b, perlinY - y)
+            // return c;
 
 
             return 0;
