@@ -17,7 +17,7 @@ namespace Grafix.TerrainCreator
             int width = 1024;
             int height = 1024;
 
-            Perlin perlin = new Perlin(width, height, 16, 16);            
+            Perlin perlin = new Perlin(width, height, 6, 6);            
             Bitmap bitmap = new Bitmap(width, height);
             bitmap.SetPixel(0, 0, Color.FromArgb(255, 128, 50, 10));
             unsafe
@@ -29,11 +29,11 @@ namespace Grafix.TerrainCreator
                 {
                     for (int j = 0; j < height; j++)
                     {
-                        if(i == 68 && j == 1)
+                        if(i == 68 && j == 67)
                         {
                             int stjsadflkjsadklf = 0;
                         }
-                        if (i == 69 && j == 1)
+                        if (i == 69 && j == 67)
                         {
                             int alksdfjklsadf = 0;
                         }

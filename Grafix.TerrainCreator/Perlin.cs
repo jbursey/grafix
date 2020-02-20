@@ -108,10 +108,18 @@ namespace Grafix.TerrainCreator
             double dx = perlinX - x;
             double dy = perlinY - y;
 
+            dx = weigh(dx);
+            dy = weigh(dy);
+
             double a = Lerp(d0, d1, dx);
             double b = Lerp(d2, d3, dx);
             double c = Lerp(a, b, dy);
             return c;
+        }
+
+        private double weigh(double x)
+        {
+            return 3 * (x * x) - 2 * (x * x * x);
         }
 
         private double Lerp(double a, double b, double factor)
@@ -140,6 +148,9 @@ namespace Grafix.TerrainCreator
             double gridX = perlinX - x;
             double gridY = perlinY - y;
 
+            gridX = perlinX;
+            gridY = perlinY;
+
             Vec2d v1 = _grid[x][y];
             Vec2d v2 = _grid[x + 1][y];
             Vec2d v3 = _grid[x][y + 1];
@@ -167,22 +178,43 @@ namespace Grafix.TerrainCreator
             ////dirV4.x = gridX - v4.x;
             ////dirV4.y = gridY - v4.y;
 
+            //Vec2d dirV1;
+            //dirV1.x = gridX - x;
+            //dirV1.y = gridY - y;
+
+            //Vec2d dirV2;
+            //dirV2.x = gridX - (x + 1);
+            //dirV2.y = gridY - y;
+
+            //Vec2d dirV3;
+            //dirV3.x = gridX - x;
+            //dirV3.y = gridY - (y + 1);
+
+            //Vec2d dirV4;
+            //dirV4.x = gridX - (x + 1);
+            //dirV4.y = gridY - (y + 1);
+
             Vec2d dirV1;
-            dirV1.x = gridX - x;
-            dirV1.y = gridY - y;
+            dirV1.x = x- gridX;
+            dirV1.y = y - gridY;
 
             Vec2d dirV2;
-            dirV2.x = gridX - (x + 1);
-            dirV2.y = gridY - y;
+            dirV2.x = (x + 1) - gridX;
+            dirV2.y = y - gridY;
 
             Vec2d dirV3;
-            dirV3.x = gridX - x;
-            dirV3.y = gridY - (y + 1);
+            dirV3.x = x - gridX;
+            dirV3.y = (y + 1) - gridY;
 
             Vec2d dirV4;
-            dirV4.x = gridX - (x + 1);
-            dirV4.y = gridY - (y + 1);
+            dirV4.x = (x + 1) - gridX;
+            dirV4.y = (y + 1) - gridY;
 
+
+            if(x == gridX && y == gridY)
+            {
+                int stop = 0;
+            }
 
             dirV1 = Normalize(dirV1);
             dirV2 = Normalize(dirV2);
