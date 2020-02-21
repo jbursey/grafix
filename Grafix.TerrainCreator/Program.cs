@@ -9,15 +9,17 @@ namespace Grafix.TerrainCreator
         {           
             CreateBitmap();
             Console.WriteLine(".......done");
-            Console.ReadLine();
+            System.Threading.Thread.Sleep(1000);
+            //Console.ReadLine();
         }
 
         static void CreateBitmap()
         {
-            int width = 1024;
-            int height = 1024;
+            int width = 1000;
+            int height = 1000;
 
-            Perlin perlin = new Perlin(width, height, 6, 6);            
+            //Perlin perlin = new Perlin(width, height, 6, 6);
+            Perlin2 perlin = new Perlin2(10, 10, width, height);
             Bitmap bitmap = new Bitmap(width, height);
             bitmap.SetPixel(0, 0, Color.FromArgb(255, 128, 50, 10));
             unsafe
@@ -29,15 +31,20 @@ namespace Grafix.TerrainCreator
                 {
                     for (int j = 0; j < height; j++)
                     {
-                        if(i == 68 && j == 67)
+                        if(i == 101 && j == 100)
+                        {
+                            int aslkdjflkasf = 0;
+                        }
+                        if(i == 100 && j == 100)
                         {
                             int stjsadflkjsadklf = 0;
                         }
-                        if (i == 69 && j == 67)
+                        if (i == 99 && j == 100)
                         {
                             int alksdfjklsadf = 0;
                         }
                         double noise = perlin.Noise(i, j);
+                        //noise = noise * 255.0;
                         byte val = (byte)ScaleNoiseToBitmap(noise);
                         //Console.WriteLine($"Noise: {noise} --> Color: {val}");
 
