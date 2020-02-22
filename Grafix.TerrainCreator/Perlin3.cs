@@ -109,12 +109,16 @@ namespace Grafix.TerrainCreator
             double b = Lerp(dot3, dot2, dx);
             double c = Lerp(a, b, dy);
 
+            //--logging
+            //Console.WriteLine($"In x,y ({originalX}, {originalY}),  trans x,y ({x0}, {y0}), index a,b,c,d ({indexA},{indexB},{indexC},{indexD}),   dx,dy ({dx},{dy})");
+
             return c;
         }
 
         private Vec2d CalculateDistanceVector(Vec2d node, double x, double y)
         {
-            Vec2d vec = new Vec2d(node.X - x, node.Y - y);
+            //Vec2d vec = new Vec2d(node.X - x, node.Y - y);
+            Vec2d vec = new Vec2d(x - node.X, y - node.Y);
             return vec;
         }
 
@@ -139,7 +143,7 @@ namespace Grafix.TerrainCreator
 
         private double Lerp(double a, double b, double w)
         {
-            w = Smooth(w);
+            //w = Smooth(w);
 
             double lerp = 0;
 
@@ -151,15 +155,15 @@ namespace Grafix.TerrainCreator
         private double Smooth(double w)
         {
             //6x^{5}-15x^{4}+10x^{3}
-            if(w < 0)
+            if (w < 0)
             {
                 return 0;
             }
-            if(w > 1)
+            if (w > 1)
             {
                 return 1;
             }
-
+            //double smooth = (3 * w * w) - (2 * w * w * w);
             double smooth = (6 * w * w * w * w * w * w) - (15 * w * w * w * w) + (10 * w * w * w);
 
             return smooth;
