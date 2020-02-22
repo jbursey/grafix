@@ -18,7 +18,7 @@ namespace Grafix.TerrainCreator
             int height = 1000;
 
             //Perlin perlin = new Perlin(width, height, 6, 6);            
-            Perlin3 perlin = new Perlin3(20, 20, width, height);
+            Perlin3 perlin = new Perlin3(10, 10, width, height);
             Bitmap bitmap = new Bitmap(width, height);
             bitmap.SetPixel(0, 0, Color.FromArgb(255, 128, 50, 10));
             unsafe
@@ -32,6 +32,7 @@ namespace Grafix.TerrainCreator
                     {                        
                         double noise = perlin.Noise(i, j);
                         byte val = (byte)ScaleNoiseToBitmap(noise);
+                        //Console.WriteLine($"Noise: {noise}");
                         if(val == 255)
                         {
                             //Console.WriteLine($"X: {i}, Y: {j}");

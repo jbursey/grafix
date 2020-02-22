@@ -124,7 +124,7 @@ namespace Grafix.TerrainCreator
 
         private void InitGradients()
         {
-            Random random = new Random(31);
+            Random random = new Random();
 
             for(int i = 0; i <= _height; i++)
             {
@@ -134,7 +134,7 @@ namespace Grafix.TerrainCreator
                     double y = (random.NextDouble() + 1.0) - 1.0;
 
                     Vec2d v = new Vec2d(x, y);
-                    v.Normalize();
+                    //v.Normalize();
 
                     _gradients.Add(v);
                 }
@@ -143,11 +143,12 @@ namespace Grafix.TerrainCreator
 
         private double Lerp(double a, double b, double w)
         {
-            //w = Smooth(w);
+            w = Smooth(w);
 
             double lerp = 0;
+            lerp = ((1 - w) * a) + w * b;
 
-            lerp = (w * (b - a)) + a;
+            //lerp = (w * (b - a)) + a;
 
             return lerp;
         }
