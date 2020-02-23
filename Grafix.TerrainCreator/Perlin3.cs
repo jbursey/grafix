@@ -112,7 +112,7 @@ namespace Grafix.TerrainCreator
             //--logging
             //Console.WriteLine($"In x,y ({originalX}, {originalY}),  trans x,y ({x0}, {y0}), index a,b,c,d ({indexA},{indexB},{indexC},{indexD}),   dx,dy ({dx},{dy})");
 
-            return c;
+            return Scale(c, 1.0);
         }
 
         private Vec2d CalculateDistanceVector(Vec2d node, double x, double y)
@@ -125,20 +125,45 @@ namespace Grafix.TerrainCreator
         private void InitGradients()
         {
             Random random = new Random();
+            List<Vec2d> gradients = new List<Vec2d>();
+            gradients.Add(new Vec2d(1, 1));
+            gradients.Add(new Vec2d(1, 0));
+            gradients.Add(new Vec2d(0, 1));
+            gradients.Add(new Vec2d(-1, -1));
+            gradients.Add(new Vec2d(-1, 0));
+            gradients.Add(new Vec2d(0, -1));            
+            gradients.Add(new Vec2d(1, -1));
 
-            for(int i = 0; i <= _height; i++)
+            for (int i = 0; i <= _height; i++)
             {
                 for(int j = 0; j <= _width; j++)
                 {                    
-                    double x = (random.NextDouble() + 1.0) - 1.0;
-                    double y = (random.NextDouble() + 1.0) - 1.0;
+                    //double x = (random.NextDouble() - 1.0) + 1.0;
+                    //double y = (random.NextDouble() - 1.0) + 1.0;
 
-                    Vec2d v = new Vec2d(x, y);
+                    //Vec2d v = new Vec2d(x, y);
                     //v.Normalize();
+
+                    int index = random.Next(0, gradients.Count - 1);
+                    Vec2d v = gradients[index];
 
                     _gradients.Add(v);
                 }
             }
+        }
+
+        private double Scale(double c, double w)
+        {
+            double scaled = c * w;
+            if( scaled < -1)
+            {
+                return -1;
+            }
+            if(scaled > 1)
+            {
+                return 1;
+            }
+            return scaled;
         }
 
         private double Lerp(double a, double b, double w)
@@ -146,9 +171,9 @@ namespace Grafix.TerrainCreator
             w = Smooth(w);
 
             double lerp = 0;
-            lerp = ((1 - w) * a) + w * b;
+            //lerp = ((1 - w) * a) + w * b;
 
-            //lerp = (w * (b - a)) + a;
+            lerp = (w * (b - a)) + a;
 
             return lerp;
         }

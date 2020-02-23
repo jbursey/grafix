@@ -9,7 +9,8 @@ namespace Grafix.TerrainCreator
         {           
             CreateBitmap();
             Console.WriteLine(".......done");
-            Console.ReadLine();
+            //Console.ReadLine();
+            System.Threading.Thread.Sleep(1500);
         }
 
         static void CreateBitmap()
