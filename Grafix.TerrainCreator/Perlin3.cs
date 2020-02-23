@@ -79,17 +79,21 @@ namespace Grafix.TerrainCreator
             Vec2d d1 = CalculateDistanceVector(n1, x, y);
             Vec2d d2 = CalculateDistanceVector(n2, x, y);
             Vec2d d3 = CalculateDistanceVector(n3, x, y);
-
+            //d0.Normalize();
+            //d1.Normalize();
+            //d2.Normalize();
+            //d3.Normalize();
             //--get gradients at nodes
             /*
              * A   B
              * D   C
              * 
              */
-            int indexA = x0 + (y0 * (_width + 1));
+
+            int indexA = x0 + (y0 * (_height));
             int indexB = indexA + 1;
             int indexC = indexB + _width + 1;
-            int indexD = indexA + _width + 1;
+            int indexD = indexB - 1;
             Vec2d g0 = _gradients[indexA];
             Vec2d g1 = _gradients[indexB];
             Vec2d g2 = _gradients[indexC];
@@ -111,8 +115,8 @@ namespace Grafix.TerrainCreator
 
             //--logging
             //Console.WriteLine($"In x,y ({originalX}, {originalY}),  trans x,y ({x0}, {y0}), index a,b,c,d ({indexA},{indexB},{indexC},{indexD}),   dx,dy ({dx},{dy})");
-
-            return Scale(c, 1.0);
+            return c;
+            //return Scale(c, 1.25);
         }
 
         private Vec2d CalculateDistanceVector(Vec2d node, double x, double y)
@@ -124,28 +128,34 @@ namespace Grafix.TerrainCreator
 
         private void InitGradients()
         {
-            Random random = new Random();
+            Random random = new Random(3453);
             List<Vec2d> gradients = new List<Vec2d>();
-            gradients.Add(new Vec2d(1, 1));
-            gradients.Add(new Vec2d(1, 0));
-            gradients.Add(new Vec2d(0, 1));
             gradients.Add(new Vec2d(-1, -1));
             gradients.Add(new Vec2d(-1, 0));
-            gradients.Add(new Vec2d(0, -1));            
+            gradients.Add(new Vec2d(-1, 1));
+            gradients.Add(new Vec2d(0, -1));
+            gradients.Add(new Vec2d(0, 0));
+            gradients.Add(new Vec2d(0, 1));
             gradients.Add(new Vec2d(1, -1));
+            gradients.Add(new Vec2d(1, 0));
+            gradients.Add(new Vec2d(1, 1));
 
             for (int i = 0; i <= _height; i++)
             {
                 for(int j = 0; j <= _width; j++)
-                {                    
+                {
                     //double x = (random.NextDouble() - 1.0) + 1.0;
                     //double y = (random.NextDouble() - 1.0) + 1.0;
+
+                    ////x = Math.Cos(((2*Math.PI) / 180.0) + random.NextDouble());
+                    ////y = Math.Sin(((2 * Math.PI) / 180.0) + random.NextDouble());
 
                     //Vec2d v = new Vec2d(x, y);
                     //v.Normalize();
 
-                    int index = random.Next(0, gradients.Count - 1);
+                    int index = random.Next(0, gradients.Count);
                     Vec2d v = gradients[index];
+                    v.Normalize();
 
                     _gradients.Add(v);
                 }
@@ -154,7 +164,7 @@ namespace Grafix.TerrainCreator
 
         private double Scale(double c, double w)
         {
-            double scaled = c * w;
+            double scaled = Math.Pow(c, w);
             if( scaled < -1)
             {
                 return -1;
@@ -168,7 +178,7 @@ namespace Grafix.TerrainCreator
 
         private double Lerp(double a, double b, double w)
         {
-            w = Smooth(w);
+            //w = Smooth(w);
 
             double lerp = 0;
             //lerp = ((1 - w) * a) + w * b;
@@ -183,11 +193,11 @@ namespace Grafix.TerrainCreator
             //6x^{5}-15x^{4}+10x^{3}
             if (w < 0)
             {
-                return 0;
+                w = 0;
             }
             if (w > 1)
             {
-                return 1;
+                w = 1;
             }
             //double smooth = (3 * w * w) - (2 * w * w * w);
             double smooth = (6 * w * w * w * w * w * w) - (15 * w * w * w * w) + (10 * w * w * w);
