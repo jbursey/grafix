@@ -90,10 +90,10 @@ namespace Grafix.TerrainCreator
              * 
              */
 
-            int indexA = x0 + (y0 * (_height));
+            int indexA = x0 + (y0 * (_height)) + x0;
             int indexB = indexA + 1;
             int indexC = indexB + _width + 1;
-            int indexD = indexB - 1;
+            int indexD = indexC - 1;
             Vec2d g0 = _gradients[indexA];
             Vec2d g1 = _gradients[indexB];
             Vec2d g2 = _gradients[indexC];
@@ -178,7 +178,7 @@ namespace Grafix.TerrainCreator
 
         private double Lerp(double a, double b, double w)
         {
-            //w = Smooth(w);
+            w = Smooth(w);
 
             double lerp = 0;
             //lerp = ((1 - w) * a) + w * b;
