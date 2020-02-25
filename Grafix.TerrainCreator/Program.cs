@@ -9,8 +9,8 @@ namespace Grafix.TerrainCreator
         {           
             CreateBitmap();
             Console.WriteLine(".......done");
-            System.Threading.Thread.Sleep(1000);
             //Console.ReadLine();
+            System.Threading.Thread.Sleep(1500);
         }
 
         static void CreateBitmap()
@@ -18,8 +18,8 @@ namespace Grafix.TerrainCreator
             int width = 1000;
             int height = 1000;
 
-            //Perlin perlin = new Perlin(width, height, 6, 6);
-            Perlin2 perlin = new Perlin2(10, 10, width, height);
+            //Perlin perlin = new Perlin(width, height, 6, 6);            
+            Perlin3 perlin = new Perlin3(10, 10, width, height);
             Bitmap bitmap = new Bitmap(width, height);
             bitmap.SetPixel(0, 0, Color.FromArgb(255, 128, 50, 10));
             unsafe
@@ -31,21 +31,23 @@ namespace Grafix.TerrainCreator
                 {
                     for (int j = 0; j < height; j++)
                     {
-                        if(i == 101 && j == 100)
-                        {
-                            int aslkdjflkasf = 0;
-                        }
-                        if(i == 100 && j == 100)
-                        {
-                            int stjsadflkjsadklf = 0;
-                        }
                         if (i == 99 && j == 100)
                         {
-                            int alksdfjklsadf = 0;
+                            int stop = 0;
                         }
+                        if (i == 100 && j == 100)
+                        {
+                            int stop = 0;
+                        }
+
                         double noise = perlin.Noise(i, j);
-                        //noise = noise * 255.0;
                         byte val = (byte)ScaleNoiseToBitmap(noise);
+                        //Console.WriteLine($"Noise: {noise}");
+                
+                        if(val == 255)
+                        {
+                            //Console.WriteLine($"X: {i}, Y: {j}");
+                        }
                         //Console.WriteLine($"Noise: {noise} --> Color: {val}");
 
                         //int color = *ptr;
@@ -98,8 +100,8 @@ namespace Grafix.TerrainCreator
             //    }
             //}
 
-            bitmap.Save(@"E:\perlin\perlin.png", System.Drawing.Imaging.ImageFormat.Png);
-            bitmap.Save(@"E:\perlin\perlin.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            bitmap.Save(@"F:\Jeff\perlin\perlin.png", System.Drawing.Imaging.ImageFormat.Png);
+            bitmap.Save(@"F:\Jeff\perlin\perlin.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
 
             int asdfsadf = 0;
         }
@@ -108,7 +110,7 @@ namespace Grafix.TerrainCreator
         {
             noise = noise + 1.0; //make it 0-2
 
-            int val = (int)(noise * 128.0);
+            int val = (int)(noise * 128);
             if(val < 0)
             {
                 val = 0;
