@@ -31,31 +31,11 @@ namespace Grafix.TerrainCreator
                 {
                     for (int j = 0; j < height; j++)
                     {
-                        if (i == 99 && j == 100)
-                        {
-                            int stop = 0;
-                        }
-                        if (i == 100 && j == 100)
-                        {
-                            int stop = 0;
-                        }
+  
 
                         double noise = perlin.Noise(i, j);
                         byte val = (byte)ScaleNoiseToBitmap(noise);
-                        //Console.WriteLine($"Noise: {noise}");
-                
-                        if(val == 255)
-                        {
-                            //Console.WriteLine($"X: {i}, Y: {j}");
-                        }
-                        //Console.WriteLine($"Noise: {noise} --> Color: {val}");
 
-                        //int color = *ptr;
-                        //byte a = (byte)(color >> 24);
-                        //byte r = (byte)(color >> 16);
-                        //byte g = (byte)(color >> 8);
-                        //byte b = (byte)(color >> 0);
-                       
                         int color = 0;
                         if (i == -1 && j == 0)
                         {
@@ -79,29 +59,8 @@ namespace Grafix.TerrainCreator
                 bitmap.UnlockBits(bitmapData);
             }
 
-            //bitmap.SetPixel(0, 0, Color.FromArgb(255, 255, 0, 0));
-
-            //string csv = "";
-            //for(int i = 0; i < width; i++)
-            //{
-            //    for(int j = 0; j < height; j++)
-            //    {
-            //        double noise = perlin.Noise(i, j);
-            //        int rgba = ScaleNoiseToBitmap(noise);
-            //        bitmap.SetPixel(i, j, Color.FromArgb(255, rgba, rgba, rgba));
-            //        //Console.WriteLine($"Noise: {noise}");
-            //        csv += noise + "\n";
-            //        int stop = 0;
-            //    }
-
-            //    if( i == 4)
-            //    {
-            //        int ssafd = 0;
-            //    }
-            //}
-
-            bitmap.Save(@"F:\Jeff\perlin\perlin.png", System.Drawing.Imaging.ImageFormat.Png);
-            bitmap.Save(@"F:\Jeff\perlin\perlin.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            bitmap.Save(@"E:\perlin\perlin.png", System.Drawing.Imaging.ImageFormat.Png);
+            bitmap.Save(@"E:\perlin\perlin.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
 
             int asdfsadf = 0;
         }

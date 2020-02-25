@@ -90,10 +90,21 @@ namespace Grafix.TerrainCreator
              * 
              */
 
-            int indexA = x0 + (y0 * (_height)) + x0;
+            int indexA = x0 + (y0 * (_height + 1)) + x0;
             int indexB = indexA + 1;
             int indexC = indexB + _width + 1;
             int indexD = indexC - 1;
+
+            if(indexC > _gradients.Count - 1)
+            {
+                return 0;
+            }
+
+            if (indexD > _gradients.Count - 1)
+            {
+                return 0;
+            }
+
             Vec2d g0 = _gradients[indexA];
             Vec2d g1 = _gradients[indexB];
             Vec2d g2 = _gradients[indexC];
@@ -128,13 +139,13 @@ namespace Grafix.TerrainCreator
 
         private void InitGradients()
         {
-            Random random = new Random(3453);
+            Random random = new Random();
             List<Vec2d> gradients = new List<Vec2d>();
             gradients.Add(new Vec2d(-1, -1));
             gradients.Add(new Vec2d(-1, 0));
             gradients.Add(new Vec2d(-1, 1));
             gradients.Add(new Vec2d(0, -1));
-            gradients.Add(new Vec2d(0, 0));
+            //gradients.Add(new Vec2d(0, 0));
             gradients.Add(new Vec2d(0, 1));
             gradients.Add(new Vec2d(1, -1));
             gradients.Add(new Vec2d(1, 0));
@@ -200,7 +211,7 @@ namespace Grafix.TerrainCreator
                 w = 1;
             }
             //double smooth = (3 * w * w) - (2 * w * w * w);
-            double smooth = (6 * w * w * w * w * w * w) - (15 * w * w * w * w) + (10 * w * w * w);
+            double smooth = (6 * w * w * w * w * w) - (15 * w * w * w * w) + (10 * w * w * w);
 
             return smooth;
         }
