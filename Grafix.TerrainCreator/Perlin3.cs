@@ -90,20 +90,20 @@ namespace Grafix.TerrainCreator
              * 
              */
 
-            int indexA = x0 + (y0 * (_height + 1)) + x0;
+            int indexA = x0 + (y0 * (_height + 1));
             int indexB = indexA + 1;
             int indexC = indexB + _width + 1;
             int indexD = indexC - 1;
 
-            if(indexC > _gradients.Count - 1)
-            {
-                return 0;
-            }
+            //if(indexC > _gradients.Count - 1)
+            //{
+            //    return 0;
+            //}
 
-            if (indexD > _gradients.Count - 1)
-            {
-                return 0;
-            }
+            //if (indexD > _gradients.Count - 1)
+            //{
+            //    return 0;
+            //}
 
             Vec2d g0 = _gradients[indexA];
             Vec2d g1 = _gradients[indexB];

@@ -19,7 +19,7 @@ namespace Grafix.TerrainCreator
             int height = 1000;
 
             //Perlin perlin = new Perlin(width, height, 6, 6);            
-            Perlin3 perlin = new Perlin3(10, 10, width, height);
+            Perlin3 perlin = new Perlin3(5, 5, width, height);
             Bitmap bitmap = new Bitmap(width, height);
             bitmap.SetPixel(0, 0, Color.FromArgb(255, 128, 50, 10));
             unsafe
@@ -59,8 +59,8 @@ namespace Grafix.TerrainCreator
                 bitmap.UnlockBits(bitmapData);
             }
 
-            bitmap.Save(@"E:\perlin\perlin.png", System.Drawing.Imaging.ImageFormat.Png);
-            bitmap.Save(@"E:\perlin\perlin.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            bitmap.Save(@"F:\Jeff\perlin\perlin.png", System.Drawing.Imaging.ImageFormat.Png);
+            bitmap.Save(@"F:\Jeff\perlin\perlin.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
 
             int asdfsadf = 0;
         }
