@@ -90,7 +90,7 @@ namespace Grafix.TerrainCreator
              * 
              */
 
-            int indexA = x0 + (y0 * (_height + 1));
+            int indexA = x0 + (y0 * (_width + 1));
             int indexB = indexA + 1;
             int indexC = indexB + _width + 1;
             int indexD = indexC - 1;
