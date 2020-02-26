@@ -69,9 +69,9 @@ void Scene::Init(HWND handle, int width, int height)
 	_entities.PositionComponents[1]->Pitch = 0;
 	_entities.PositionComponents[1]->Roll = 0;
 	_entities.PositionComponents[1]->Yaw = 0;
-	_entities.PositionComponents[1]->X = 85;
-	_entities.PositionComponents[1]->Y = 220;
-	_entities.PositionComponents[1]->Z = 85;
+	_entities.PositionComponents[1]->X = 0;
+	_entities.PositionComponents[1]->Y = 0;
+	_entities.PositionComponents[1]->Z = 0;
 
 	_entities.LightComponents[1] = new LightComponent();
 	_entities.LightComponents[1]->Color = DirectX::XMFLOAT4(1, 0, 0, 1);	

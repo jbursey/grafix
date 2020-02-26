@@ -27,6 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bitmaps", "Bitmaps", "{65D0
 	ProjectSection(SolutionItems) = preProject
 		heightmap5.bmp = heightmap5.bmp
 		heightmap_test.bmp = heightmap_test.bmp
+		perlin.bmp = perlin.bmp
 		test_bitmap.bmp = test_bitmap.bmp
 		test_bitmap_needs_padding_5_by_5.bmp = test_bitmap_needs_padding_5_by_5.bmp
 		usgs_colo_springs.bmp = usgs_colo_springs.bmp
@@ -47,7 +48,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Grafix.UI2", "Grafix.UI2\Gr
 		{2001A689-A9AA-4219-9CBD-48A2B3B44E10} = {2001A689-A9AA-4219-9CBD-48A2B3B44E10}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grafix.TerrainCreator", "Grafix.TerrainCreator\Grafix.TerrainCreator.csproj", "{7F6FC0F1-B09B-4E60-8178-797232A7880E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grafix.TerrainCreator", "Grafix.TerrainCreator\Grafix.TerrainCreator.csproj", "{7F6FC0F1-B09B-4E60-8178-797232A7880E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

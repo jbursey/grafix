@@ -126,8 +126,8 @@ namespace Grafix.TerrainCreator
 
             //--logging
             //Console.WriteLine($"In x,y ({originalX}, {originalY}),  trans x,y ({x0}, {y0}), index a,b,c,d ({indexA},{indexB},{indexC},{indexD}),   dx,dy ({dx},{dy})");
-            return c;
-            //return Scale(c, 1.25);
+            //return c;
+            return Scale(c, 3.0);
         }
 
         private Vec2d CalculateDistanceVector(Vec2d node, double x, double y)
@@ -139,7 +139,7 @@ namespace Grafix.TerrainCreator
 
         private void InitGradients()
         {
-            Random random = new Random();
+            Random random = new Random(5456);
             List<Vec2d> gradients = new List<Vec2d>();
             gradients.Add(new Vec2d(-1, -1));
             gradients.Add(new Vec2d(-1, 0));
@@ -173,17 +173,26 @@ namespace Grafix.TerrainCreator
             }
         }
 
-        private double Scale(double c, double w)
+        private double Scale(double val, double factor)
         {
-            double scaled = Math.Pow(c, w);
+
+            double a = 1;
+            double b = 0.5;
+            double c = factor;
+            double d = 0.5;            
+
+            double scaled = (a / (b +(d*Math.Pow(Math.E, -c * val)))) - 1.0;
+
             if( scaled < -1)
             {
                 return -1;
             }
+
             if(scaled > 1)
             {
                 return 1;
             }
+
             return scaled;
         }
 
