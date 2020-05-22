@@ -43,7 +43,7 @@ void Scene::Init(HWND handle, int width, int height)
 	_entities.RenderComponents[0] = new RenderComponent();
 	_entities.RenderComponents[0]->CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
 	_entities.RenderComponents[0]->FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
-	_entities.RenderComponents[0]->Mesh = MeshUtil::GetGrid(_systemAsset->GetAsset("perlin.bmp"), 1.0 / 1.0);
+	_entities.RenderComponents[0]->Mesh = MeshUtil::GetGrid(_systemAsset->GetAsset("usgs_colo_springs.bmp"), 1.0 / 1.0);
 	_entities.RenderComponents[0]->PixelShader = "PixelShaderLights.cso";
 	_entities.RenderComponents[0]->Topology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 	_entities.RenderComponents[0]->VertexShader = "VertexShaderLights.cso";
