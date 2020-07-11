@@ -8,6 +8,7 @@
 #include "TerrainSystem.h"
 #include "AssetSystem.h"
 #include "ShaderSystem.h"
+#include "TextureSystem.h"
 #include "Camera.h"
 #include "MeshUtil.h"
 #include "InputControls.h"
@@ -32,6 +33,7 @@ private:
 	TerrainSystem* _systemTerrain;
 	AssetSystem* _systemAsset;
 	ShaderSystem _systemShader;
+	TextureSystem* _systemTexture;
 	Camera _camera;
 };
 

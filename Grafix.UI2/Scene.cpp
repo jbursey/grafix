@@ -40,10 +40,13 @@ void Scene::Init(HWND handle, int width, int height)
 	PositionComponent* terrainPC;
 	_systemTerrain = new TerrainSystem();
 	_systemAsset = new AssetSystem();
+	_systemTexture = new TextureSystem();
 	_systemAsset->Init();
 	_systemTerrain->Init(_entities, MeshUtil::GetGrid(_systemAsset->GetAsset("mt_shasta.bmp"), 1.0 / 1.0));
 	_systemShader.Init(_systemAsset);
-	_systemLight.Init(_graphics);
+	_systemLight.Init(_graphics);	
+	_systemTexture->Init(_graphics);
+	
 
 
 	//--make some entities	
@@ -190,6 +193,7 @@ void Scene::Tick()
 
 	for (int i = 0; i < GrafixConstants::MaxEntities; i++)
 	{
+		_systemTexture->Tick(_graphics);
 		_systemShader.Tick(_entities.RenderComponents[i], _graphics);		
 		_systemRender.Tick(i, _entities.RenderComponents[i], _entities.PositionComponents[i], _graphics, _camera);
 
