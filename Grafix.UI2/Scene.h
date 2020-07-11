@@ -24,13 +24,12 @@ public:
 	void Tick();
 
 private:
-	EntityData _entities;
-	std::vector<Entity> _entities2;
+	EntityData _entities;	
 	Graphics* _graphics;	
 	RenderSystem _systemRender;
 	LightSystem _systemLight;
 	PhysicsSystem _systemPhysics;
-	TerrainSystem _systemTerrain;
+	TerrainSystem* _systemTerrain;
 	AssetSystem* _systemAsset;
 	ShaderSystem _systemShader;
 	Camera _camera;

@@ -218,10 +218,7 @@ Mesh MeshUtil::GetGrid(int width, int depth)
 Mesh MeshUtil::GetGrid(std::vector<unsigned char> fileBytes, double scaling)
 {
 	Mesh m;
-
-	//FileReader fr;
-	//std::vector<unsigned char> fileBytes = fr.ReadAllBytes(bitmapFile);
-
+	
 	BitmapFile bitmap;
 	bitmap.Parse(fileBytes);
 

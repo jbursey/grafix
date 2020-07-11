@@ -59,8 +59,8 @@ namespace Grafix.TerrainCreator
                 bitmap.UnlockBits(bitmapData);
             }
 
-            bitmap.Save(@"F:\Jeff\perlin\perlin.png", System.Drawing.Imaging.ImageFormat.Png);
-            bitmap.Save(@"F:\Jeff\perlin\perlin.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            bitmap.Save(@"D:\Jeff\perlin\perlin.png", System.Drawing.Imaging.ImageFormat.Png);
+            bitmap.Save(@"D:\Jeff\perlin\perlin.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
 
             int asdfsadf = 0;
         }

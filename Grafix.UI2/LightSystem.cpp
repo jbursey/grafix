@@ -44,6 +44,13 @@ void LightSystem::Update(int entityId, PositionComponent* pc, LightComponent* lc
 		return;
 	}
 
+	pc->X += 0.01;
+	//pc->Y += 0.001;
+	//lc->Color.x = pc->X / 255.0;
+	//lc->Color.y = pc->Y / 255.0;
+	//lc->Color.z = pc->X / 255.0;
+	//
+
 	LightPoint lp;
 	lp.Position = DirectX::XMFLOAT4(pc->X, pc->Y, pc->Z, 1);
 	lp.Color = lc->Color;

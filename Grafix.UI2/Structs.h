@@ -3,6 +3,7 @@
 #include <d3d11.h>
 #include <vector>
 #include <string>
+#include <BitmapFile.h>
 
 struct Vertex
 {
@@ -127,11 +128,11 @@ struct EntityData
 	std::vector<RenderComponent*> RenderComponents;
 };
 
-struct Entity
-{
-	int ID;
-	PositionComponent* Position;
-	LightComponent* Light;
-	PhysicsComponent* Physics;
-	RenderComponent* Render;
-};
+//struct Entity
+//{
+//	int ID;
+//	PositionComponent* Position;
+//	LightComponent* Light;
+//	PhysicsComponent* Physics;
+//	RenderComponent* Render;
+//};

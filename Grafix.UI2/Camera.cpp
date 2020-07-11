@@ -156,3 +156,8 @@ void Camera::MoveDown()
 {
 	_y += (GrafixConstants::CameraMoveUnitsPerSecond * GrafixConstants::MillisecondsPerUpdate) / 1000.0;
 }
+
+DirectX::XMFLOAT3 Camera::GetPosition()
+{
+	return DirectX::XMFLOAT3(_x, _y, _z);
+}

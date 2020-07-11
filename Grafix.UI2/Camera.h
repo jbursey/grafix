@@ -19,6 +19,8 @@ public:
 	void MoveUp();
 	void MoveDown();
 
+	DirectX::XMFLOAT3 GetPosition();
+
 private:
 	float _x;
 	float _y;
