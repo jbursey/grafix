@@ -23,6 +23,9 @@ private:
 	{
 		DirectX::XMFLOAT4 Position;
 		DirectX::XMFLOAT4 Color;
+		float ConstantFactor;
+		float LinearFactor;
+		float SquareFactor;
 	};
 
 	std::map<int, LightPoint> _lightPointsThisFrame;

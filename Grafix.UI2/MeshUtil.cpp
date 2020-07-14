@@ -161,6 +161,7 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 		m.Indx.push_back(i + 1);
 	}
 
+	NormalizeNormals(m);
 
 	return m;
 }
@@ -320,5 +321,20 @@ void MeshUtil::CalculateNormals(Mesh & m)
 		v2.Normal = unitnormal;
 		v3.Normal = unitnormal;
 	}
+}
 
+void MeshUtil::NormalizeNormals(Mesh& m)
+{
+	for (int i = 0; i < m.Vertx.size(); i++)
+	{
+		Vertex& v = m.Vertx[i];
+
+		double mag = sqrt((v.Normal.x * v.Normal.x) + (v.Normal.y * v.Normal.y) + (v.Normal.z * v.Normal.z));
+		if (mag != 0)
+		{
+			v.Normal.x /= mag;
+			v.Normal.y /= mag;
+			v.Normal.z /= mag;
+		}
+	}
 }

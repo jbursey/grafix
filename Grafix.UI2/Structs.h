@@ -15,6 +15,7 @@ public:
 	DirectX::XMFLOAT4 Point;
 	DirectX::XMFLOAT4 Color;
 	DirectX::XMFLOAT4 Normal;
+	//DirectX::XMFLOAT2 TexUV;
 };
 
 struct CBPerEntity
@@ -28,6 +29,9 @@ struct CBPerFrame
 {
 	DirectX::XMFLOAT4 pointLightPositions[20];
 	DirectX::XMFLOAT4 pointLightColors[20];
+	DirectX::XMFLOAT4 pointLightConstantFactor[20];
+	DirectX::XMFLOAT4 pointLightLinearFactor[20];
+	DirectX::XMFLOAT4 pointLightSquareFactor[20];
 };
 
 enum LightType

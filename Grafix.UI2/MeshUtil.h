@@ -16,5 +16,9 @@ public:
 	static Mesh GetGrid(std::vector<unsigned char> fileBytes, double scaling); //fix me 
 	
 	static void CalculateNormals(Mesh& m);
+
+private:
+
+	static void NormalizeNormals(Mesh& m);
 };
 

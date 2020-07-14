@@ -35,5 +35,7 @@ private:
 	ShaderSystem _systemShader;
 	TextureSystem* _systemTexture;
 	Camera _camera;
+
+	void RenderNormalEntityData();
 };
 

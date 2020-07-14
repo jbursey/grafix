@@ -24,6 +24,9 @@ cbuffer cbPerFrame : register(b1)
 {
 	float4 pointLightPositions[20];
 	float4 pointLightColors[20];
+	float4 pointLightConstantFactor[20];
+	float4 pointLightLinearFactor[20];
+	float4 pointLightSquareFactor[20];
 }
 
 //struct PixelInput

@@ -23,7 +23,7 @@ float4 CalculateSpotDiffuseLight(float4 lightColor, float4 lightPosition, float4
 	float4 directionToLight = lightPosition - inputWorldPosition;
 	directionToLight.w = 0; //make this a vector
 
-	float initialIntensity = dot(inputNormal, directionToLight);
+	float initialIntensity = dot(inputNormal, directionToLight);	
 	float4 delta = inputWorldPosition - lightPosition;
 	float temp = dot(delta, delta);
 	float distance = sqrt(temp);
@@ -34,6 +34,7 @@ float4 CalculateSpotDiffuseLight(float4 lightColor, float4 lightPosition, float4
 	float4 color = lightColor * intensity * initialIntensity;
 
 	//return float4(distance, distance, distance, 1);
+	//return delta;
 	return saturate(color);
 }
 
@@ -53,7 +54,7 @@ float4 main(VertexOutput input) : SV_TARGET
 	for (int i = 0; i < 20; i++)
 	{
 		//spotDiffuseColor += CalculateSpotDiffuseLight(pointLightPositions[i], pointLightColors[i], input.Normal, input.PositionWorld, 0.075);
-		spotDiffuseColor += CalculateSpotDiffuseLight(pointLightColors[i], pointLightPositions[i], input.Normal, input.PositionWorld, 1.0, 0.025, 0.05);
+		spotDiffuseColor += CalculateSpotDiffuseLight(pointLightColors[i], pointLightPositions[i], input.Normal, input.PositionWorld, pointLightConstantFactor[i].x, pointLightLinearFactor[i].x, pointLightSquareFactor[i].x);
 	}
 
 	/*float4 spotDiffuseColor1 = CalculateSpotDiffuseLight(float4(0, 0, 1, 1), float4(200, 125, 10, 1), input.Normal, input.PositionWorld, 0.075);
