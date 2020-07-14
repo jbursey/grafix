@@ -169,6 +169,7 @@
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="LightSystem.h" />
     <ClInclude Include="MeshUtil.h" />
+    <ClInclude Include="Perlin.h" />
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="Resource.h" />
@@ -189,6 +190,7 @@
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="LightSystem.cpp" />
     <ClCompile Include="MeshUtil.cpp" />
+    <ClCompile Include="Perlin.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="Scene.cpp" />

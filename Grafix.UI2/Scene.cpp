@@ -44,8 +44,8 @@ void Scene::Init(HWND handle, int width, int height)
 	_systemAsset = new AssetSystem();
 	_systemTexture = new TextureSystem();
 	_systemAsset->Init();
-	//_systemTerrain->Init(_entities, MeshUtil::GetGrid(_systemAsset->GetAsset("mt_shasta.bmp"), 1.0 / 1.0));
-	_systemTerrain->Init(_entities, MeshUtil::GetGrid(worldWidth, worldDepth));
+	_systemTerrain->Init(_entities, MeshUtil::GetGrid(_systemAsset->GetAsset("mt_shasta.bmp"), 1.0 / 1.0));
+	//_systemTerrain->Init(_entities, MeshUtil::GetGrid(worldWidth, worldDepth));
 	_systemShader.Init(_systemAsset);
 	_systemLight.Init(_graphics);	
 	_systemTexture->Init(_graphics);
@@ -99,7 +99,7 @@ void Scene::Init(HWND handle, int width, int height)
 	{
 		int x = (int)(rand() % worldWidth);
 		int z = (int)(rand() % worldDepth);
-		int y = (int)(rand() % 10 + 25);
+		int y = (int)(rand() % 250 + 25);
 		//y = 0;
 
 		if (i == 3)
@@ -141,7 +141,7 @@ void Scene::Init(HWND handle, int width, int height)
 		}
 	}
 
-	//RenderNormalEntityData();
+	RenderNormalEntityData();
 }
 
 void Scene::Resize(int width, int height)

@@ -79,6 +79,9 @@
     <ClInclude Include="TextureSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Perlin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Grafix.UI2.cpp">
@@ -124,6 +127,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TextureSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Perlin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
