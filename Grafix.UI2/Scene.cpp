@@ -36,16 +36,17 @@ void Scene::Init(HWND handle, int width, int height)
 	}
 
 	//--systems init
-	int worldWidth = 1024;
-	int worldDepth = 1024;
+	int worldWidth = 100;
+	int worldDepth = 100;
 	RenderComponent* terrainRC;
 	PositionComponent* terrainPC;
 	_systemTerrain = new TerrainSystem();
 	_systemAsset = new AssetSystem();
 	_systemTexture = new TextureSystem();
 	_systemAsset->Init();
-	_systemTerrain->Init(_entities, MeshUtil::GetGrid(_systemAsset->GetAsset("mt_shasta.bmp"), 1.0 / 1.0));
-	//_systemTerrain->Init(_entities, MeshUtil::GetGrid(worldWidth, worldDepth));
+	//_systemTerrain->Init(_entities, MeshUtil::GetGrid(_systemAsset->GetAsset("mt_shasta.bmp"), 1.0 / 1.0));
+	//_systemTerrain->Init(_entities, MeshUtil::GetGrid(_systemAsset->GetAsset("perlin.bmp"), 1.0 / 1.0));
+	_systemTerrain->Init(_entities, MeshUtil::GetGrid(worldWidth, worldDepth));
 	_systemShader.Init(_systemAsset);
 	_systemLight.Init(_graphics);	
 	_systemTexture->Init(_graphics);
@@ -76,7 +77,7 @@ void Scene::Init(HWND handle, int width, int height)
 	_entities.RenderComponents[2]->FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 	_entities.RenderComponents[2]->Mesh = MeshUtil::GetSphere(5.0, 30, 30);	
 	_entities.RenderComponents[2]->Mesh.SetColor(1, 0, 0, 1);
-	_entities.RenderComponents[2]->PixelShader = "PixelShader.cso";
+	_entities.RenderComponents[2]->PixelShader = "PixelShaderTexture.cso";
 	_entities.RenderComponents[2]->Topology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 	_entities.RenderComponents[2]->VertexShader = "VertexShader.cso";
 
@@ -141,7 +142,7 @@ void Scene::Init(HWND handle, int width, int height)
 		}
 	}
 
-	RenderNormalEntityData();
+	//RenderNormalEntityData();
 }
 
 void Scene::Resize(int width, int height)

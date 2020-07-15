@@ -11,5 +11,7 @@ VertexOutput main(VertexInput input)
 	output.Color = input.Color;
 	output.Normal = mul(input.Normal, ModelToWorld);
 	output.PositionWorld = mul(input.Position, ModelToWorld);
+	output.TextureUV = input.TextureUV;
+
 	return output;
 }

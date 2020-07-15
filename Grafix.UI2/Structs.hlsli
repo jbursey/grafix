@@ -3,6 +3,7 @@ struct VertexInput
 	float4 Position : POSITION;
 	float4 Color : COLOR;
 	float4 Normal : NORMAL;
+	float2 TextureUV : TEXCOORD;
 };
 
 struct VertexOutput
@@ -11,6 +12,7 @@ struct VertexOutput
 	float4 Color : COLOR;
 	float4 Normal : NORMAL;
 	float4 PositionWorld: POSITION;
+	float2 TextureUV : TEXCOORD;
 };
 
 cbuffer cbPerEntity : register(b0)

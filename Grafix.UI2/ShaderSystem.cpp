@@ -40,7 +40,7 @@ void ShaderSystem::Tick(RenderComponent* rc, Graphics* graphics)
 		_vertexShaders.insert_or_assign(rc->VertexShader, vs);
 
 		//--make better ugh
-		D3D11_INPUT_ELEMENT_DESC inputDesc[3];
+		D3D11_INPUT_ELEMENT_DESC inputDesc[4];
 		inputDesc[0].AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
 		inputDesc[0].Format = DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT;
 		inputDesc[0].InputSlot = 0;
@@ -65,7 +65,15 @@ void ShaderSystem::Tick(RenderComponent* rc, Graphics* graphics)
 		inputDesc[2].SemanticIndex = 0;
 		inputDesc[2].SemanticName = "NORMAL";
 
-		auto inputLayoutResult = graphics->Device->CreateInputLayout(inputDesc, 3, &vsBytes[0], vsBytes.size(), &il);
+		inputDesc[3].AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
+		inputDesc[3].Format = DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT;
+		inputDesc[3].InputSlot = 0;
+		inputDesc[3].InputSlotClass = D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA;
+		inputDesc[3].InstanceDataStepRate = 0;
+		inputDesc[3].SemanticIndex = 0;
+		inputDesc[3].SemanticName = "TEXCOORD";
+
+		auto inputLayoutResult = graphics->Device->CreateInputLayout(inputDesc, 4, &vsBytes[0], vsBytes.size(), &il);
 		_inputLayouts.insert_or_assign(rc->VertexShader, il);
 	}
 

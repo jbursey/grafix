@@ -8,15 +8,18 @@ void TextureSystem::Init(Graphics* graphics)
 	sampleDesc.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
 	sampleDesc.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;	
 
-	graphics->Device->CreateSamplerState(&sampleDesc, &_samplerState);
-	//graphics->Context->PSSetSamplers(0, 1)
+	HRESULT createSamplerStateResult = graphics->Device->CreateSamplerState(&sampleDesc, &_samplerState);
+	HRESULT createResult = DirectX::CreateWICTextureFromFile(graphics->Device, L"../../TestTexture.png", &_pngTexture, &_srv);
+	
 
-	HRESULT result = DirectX::CreateDDSTextureFromFile(graphics->Device, L"", 0, 0, 0);
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
+	_srv->GetDesc(&srvDesc);	
 
 	int stop = 0;
 }
 
 void TextureSystem::Tick(Graphics* graphics)
 {
-	
+	graphics->Context->PSSetShaderResources(0, 1, &_srv);
+	graphics->Context->PSSetSamplers(0, 1, &_samplerState);
 }

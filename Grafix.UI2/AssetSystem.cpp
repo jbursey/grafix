@@ -30,9 +30,10 @@ void AssetSystem::Init()
 	std::string shaderDir = "./";
 	std::vector<std::string> shaders;
 	shaders.push_back("PixelShader.cso");
-	shaders.push_back("PixelShaderLights.cso");
+	shaders.push_back("PixelShaderLights.cso");	
+	shaders.push_back("PixelShaderTexture.cso");
 	shaders.push_back("VertexShader.cso");
-	shaders.push_back("VertexShaderLights.cso");
+	shaders.push_back("VertexShaderLights.cso");	
 
 	for (std::string hm : heightmaps)
 	{

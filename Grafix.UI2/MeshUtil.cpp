@@ -63,6 +63,8 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 
 	m.Vertx.push_back(north);
 
+	int texU = 0;
+	int texV = 0;
 
 	for (int i = 1; i < numStacks; i++)
 	{
@@ -87,6 +89,7 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 			//v.Color = color;
 			v.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
 			v.Normal = DirectX::XMFLOAT4(x, y, z, 0);
+			v.TexUV = DirectX::XMFLOAT2(texU++, texV++);
 
 			m.Vertx.push_back(v);
 		}
@@ -207,7 +210,7 @@ Mesh MeshUtil::GetGrid(int width, int depth)
 
 			m.Indx.push_back(a);
 			m.Indx.push_back(d);
-			m.Indx.push_back(c);
+			m.Indx.push_back(c);			
 		}
 	}
 
