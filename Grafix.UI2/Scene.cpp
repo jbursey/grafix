@@ -36,8 +36,8 @@ void Scene::Init(HWND handle, int width, int height)
 	}
 
 	//--systems init
-	int worldWidth = 100;
-	int worldDepth = 100;
+	int worldWidth = 2048;
+	int worldDepth = 2048;
 	RenderComponent* terrainRC;
 	PositionComponent* terrainPC;
 	_systemTerrain = new TerrainSystem();

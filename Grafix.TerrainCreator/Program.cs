@@ -15,11 +15,11 @@ namespace Grafix.TerrainCreator
 
         static void CreateBitmap()
         {
-            int width = 1000;
-            int height = 1000;
+            int width = 10;
+            int height = 10;
 
             //Perlin perlin = new Perlin(width, height, 6, 6);            
-            Perlin3 perlin = new Perlin3(5, 7, width, height);
+            Perlin3 perlin = new Perlin3(4, 4, width, height);
             Bitmap bitmap = new Bitmap(width, height);
             bitmap.SetPixel(0, 0, Color.FromArgb(255, 128, 50, 10));
             unsafe

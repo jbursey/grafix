@@ -5,6 +5,7 @@
 #include <FileReader.h>
 #include <vector>
 #include <DirectXMath.h>
+#include "Perlin.h"
 
 class MeshUtil
 {

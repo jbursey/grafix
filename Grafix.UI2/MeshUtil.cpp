@@ -174,13 +174,18 @@ Mesh MeshUtil::GetGrid(int width, int depth)
 	Mesh m;
 
 	//--vertx
+	Perlin p;
+	p.Init(5, 5);
+	//
+
 	for (int x = 0; x < width; x++)
 	{
 		for (int z = 0; z < depth; z++)
 		{
 			Vertex v;
 			double y = sin(z);
-			y = 0;
+			y = p.Noise(x / (width * 1.0), z / (depth * 1.0));			
+			y *= 128.0;
 			v.Point = DirectX::XMFLOAT4(x, y, z, 1);
 			v.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
 			m.Vertx.push_back(v);

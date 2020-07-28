@@ -6,6 +6,7 @@
 #include "InputControls.h"
 #include "Scene.h"
 #include <GameTimer.h>
+#include "Perlin.h"
 
 #define MAX_LOADSTRING 100
 
@@ -46,6 +47,24 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		render system, input system, movement system, gravity system, ai system, physics system
 
 	*/
+	Perlin p;
+	p.Init(3, 3);
+	p.Noise(0.5, 0.5);
+	//for (double x = 0; x < 1.0; x += 0.025)
+	//{
+	//	for (double y = 0; y < 1.0; y += 0.025)
+	//	{
+	//		std::wstring t;
+	//		double noise = p.Noise(x, y);
+
+	//		t += L"Noise: " + std::to_wstring(noise) + L" ";
+	//		t += L"X: " + std::to_wstring(x) + L" ";
+	//		t += L"Y: " + std::to_wstring(y) + L" ";
+	//		t += L"\r\n";
+	//		OutputDebugString(t.c_str());
+	//	}
+	//}
+	
 
 	g_timer = new GameTimer();
 	g_scene = new Scene();
