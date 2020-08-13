@@ -44,7 +44,7 @@ void LightSystem::Update(int entityId, PositionComponent* pc, LightComponent* lc
 		return;
 	}
 
-	//pc->X += 0.01;
+	pc->X += 0.01;
 	//pc->Y += 0.001;
 	//lc->Color.x = pc->X / 255.0;
 	//lc->Color.y = pc->Y / 255.0;

@@ -10,3 +10,8 @@ DirectX::XMFLOAT4 Util::CreateRandomColor()
 
 	return DirectX::XMFLOAT4(r, g, b, 1);
 }
+
+void Util::Test_DeleteMe_PerlinNoiseVisual()
+{
+	
+}

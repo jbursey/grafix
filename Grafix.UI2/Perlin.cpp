@@ -13,7 +13,7 @@ void Perlin::Init(int width, int height)
     _maxWidth = width;
 
     //1 - grid definition
-    srand(7);
+    srand(time(0));
     int maxGradientIndex = _randomGradients.size();    
 
     //add vertical then horizontal    

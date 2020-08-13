@@ -157,7 +157,7 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 	}
 
 	//--bottom pie
-	for (int i = southPole - (numSlices + 1); i < m.Vertx.size(); i++)
+	for (int i = southPole - (numSlices + 1); i < m.Vertx.size() - 1; i++)
 	{
 		m.Indx.push_back(southPole);
 		m.Indx.push_back(i);
@@ -175,7 +175,7 @@ Mesh MeshUtil::GetGrid(int width, int depth)
 
 	//--vertx
 	Perlin p;
-	p.Init(5, 5);
+	p.Init(25, 25);
 	//
 
 	for (int x = 0; x < width; x++)
@@ -185,7 +185,7 @@ Mesh MeshUtil::GetGrid(int width, int depth)
 			Vertex v;
 			double y = sin(z);
 			y = p.Noise(x / (width * 1.0), z / (depth * 1.0));			
-			y *= 128.0;
+			y *= 64.0;
 			v.Point = DirectX::XMFLOAT4(x, y, z, 1);
 			v.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
 			m.Vertx.push_back(v);

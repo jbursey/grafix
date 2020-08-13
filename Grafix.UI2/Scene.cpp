@@ -36,8 +36,8 @@ void Scene::Init(HWND handle, int width, int height)
 	}
 
 	//--systems init
-	int worldWidth = 2048;
-	int worldDepth = 2048;
+	int worldWidth = 1024;
+	int worldDepth = 1024;
 	RenderComponent* terrainRC;
 	PositionComponent* terrainPC;
 	_systemTerrain = new TerrainSystem();
@@ -51,27 +51,6 @@ void Scene::Init(HWND handle, int width, int height)
 	_systemLight.Init(_graphics);	
 	_systemTexture->Init(_graphics);
 	
-
-
-	//--make some entities	
-	//--move entity to terrain
-	//_entities.RenderComponents[0] = new RenderComponent();
-	//_entities.RenderComponents[0]->CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
-	//_entities.RenderComponents[0]->FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
-	//_entities.RenderComponents[0]->Mesh = MeshUtil::GetGrid(_systemAsset->GetAsset("usgs_colo_springs.bmp"), 1.0 / 1.0);
-	//_entities.RenderComponents[0]->PixelShader = "PixelShaderLights.cso";
-	//_entities.RenderComponents[0]->Topology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-	//_entities.RenderComponents[0]->VertexShader = "VertexShaderLights.cso";
-	//
-	//_entities.PositionComponents[0] = new PositionComponent();
-	//_entities.PositionComponents[0]->Pitch = 0;
-	//_entities.PositionComponents[0]->Roll = 0;
-	//_entities.PositionComponents[0]->Yaw = 0;
-	//_entities.PositionComponents[0]->X = 0;
-	//_entities.PositionComponents[0]->Y = 0;
-	//_entities.PositionComponents[0]->Z = 0;		
-
-
 	_entities.RenderComponents[2] = new RenderComponent();
 	_entities.RenderComponents[2]->CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
 	_entities.RenderComponents[2]->FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
@@ -133,14 +112,25 @@ void Scene::Init(HWND handle, int width, int height)
 		_entities.LightComponents[i]->Color = color;
 		_entities.LightComponents[i]->AttenA = 1.0;
 		_entities.LightComponents[i]->AttenB = 0.25;
-		_entities.LightComponents[i]->AttenC = 0.05;
-
-		if (i == 3)
-		{
-			//_entities.LightComponents[i]->AttenB = 0.025;
-			//_entities.LightComponents[i]->AttenC = 0.00000000;
-		}
+		_entities.LightComponents[i]->AttenC = 0.03;
 	}
+
+	_entities.RenderComponents[40] = new RenderComponent();
+	_entities.RenderComponents[40]->CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
+	_entities.RenderComponents[40]->FillMode = D3D11_FILL_MODE::D3D11_FILL_WIREFRAME;
+	_entities.RenderComponents[40]->Mesh = MeshUtil::GetSphere(1000.0, 20, 20);
+	_entities.RenderComponents[40]->Mesh.SetColor(DirectX::XMFLOAT4(1, 1, 1, 1));
+	_entities.RenderComponents[40]->PixelShader = "PixelShader.cso";
+	_entities.RenderComponents[40]->Topology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+	_entities.RenderComponents[40]->VertexShader = "VertexShader.cso";
+
+	_entities.PositionComponents[40] = new PositionComponent();
+	_entities.PositionComponents[40]->Pitch = 0;
+	_entities.PositionComponents[40]->Roll = 0;
+	_entities.PositionComponents[40]->Yaw = 0;
+	_entities.PositionComponents[40]->X = width / 2.0;
+	_entities.PositionComponents[40]->Y = 0;
+	_entities.PositionComponents[40]->Z = height / 2.0;
 
 	//RenderNormalEntityData();
 }
