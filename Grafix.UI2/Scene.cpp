@@ -117,12 +117,12 @@ void Scene::Init(HWND handle, int width, int height)
 
 	_entities.RenderComponents[40] = new RenderComponent();
 	_entities.RenderComponents[40]->CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
-	_entities.RenderComponents[40]->FillMode = D3D11_FILL_MODE::D3D11_FILL_WIREFRAME;
-	_entities.RenderComponents[40]->Mesh = MeshUtil::GetSphere(1000.0, 20, 20);
-	_entities.RenderComponents[40]->Mesh.SetColor(DirectX::XMFLOAT4(1, 1, 1, 1));
-	_entities.RenderComponents[40]->PixelShader = "PixelShader.cso";
+	_entities.RenderComponents[40]->FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
+	_entities.RenderComponents[40]->Mesh = MeshUtil::GetSphere(500.0, 20, 20);
+	//_entities.RenderComponents[40]->Mesh.SetColor(DirectX::XMFLOAT4(0, 0, 0, 1));
+	_entities.RenderComponents[40]->PixelShader = "PixelShaderLights.cso";
 	_entities.RenderComponents[40]->Topology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-	_entities.RenderComponents[40]->VertexShader = "VertexShader.cso";
+	_entities.RenderComponents[40]->VertexShader = "VertexShaderLights.cso";
 
 	_entities.PositionComponents[40] = new PositionComponent();
 	_entities.PositionComponents[40]->Pitch = 0;
