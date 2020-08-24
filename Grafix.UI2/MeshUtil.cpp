@@ -79,7 +79,7 @@ Mesh MeshUtil::GetSphere(int radius, int numStacks, int numSlices)
 
 			double thetaRadians = theta * (DirectX::XM_PI / 180.0);
 			double phiRadians = phi * (DirectX::XM_PI / 180.0);
-
+			
 			double x = r * sin(thetaRadians) * cos(phiRadians);
 			double y = r * cos(thetaRadians);
 			double z = r * sin(thetaRadians) * sin(phiRadians);
@@ -175,7 +175,7 @@ Mesh MeshUtil::GetGrid(int width, int depth)
 
 	//--vertx
 	Perlin p;
-	p.Init(25, 25);
+	p.Init(3,3);
 	//
 
 	for (int x = 0; x < width; x++)
@@ -185,7 +185,7 @@ Mesh MeshUtil::GetGrid(int width, int depth)
 			Vertex v;
 			double y = sin(z);
 			y = p.Noise(x / (width * 1.0), z / (depth * 1.0));			
-			y *= 64.0;
+			y *= 350.0;
 			v.Point = DirectX::XMFLOAT4(x, y, z, 1);
 			v.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
 			m.Vertx.push_back(v);
