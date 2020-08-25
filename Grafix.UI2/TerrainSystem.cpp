@@ -27,7 +27,7 @@ void TerrainSystem::Init(EntityData& entities, Mesh mesh)
 	entities.RenderComponents[GrafixConstants::EntityTerrainID]->CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
 	entities.RenderComponents[GrafixConstants::EntityTerrainID]->FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 	entities.RenderComponents[GrafixConstants::EntityTerrainID]->Mesh = _mesh;
-	entities.RenderComponents[GrafixConstants::EntityTerrainID]->PixelShader = "PixelShader.cso";
+	entities.RenderComponents[GrafixConstants::EntityTerrainID]->PixelShader = "PixelShaderTexture.cso";
 	entities.RenderComponents[GrafixConstants::EntityTerrainID]->Topology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 	entities.RenderComponents[GrafixConstants::EntityTerrainID]->VertexShader = "VertexShader.cso";
 
@@ -36,8 +36,7 @@ void TerrainSystem::Init(EntityData& entities, Mesh mesh)
 	entities.PositionComponents[GrafixConstants::EntityTerrainID]->Roll = 0;
 	entities.PositionComponents[GrafixConstants::EntityTerrainID]->Yaw = 0;
 	entities.PositionComponents[GrafixConstants::EntityTerrainID]->X = 0;
-	entities.PositionComponents[GrafixConstants::EntityTerrainID]->Y = 0;
-	
+	entities.PositionComponents[GrafixConstants::EntityTerrainID]->Y = 0;		
 }
 
 void TerrainSystem::Update(PositionComponent* position, bool snapToTerrain, bool allowOutOfBounds)

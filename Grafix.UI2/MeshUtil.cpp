@@ -251,13 +251,13 @@ Mesh MeshUtil::GetGridTex(int width, int depth)
 			a.Point = DirectX::XMFLOAT4(x, 0, z, 1);
 			a.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
 			a.Normal = DirectX::XMFLOAT4(0, 0, 0, 0);
-			a.TexUV = DirectX::XMFLOAT2(0, 0);
+			a.TexUV = DirectX::XMFLOAT2(0, 1);
 
 			Vertex b;
 			b.Point = DirectX::XMFLOAT4(x + 1, 0, z, 1);
 			b.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
 			b.Normal = DirectX::XMFLOAT4(0, 0, 0, 0);
-			b.TexUV = DirectX::XMFLOAT2(0, 0);
+			b.TexUV = DirectX::XMFLOAT2(1, 1);
 
 			Vertex c;
 			c.Point = DirectX::XMFLOAT4(x, 0, z + 1, 1);
@@ -269,7 +269,7 @@ Mesh MeshUtil::GetGridTex(int width, int depth)
 			d.Point = DirectX::XMFLOAT4(x + 1, 0, z + 1, 1);
 			d.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
 			d.Normal = DirectX::XMFLOAT4(0, 0, 0, 0);
-			d.TexUV = DirectX::XMFLOAT2(0, 0);
+			d.TexUV = DirectX::XMFLOAT2(1, 0);
 
 			a.Point.y = perlin.Noise(a.Point.x / (width * 1.0), a.Point.z / (depth * 1.0)) * heightScale;
 			b.Point.y = perlin.Noise(b.Point.x / (width * 1.0), b.Point.z / (depth * 1.0)) * heightScale;

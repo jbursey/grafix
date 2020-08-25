@@ -132,7 +132,7 @@ void Scene::Init(HWND handle, int width, int height)
 	_entities.PositionComponents[40]->Y = 0;
 	_entities.PositionComponents[40]->Z = height / 2.0;
 
-	RenderNormalEntityData();
+	//RenderNormalEntityData();
 }
 
 void Scene::Resize(int width, int height)
