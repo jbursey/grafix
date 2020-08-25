@@ -24,12 +24,12 @@ void TerrainSystem::Init(EntityData& entities, Mesh mesh)
 	//}
 
 	entities.RenderComponents[GrafixConstants::EntityTerrainID] = new RenderComponent();
-	entities.RenderComponents[GrafixConstants::EntityTerrainID]->CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
+	entities.RenderComponents[GrafixConstants::EntityTerrainID]->CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
 	entities.RenderComponents[GrafixConstants::EntityTerrainID]->FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 	entities.RenderComponents[GrafixConstants::EntityTerrainID]->Mesh = _mesh;
-	entities.RenderComponents[GrafixConstants::EntityTerrainID]->PixelShader = "PixelShaderLights.cso";
+	entities.RenderComponents[GrafixConstants::EntityTerrainID]->PixelShader = "PixelShader.cso";
 	entities.RenderComponents[GrafixConstants::EntityTerrainID]->Topology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-	entities.RenderComponents[GrafixConstants::EntityTerrainID]->VertexShader = "VertexShaderLights.cso";
+	entities.RenderComponents[GrafixConstants::EntityTerrainID]->VertexShader = "VertexShader.cso";
 
 	entities.PositionComponents[GrafixConstants::EntityTerrainID] = new PositionComponent();	
 	entities.PositionComponents[GrafixConstants::EntityTerrainID]->Pitch = 0;

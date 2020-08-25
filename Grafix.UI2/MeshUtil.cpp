@@ -224,6 +224,86 @@ Mesh MeshUtil::GetGrid(int width, int depth)
 	return m;
 }
 
+Mesh MeshUtil::GetGridTex(int width, int depth)
+{
+	Mesh m;
+
+	/*
+	
+	for each (x,z) pair we need to create a quad made up of two triangles that don't share vertices
+	
+	we will duplicate every vertex so that each triangle is using unique vertices. This is needed for texturing	
+
+	  C     D
+
+
+	  A     B
+	*/
+	Perlin perlin;
+	perlin.Init(5, 5);
+	double heightScale = 100.0;
+	unsigned int index = 0;
+	for (int z = 0; z <= depth; z++)
+	{
+		for (int x = 0; x <= width; x++)
+		{	
+			Vertex a;
+			a.Point = DirectX::XMFLOAT4(x, 0, z, 1);
+			a.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
+			a.Normal = DirectX::XMFLOAT4(0, 0, 0, 0);
+			a.TexUV = DirectX::XMFLOAT2(0, 0);
+
+			Vertex b;
+			b.Point = DirectX::XMFLOAT4(x + 1, 0, z, 1);
+			b.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
+			b.Normal = DirectX::XMFLOAT4(0, 0, 0, 0);
+			b.TexUV = DirectX::XMFLOAT2(0, 0);
+
+			Vertex c;
+			c.Point = DirectX::XMFLOAT4(x, 0, z + 1, 1);
+			c.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
+			c.Normal = DirectX::XMFLOAT4(0, 0, 0, 0);
+			c.TexUV = DirectX::XMFLOAT2(0, 0);
+			
+			Vertex d;
+			d.Point = DirectX::XMFLOAT4(x + 1, 0, z + 1, 1);
+			d.Color = DirectX::XMFLOAT4(1, 1, 1, 1);
+			d.Normal = DirectX::XMFLOAT4(0, 0, 0, 0);
+			d.TexUV = DirectX::XMFLOAT2(0, 0);
+
+			a.Point.y = perlin.Noise(a.Point.x / (width * 1.0), a.Point.z / (depth * 1.0)) * heightScale;
+			b.Point.y = perlin.Noise(b.Point.x / (width * 1.0), b.Point.z / (depth * 1.0)) * heightScale;
+			c.Point.y = perlin.Noise(c.Point.x / (width * 1.0), c.Point.z / (depth * 1.0)) * heightScale;
+			d.Point.y = perlin.Noise(d.Point.x / (width * 1.0), d.Point.z / (depth * 1.0)) * heightScale;
+
+
+			m.Vertx.push_back(a); // index
+			m.Vertx.push_back(b); // index + 1
+			m.Vertx.push_back(c); // index + 2
+			m.Vertx.push_back(d); // index + 3
+
+			unsigned int ia = index;
+			unsigned int ib = index + 1;
+			unsigned int ic = index + 2;
+			unsigned int id = index + 3;
+
+			m.Indx.push_back(ia);
+			m.Indx.push_back(ic);
+			m.Indx.push_back(id);
+
+			m.Indx.push_back(ia);
+			m.Indx.push_back(id);
+			m.Indx.push_back(ib);
+
+			index += 4;
+		}
+	}
+
+	CalculateNormals(m);
+
+	return m;
+}
+
 Mesh MeshUtil::GetGrid(std::vector<unsigned char> fileBytes, double scaling)
 {
 	Mesh m;

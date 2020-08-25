@@ -36,8 +36,8 @@ void Scene::Init(HWND handle, int width, int height)
 	}
 
 	//--systems init
-	int worldWidth = 1024;
-	int worldDepth = 1024;
+	int worldWidth = 500;
+	int worldDepth = 500;
 	RenderComponent* terrainRC;
 	PositionComponent* terrainPC;
 	_systemTerrain = new TerrainSystem();
@@ -46,7 +46,7 @@ void Scene::Init(HWND handle, int width, int height)
 	_systemAsset->Init();
 	//_systemTerrain->Init(_entities, MeshUtil::GetGrid(_systemAsset->GetAsset("mt_shasta.bmp"), 1.0 / 1.0));
 	//_systemTerrain->Init(_entities, MeshUtil::GetGrid(_systemAsset->GetAsset("perlin.bmp"), 1.0 / 1.0));
-	_systemTerrain->Init(_entities, MeshUtil::GetGrid(worldWidth, worldDepth));
+	_systemTerrain->Init(_entities, MeshUtil::GetGridTex(worldWidth, worldDepth));
 	_systemShader.Init(_systemAsset);
 	_systemLight.Init(_graphics);	
 	_systemTexture->Init(_graphics);
@@ -132,7 +132,7 @@ void Scene::Init(HWND handle, int width, int height)
 	_entities.PositionComponents[40]->Y = 0;
 	_entities.PositionComponents[40]->Z = height / 2.0;
 
-	//RenderNormalEntityData();
+	RenderNormalEntityData();
 }
 
 void Scene::Resize(int width, int height)
@@ -207,9 +207,12 @@ void Scene::Tick()
 
 	for (int i = 0; i < GrafixConstants::MaxEntities; i++)
 	{
-		_systemTexture->Tick(_graphics);
-		_systemShader.Tick(_entities.RenderComponents[i], _graphics);		
-		_systemRender.Tick(i, _entities.RenderComponents[i], _entities.PositionComponents[i], _graphics, _camera);
+		if (i == GrafixConstants::EntityTerrainID || i == GrafixConstants::EntityNormals)
+		{
+			_systemTexture->Tick(_graphics);
+			_systemShader.Tick(_entities.RenderComponents[i], _graphics);
+			_systemRender.Tick(i, _entities.RenderComponents[i], _entities.PositionComponents[i], _graphics, _camera);
+		}
 
 		int a = 0;
 	}
