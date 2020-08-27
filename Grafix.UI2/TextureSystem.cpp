@@ -4,12 +4,13 @@ void TextureSystem::Init(Graphics* graphics)
 {	
 	D3D11_SAMPLER_DESC sampleDesc;
 	ZeroMemory(&sampleDesc, sizeof(D3D11_SAMPLER_DESC));
+	sampleDesc.Filter = D3D11_FILTER::D3D11_FILTER_ANISOTROPIC;
 	sampleDesc.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
 	sampleDesc.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
 	sampleDesc.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;	
 
 	HRESULT createSamplerStateResult = graphics->Device->CreateSamplerState(&sampleDesc, &_samplerState);
-	HRESULT createResult = DirectX::CreateWICTextureFromFile(graphics->Device, L"../../TestTexture2.png", &_pngTexture, &_srv);
+	HRESULT createResult = DirectX::CreateWICTextureFromFile(graphics->Device, L"../../oip.jpg", &_pngTexture, &_srv);
 	
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
