@@ -36,8 +36,8 @@ void Scene::Init(HWND handle, int width, int height)
 	}
 
 	//--systems init
-	int worldWidth = 500;
-	int worldDepth = 500;
+	int worldWidth = 512;
+	int worldDepth = 512;
 	RenderComponent* terrainRC;
 	PositionComponent* terrainPC;
 	_systemTerrain = new TerrainSystem();
@@ -94,7 +94,7 @@ void Scene::Init(HWND handle, int width, int height)
 		_entities.RenderComponents[i] = new RenderComponent();
 		_entities.RenderComponents[i]->CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
 		_entities.RenderComponents[i]->FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
-		_entities.RenderComponents[i]->Mesh = MeshUtil::GetSphere(75.0, 10, 10);		
+		_entities.RenderComponents[i]->Mesh = MeshUtil::GetSphere(3.0, 10, 10);		
 		_entities.RenderComponents[i]->Mesh.SetColor(color);
 		_entities.RenderComponents[i]->PixelShader = "PixelShader.cso";
 		_entities.RenderComponents[i]->Topology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
@@ -128,9 +128,9 @@ void Scene::Init(HWND handle, int width, int height)
 	_entities.PositionComponents[40]->Pitch = 0;
 	_entities.PositionComponents[40]->Roll = 0;
 	_entities.PositionComponents[40]->Yaw = 0;
-	_entities.PositionComponents[40]->X = width / 2.0;
+	_entities.PositionComponents[40]->X = width;
 	_entities.PositionComponents[40]->Y = 0;
-	_entities.PositionComponents[40]->Z = height / 2.0;
+	_entities.PositionComponents[40]->Z = height;
 
 	//RenderNormalEntityData();
 }
@@ -207,7 +207,7 @@ void Scene::Tick()
 
 	for (int i = 0; i < GrafixConstants::MaxEntities; i++)
 	{
-		if (i == GrafixConstants::EntityTerrainID || i == GrafixConstants::EntityNormals)
+		//if (i == GrafixConstants::EntityTerrainID || i == GrafixConstants::EntityNormals)
 		{
 			_systemTexture->Tick(_graphics);
 			_systemShader.Tick(_entities.RenderComponents[i], _graphics);

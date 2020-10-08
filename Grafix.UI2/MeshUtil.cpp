@@ -276,7 +276,6 @@ Mesh MeshUtil::GetGridTex(int width, int depth)
 			c.Point.y = perlin.Noise(c.Point.x / (width * 1.0), c.Point.z / (depth * 1.0)) * heightScale;
 			d.Point.y = perlin.Noise(d.Point.x / (width * 1.0), d.Point.z / (depth * 1.0)) * heightScale;
 
-
 			m.Vertx.push_back(a); // index
 			m.Vertx.push_back(b); // index + 1
 			m.Vertx.push_back(c); // index + 2
