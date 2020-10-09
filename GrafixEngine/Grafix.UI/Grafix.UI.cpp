@@ -14,6 +14,8 @@ WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 HWND g_windowHandle;
 Application* g_app;
+int g_width;
+int g_height;
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -32,6 +34,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // TODO: Place code here.
     g_windowHandle = nullptr;
     g_app = new Application();
+    g_width = 1280;
+    g_height = 800;
 
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -50,6 +54,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //g_app->Run();
 
     MSG msg;
+
+    g_app->Init(g_windowHandle, g_width, g_height);
     bool isRunning = true;
     Timer t;
     t.Start();
@@ -86,7 +92,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 
         //--game system tick        
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));        
+        //std::this_thread::sleep_for(std::chrono::milliseconds(100));        
+        g_app->Run();
 
         //--metric stuff        
 
@@ -97,7 +104,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             framesThisSecond = 0;
 
             std::wstring debugMsg;
-            debugMsg += L"FPS: " + std::to_wstring(fps);
+            debugMsg += L"FPS: " + std::to_wstring((int)fps);
             debugMsg += L" Frames: " + std::to_wstring(frameCount);
             debugMsg += L" Updates: " + std::to_wstring(updateCount);
             debugMsg += L" Frame Time: " + std::to_wstring(frameElapsedTimeMS / 1000.0);
@@ -156,7 +163,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // Store instance handle in our global variable
 
    g_windowHandle = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+      CW_USEDEFAULT, 0, g_width, g_height, nullptr, nullptr, hInstance, nullptr);
 
    if (!g_windowHandle)
    {
@@ -207,6 +214,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // TODO: Add any drawing code that uses hdc here...
             EndPaint(hWnd, &ps);
         }
+        break;
+    case WM_SIZE:
+        {
+            RECT rect;
+            GetWindowRect(g_windowHandle, &rect);
+            int width = rect.right - rect.left;
+            int height = rect.bottom - rect.top;
+
+            g_app->ResizeWindow(width, height);           
+        }        
         break;
     case WM_DESTROY:
         PostQuitMessage(0);
