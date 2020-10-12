@@ -33,7 +33,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // TODO: Place code here.
     g_windowHandle = nullptr;
-    g_app = new Application();
+    g_app = Application::Current();
     g_width = 1280;
     g_height = 800;
 

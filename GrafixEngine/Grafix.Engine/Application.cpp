@@ -2,19 +2,20 @@
 
 Application::Application()
 {
+	Resources = nullptr;
 	_appReady = false;
 }
 
 void Application::Init(HWND handle, int width, int height)
 {
 	_appReady = false;
-	_resources = new DeviceResources();
+	Resources = new DeviceResources();
 
 	//create factory
-	HRESULT dxgiFactoryResult = CreateDXGIFactory(__uuidof(IDXGIFactory), (void**)&_resources->DXGIFactory);
+	HRESULT dxgiFactoryResult = CreateDXGIFactory(__uuidof(IDXGIFactory), (void**)&Resources->DXGIFactory);
 
 	//create adapter
-	HRESULT dxgiAdapterResult = _resources->DXGIFactory->EnumAdapters(0, &_resources->Adapter);
+	HRESULT dxgiAdapterResult = Resources->DXGIFactory->EnumAdapters(0, &Resources->Adapter);
 
 	//create device swap chain
 	unsigned int deviceFlags = 0;
@@ -42,28 +43,23 @@ void Application::Init(HWND handle, int width, int height)
 	swapDesc.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_DISCARD;
 	swapDesc.Windowed = true;
 
-	HRESULT createDeviceResult = D3D11CreateDeviceAndSwapChain(_resources->Adapter, D3D_DRIVER_TYPE::D3D_DRIVER_TYPE_UNKNOWN, 0, deviceFlags, &levels, 1, D3D11_SDK_VERSION, 
-		&swapDesc, &_resources->SwapChain, &_resources->Device, nullptr, &_resources->Context);
+	HRESULT createDeviceResult = D3D11CreateDeviceAndSwapChain(Resources->Adapter, D3D_DRIVER_TYPE::D3D_DRIVER_TYPE_UNKNOWN, 0, deviceFlags, &levels, 1, D3D11_SDK_VERSION, 
+		&swapDesc, &Resources->SwapChain, &Resources->Device, nullptr, &Resources->Context);
 
 	_appReady = true;
-
-	//---------Move to resize
-	ResizeWindow(width, height);
-	ResizeWindow(500, 500);
-	//create viewport	
-
-	//--------End move to resize	
+	
+	ResizeWindow(width, height);	
 }
 
 bool Application::Run()
 {
 	float bg[4] = {0,0,0,255};
-	_resources->Context->ClearRenderTargetView(_resources->RenderTargetView, bg);
-	_resources->Context->ClearDepthStencilView(_resources->DepthStencilView, D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH, 1.0, 0);
+	Resources->Context->ClearRenderTargetView(Resources->RenderTargetView, bg);
+	Resources->Context->ClearDepthStencilView(Resources->DepthStencilView, D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH, 1.0, 0);
 
 	//--other things here
 
-	_resources->SwapChain->Present(0, 0);
+	Resources->SwapChain->Present(0, 0);
 
 	return true;
 }
@@ -74,25 +70,25 @@ void Application::ResizeWindow(int width, int height)
 	{
 		//resize back buffers
 		ID3D11Texture2D* backBuffer = nullptr;
-		HRESULT getBackBufferResult = _resources->SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer);
+		HRESULT getBackBufferResult = Resources->SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer);
 
 		//create render target view
-		if (_resources->DepthStencilView)
+		if (Resources->DepthStencilView)
 		{
-			_resources->DepthStencilView->Release();
-			_resources->DepthStencilView = 0;
+			Resources->DepthStencilView->Release();
+			Resources->DepthStencilView = 0;
 		}
 
-		if (_resources->DepthTexture)
+		if (Resources->DepthTexture)
 		{
-			_resources->DepthTexture->Release();
-			_resources->DepthTexture = 0;
+			Resources->DepthTexture->Release();
+			Resources->DepthTexture = 0;
 		}
 
-		if (_resources->RenderTargetView)
+		if (Resources->RenderTargetView)
 		{
-			_resources->RenderTargetView->Release();			
-			_resources->RenderTargetView = 0;
+			Resources->RenderTargetView->Release();			
+			Resources->RenderTargetView = 0;
 		}
 
 		if (backBuffer)
@@ -101,20 +97,20 @@ void Application::ResizeWindow(int width, int height)
 			backBuffer = 0;
 		}	
 
-		_resources->SwapChain->ResizeBuffers(1, width, height, DXGI_FORMAT::DXGI_FORMAT_R8G8B8A8_UNORM, 0);
+		Resources->SwapChain->ResizeBuffers(1, width, height, DXGI_FORMAT::DXGI_FORMAT_R8G8B8A8_UNORM, 0);
 
 		////////////ID3D11Debug* debug = nullptr;
-		////////////_resources->Device->QueryInterface(__uuidof(ID3D11Debug), (void**)&debug);
+		////////////Resources->Device->QueryInterface(__uuidof(ID3D11Debug), (void**)&debug);
 
 		////////////debug->ReportLiveDeviceObjects(D3D11_RLDO_FLAGS::D3D11_RLDO_DETAIL);
 		////////////debug->Release();
 
-		_resources->SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer);
+		Resources->SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer);
 		D3D11_RENDER_TARGET_VIEW_DESC renderTargetDesc;
 		ZeroMemory(&renderTargetDesc, sizeof(D3D11_RENDER_TARGET_VIEW_DESC));
 		renderTargetDesc.Format = DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT;
 
-		HRESULT createRTVResult = _resources->Device->CreateRenderTargetView(backBuffer, nullptr, &_resources->RenderTargetView);
+		HRESULT createRTVResult = Resources->Device->CreateRenderTargetView(backBuffer, nullptr, &Resources->RenderTargetView);
 
 		if (backBuffer)
 		{
@@ -135,11 +131,34 @@ void Application::ResizeWindow(int width, int height)
 		depthTextureDesc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
 		depthTextureDesc.Width = width;
 
-		_resources->Device->CreateTexture2D(&depthTextureDesc, nullptr, &_resources->DepthTexture);
+		Resources->Device->CreateTexture2D(&depthTextureDesc, nullptr, &Resources->DepthTexture);
 
 		D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilDesc;
 		ZeroMemory(&depthStencilDesc, sizeof(D3D11_DEPTH_STENCIL_VIEW_DESC));
 
-		HRESULT createDSVResult = _resources->Device->CreateDepthStencilView(_resources->DepthTexture, nullptr, &_resources->DepthStencilView);
+		HRESULT createDSVResult = Resources->Device->CreateDepthStencilView(Resources->DepthTexture, nullptr, &Resources->DepthStencilView);
+
+		Resources->Context->OMSetRenderTargets(1, &Resources->RenderTargetView, Resources->DepthStencilView);
+
+		//--create viewport
+		D3D11_VIEWPORT viewport;
+		viewport.Height = height;
+		viewport.MaxDepth = 1.0;
+		viewport.MinDepth = 0;
+		viewport.TopLeftX = 0;
+		viewport.TopLeftY = 0;
+		viewport.Width = width;
+
+		Resources->Context->RSSetViewports(1, &viewport);
 	}
+}
+
+Application* Application::Current()
+{
+	if (_instance == nullptr)
+	{
+		_instance = new Application();
+	}
+
+	return _instance;
 }

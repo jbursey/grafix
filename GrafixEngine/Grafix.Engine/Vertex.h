@@ -4,7 +4,7 @@
 struct Vertex
 {
 public:
-	DirectX::XMFLOAT4 Position;
+	DirectX::XMFLOAT4 Point;
 	DirectX::XMFLOAT4 Color;
 	DirectX::XMFLOAT4 Normal;
 	DirectX::XMFLOAT2 TexUV;

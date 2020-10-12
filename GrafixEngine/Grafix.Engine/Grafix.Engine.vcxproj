@@ -164,15 +164,63 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="AssetCache.h" />
+    <ClInclude Include="BitmapFile.h" />
+    <ClInclude Include="ByteReader.h" />
+    <ClInclude Include="ConstantBuffers.h" />
     <ClInclude Include="DeviceResources.h" />
+    <ClInclude Include="Entities.h" />
+    <ClInclude Include="FileReader.h" />
     <ClInclude Include="GrafixEngine.h" />
     <ClInclude Include="GraifxConstants.h" />
+    <ClInclude Include="LightComponent.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshUtil.h" />
+    <ClInclude Include="Perlin.h" />
+    <ClInclude Include="PositionComponent.h" />
+    <ClInclude Include="RenderingComponent.h" />
+    <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Util.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="AssetCache.cpp" />
+    <ClCompile Include="BitmapFile.cpp" />
+    <ClCompile Include="ByteReader.cpp" />
+    <ClCompile Include="FileReader.cpp" />
+    <ClCompile Include="MeshUtil.cpp" />
+    <ClCompile Include="Perlin.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Util.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="PixelShaderSimple.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.1</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.1</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.1</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.1</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="VertexShaderSimple.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.1</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.1</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.1</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.1</ShaderModel>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Common.hlsli" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
